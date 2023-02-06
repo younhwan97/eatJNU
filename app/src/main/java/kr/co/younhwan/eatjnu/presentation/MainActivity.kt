@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -86,8 +87,9 @@ fun HomeScreen() {
         ) {
             Text(
                 text = "후문",
-                fontSize = 16.sp,
-                color = Color(0XFFFFFFFF)
+                color = Color(0XFFFFFFFF),
+                style = MaterialTheme.typography.body1,
+                fontWeight = FontWeight.Bold
             )
         }
 
@@ -102,8 +104,9 @@ fun HomeScreen() {
         ) {
             Text(
                 text = "상대",
-                fontSize = 16.sp,
-                color = Color(0XFFFFFFFF)
+                color = Color(0XFFFFFFFF),
+                style = MaterialTheme.typography.body1,
+                fontWeight = FontWeight.Bold
             )
         }
 
@@ -118,8 +121,9 @@ fun HomeScreen() {
         ) {
             Text(
                 text = "정문",
-                fontSize = 16.sp,
-                color = Color(0XFFFFFFFF)
+                color = Color(0XFFFFFFFF),
+                style = MaterialTheme.typography.body1,
+                fontWeight = FontWeight.Bold
             )
         }
     }
