@@ -1,4 +1,4 @@
-package kr.co.younhwan.eatjnu.ui.theme
+package kr.co.younhwan.eatjnu.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
