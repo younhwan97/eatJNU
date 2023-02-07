@@ -15,10 +15,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kr.co.younhwan.eatjnu.R
+import kr.co.younhwan.eatjnu.domain.model.FilterInfo
 
 @Composable
-fun Filter() {
+fun Filter(
+    info: FilterInfo,
+    onClickFilter: () -> Unit
+) {
     Button(
         onClick = { /*TODO*/ },
         colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
@@ -32,13 +35,13 @@ fun Filter() {
         )
     ) {
         Icon(
-            painter = painterResource(id = R.drawable.ic_baseline_local_dining_24),
+            painter = painterResource(id = info.resource),
             contentDescription = "Favorite",
             modifier = Modifier.size(ButtonDefaults.IconSize)
         )
         Spacer(Modifier.size(ButtonDefaults.IconSpacing))
         Text(
-            text = "맛집",
+            text = info.text,
             style = MaterialTheme.typography.body1,
             fontWeight = FontWeight.Bold,
             fontSize = 14.sp
