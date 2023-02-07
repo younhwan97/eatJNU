@@ -26,6 +26,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.younhwan.eatjnu.R
 import kr.co.younhwan.eatjnu.presentation.home.HomeScreen
+import kr.co.younhwan.eatjnu.presentation.place_list.PlaceListScreen
 import kr.co.younhwan.eatjnu.presentation.theme.EatJNUTheme
 
 @AndroidEntryPoint
@@ -57,6 +58,12 @@ class MainActivity : ComponentActivity() {
                             route = Screen.HomeScreen.route,
                         ) {
                             HomeScreen(navController)
+                        }
+
+                        composable(
+                            route = Screen.PlaceListScreen.route + "/{type}"
+                        ) {
+                            PlaceListScreen(navController)
                         }
                     }
                 }
