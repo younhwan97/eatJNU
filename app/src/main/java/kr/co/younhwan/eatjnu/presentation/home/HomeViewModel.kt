@@ -19,6 +19,6 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getArea() {
-        _state.value = HomeState(data = getAreaUseCase() ?: emptyList())
+        _state.value = HomeState(data = getAreaUseCase())
     }
 }

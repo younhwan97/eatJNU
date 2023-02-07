@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kr.co.younhwan.eatjnu.R
-import kr.co.younhwan.eatjnu.presentation.home.components.PlaceButton
+import kr.co.younhwan.eatjnu.presentation.home.components.AreaButton
 
 @Composable
 fun HomeScreen(
@@ -22,7 +22,7 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
-    
+
     Box(
         contentAlignment = Alignment.BottomCenter,
         modifier = Modifier
@@ -55,18 +55,18 @@ fun HomeScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp)
             ) {
-                PlaceButton(placeName = "후문")
 
-                Spacer(modifier = Modifier.height(16.dp))
-
-                PlaceButton(placeName = "상대")
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                PlaceButton(placeName = "정문")
-
-                Spacer(modifier = Modifier.height(32.dp))
+                // 장소 버튼 생성
+                for (i in 0 until state.data.count()) {
+                    AreaButton(
+                        type = state.data[i].type,
+                        placeName = state.data[i].title
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
             }
+
+            Spacer(modifier = Modifier.height(32.dp))
         }
     }
 }
