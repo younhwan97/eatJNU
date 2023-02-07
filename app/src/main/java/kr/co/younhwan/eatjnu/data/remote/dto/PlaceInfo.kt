@@ -1,5 +1,7 @@
 package kr.co.younhwan.eatjnu.data.remote.dto
 
+import kr.co.younhwan.eatjnu.domain.model.Place
+
 data class PlaceInfo(
     val id: Int,
     val name: String,
@@ -8,3 +10,14 @@ data class PlaceInfo(
     val likeCount: Int,
     val tags: String
 )
+
+fun PlaceInfo.toPlace(): Place {
+    return Place(
+        id = id,
+        name = name,
+        image = image,
+        reviewCount = reviewCount,
+        likeCount = likeCount,
+        tags = tags
+    )
+}
