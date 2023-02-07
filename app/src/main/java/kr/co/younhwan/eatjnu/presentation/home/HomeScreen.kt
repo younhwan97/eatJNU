@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kr.co.younhwan.eatjnu.R
+import kr.co.younhwan.eatjnu.presentation.Screen
 import kr.co.younhwan.eatjnu.presentation.home.components.AreaButton
 
 @Composable
@@ -60,7 +61,10 @@ fun HomeScreen(
                 for (i in 0 until state.data.count()) {
                     AreaButton(
                         type = state.data[i].type,
-                        placeName = state.data[i].title
+                        placeName = state.data[i].title,
+                        onAreaClick = {
+                            navController.navigate(Screen.PlaceListScreen.route + "/${state.data[i].type}")
+                        }
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                 }

@@ -19,10 +19,11 @@ import kr.co.younhwan.eatjnu.domain.model.Area
 @Composable
 fun AreaButton(
     type: Int,
-    placeName: String
+    placeName: String,
+    onAreaClick: () -> Unit
 ) {
     OutlinedButton(
-        onClick = { },
+        onClick = onAreaClick,
         shape = RoundedCornerShape(8.dp),
         border = BorderStroke(4.dp, Color.Black),
         colors = ButtonDefaults.buttonColors(backgroundColor = Color(0XFF28943E)),

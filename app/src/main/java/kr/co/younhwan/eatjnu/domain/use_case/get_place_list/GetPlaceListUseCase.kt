@@ -1,5 +1,6 @@
 package kr.co.younhwan.eatjnu.domain.use_case.get_place_list
 
+import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kr.co.younhwan.eatjnu.common.Resource
