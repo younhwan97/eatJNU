@@ -3,6 +3,7 @@ package kr.co.younhwan.eatjnu.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kr.co.younhwan.eatjnu.R
+import kr.co.younhwan.eatjnu.presentation.home.HomeScreen
 import kr.co.younhwan.eatjnu.presentation.theme.EatJNUTheme
 
 class MainActivity : ComponentActivity() {
@@ -54,77 +56,3 @@ fun DefaultPreview() {
     }
 }
 
-@Composable
-fun HomeScreen() {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 16.dp)
-    ) {
-        Image(
-            painter = painterResource(R.drawable.main_image),
-            contentDescription = null,
-            contentScale = ContentScale.FillWidth,
-            modifier = Modifier.padding(top = 100.dp)
-        )
-
-        Text(
-            text = "전대 밥토끼",
-            style = MaterialTheme.typography.body2,
-            fontSize = 58.sp,
-            modifier = Modifier.padding(bottom = 32.dp)
-        )
-
-        Button(
-            onClick = {},
-            shape = RoundedCornerShape(8.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0XFF28943E)),
-            modifier = Modifier
-                .padding(vertical = 8.dp)
-                .fillMaxWidth(0.8f)
-                .height(48.dp)
-        ) {
-            Text(
-                text = "후문",
-                color = Color(0XFFFFFFFF),
-                style = MaterialTheme.typography.body1,
-                fontWeight = FontWeight.Bold
-            )
-        }
-
-        Button(
-            onClick = {},
-            shape = RoundedCornerShape(8.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0XFF28943E)),
-            modifier = Modifier
-                .padding(vertical = 8.dp)
-                .fillMaxWidth(0.8f)
-                .height(48.dp)
-        ) {
-            Text(
-                text = "상대",
-                color = Color(0XFFFFFFFF),
-                style = MaterialTheme.typography.body1,
-                fontWeight = FontWeight.Bold
-            )
-        }
-
-        Button(
-            onClick = {},
-            shape = RoundedCornerShape(8.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0XFF28943E)),
-            modifier = Modifier
-                .padding(vertical = 8.dp)
-                .fillMaxWidth(0.8f)
-                .height(48.dp)
-        ) {
-            Text(
-                text = "정문",
-                color = Color(0XFFFFFFFF),
-                style = MaterialTheme.typography.body1,
-                fontWeight = FontWeight.Bold
-            )
-        }
-    }
-}

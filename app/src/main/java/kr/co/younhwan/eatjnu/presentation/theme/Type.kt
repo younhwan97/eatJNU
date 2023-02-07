@@ -9,8 +9,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import kr.co.younhwan.eatjnu.R
 
-val TempFont = FontFamily(
-    Font(R.font.font2),
+val Dohyun = FontFamily(
+    Font(R.font.bm_dohyun, FontWeight.Normal, FontStyle.Normal),
 )
 
 val Pretendard = FontFamily(
@@ -23,14 +23,15 @@ val Pretendard = FontFamily(
 
 // Set of Material typography styles to start with
 val Typography = Typography(
+    h1 = TextStyle(
+        fontFamily = Dohyun,
+        fontWeight = FontWeight.Normal,
+        fontSize = 64.sp
+    ),
+
     body1 = TextStyle(
         fontFamily = Pretendard,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
-    ),
-
-    body2 = TextStyle(
-        fontFamily = TempFont,
         fontSize = 16.sp
     )
 )
