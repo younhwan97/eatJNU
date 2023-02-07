@@ -27,7 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kr.co.younhwan.eatjnu.R
 import kr.co.younhwan.eatjnu.presentation.home.HomeScreen
 import kr.co.younhwan.eatjnu.presentation.place_list.PlaceListScreen
-import kr.co.younhwan.eatjnu.presentation.theme.EatJNUTheme
+import kr.co.younhwan.eatjnu.presentation.ui.theme.EatJNUTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable(
-                            route = Screen.PlaceListScreen.route + "/{type}"
+                            route = Screen.PlaceListScreen.route + "/{areaType}"
                         ) {
                             PlaceListScreen(navController)
                         }

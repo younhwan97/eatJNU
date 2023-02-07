@@ -1,4 +1,4 @@
-package kr.co.younhwan.eatjnu.presentation.theme
+package kr.co.younhwan.eatjnu.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

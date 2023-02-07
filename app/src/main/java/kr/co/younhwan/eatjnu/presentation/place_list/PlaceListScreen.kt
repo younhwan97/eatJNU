@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import kr.co.younhwan.eatjnu.presentation.home.HomeViewModel
 
 @Composable
 fun PlaceListScreen(

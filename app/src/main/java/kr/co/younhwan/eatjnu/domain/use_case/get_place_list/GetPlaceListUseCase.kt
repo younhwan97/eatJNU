@@ -15,10 +15,10 @@ class GetPlaceListUseCase @Inject constructor(
     private val repository: EatJnuRepository
 ) {
 
-    operator fun invoke(): Flow<Resource<List<Place>>> = flow {
+    operator fun invoke(areaType: String): Flow<Resource<List<Place>>> = flow {
         try {
             emit(Resource.Loading())
-            val places = repository.getPlaceList().map { it.toPlace() }
+            val places = repository.getPlaceList(areaType = areaType).map { it.toPlace() }
             emit(Resource.Success(data = places))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "An expected error!"))

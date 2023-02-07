@@ -20,10 +20,10 @@ import kr.co.younhwan.eatjnu.domain.model.Area
 fun AreaButton(
     type: Int,
     placeName: String,
-    onAreaClick: () -> Unit
+    onAreaClick: (Area) -> Unit
 ) {
     OutlinedButton(
-        onClick = onAreaClick,
+        onClick = { onAreaClick(Area(type, placeName)) },
         shape = RoundedCornerShape(8.dp),
         border = BorderStroke(4.dp, Color.Black),
         colors = ButtonDefaults.buttonColors(backgroundColor = Color(0XFF28943E)),

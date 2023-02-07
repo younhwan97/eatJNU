@@ -56,14 +56,15 @@ fun HomeScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp)
             ) {
+                val areas = state.data
 
                 // 장소 버튼 생성
-                for (i in 0 until state.data.count()) {
+                for (i in 0 until areas.count()) {
                     AreaButton(
-                        type = state.data[i].type,
-                        placeName = state.data[i].title,
+                        type = areas[i].type,
+                        placeName = areas[i].title,
                         onAreaClick = {
-                            navController.navigate(Screen.PlaceListScreen.route + "/${state.data[i].type}")
+                            navController.navigate(Screen.PlaceListScreen.route + "/${areas[i].type}")
                         }
                     )
                     Spacer(modifier = Modifier.height(16.dp))
