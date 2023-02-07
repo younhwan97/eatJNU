@@ -11,15 +11,22 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import kr.co.younhwan.eatjnu.R
 import kr.co.younhwan.eatjnu.presentation.home.components.PlaceButton
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navController: NavController,
+    viewModel: HomeViewModel = hiltViewModel()
+) {
+    val state = viewModel.state.value
+    
     Box(
         contentAlignment = Alignment.BottomCenter,
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .padding(horizontal = 16.dp)
     ) {
         Column(

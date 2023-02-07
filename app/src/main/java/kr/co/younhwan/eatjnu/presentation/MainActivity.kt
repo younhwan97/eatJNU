@@ -19,6 +19,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kr.co.younhwan.eatjnu.R
 import kr.co.younhwan.eatjnu.presentation.home.HomeScreen
@@ -29,6 +32,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             EatJNUTheme {
+                // Status bar
                 val systemUiController = rememberSystemUiController()
                 SideEffect {
                     systemUiController.setStatusBarColor(
@@ -41,18 +45,20 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    HomeScreen()
+                    val navController = rememberNavController()
+
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screen.HomeScreen.route
+                    ) {
+                        composable(
+                            route = Screen.HomeScreen.route,
+                        ) {
+                            HomeScreen(navController)
+                        }
+                    }
                 }
             }
         }
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    EatJNUTheme {
-        HomeScreen()
-    }
-}
-
