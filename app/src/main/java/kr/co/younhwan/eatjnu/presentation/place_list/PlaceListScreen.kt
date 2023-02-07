@@ -1,5 +1,6 @@
 package kr.co.younhwan.eatjnu.presentation.place_list
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
