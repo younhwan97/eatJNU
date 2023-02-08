@@ -61,8 +61,6 @@ fun PlaceListScreen(
 
         Divider(modifier = Modifier.height(1.dp))
 
-        Spacer(modifier = Modifier.height(16.dp))
-
         if (isLoading) {
             // Loading
             LoadingScreen()
@@ -70,6 +68,7 @@ fun PlaceListScreen(
             // Success
             PlaceScreen(
                 places = placeList,
+                selectedFilter,
                 modifier = Modifier.fillMaxSize()
             )
         } else {

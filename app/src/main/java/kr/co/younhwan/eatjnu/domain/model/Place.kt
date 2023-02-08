@@ -6,5 +6,6 @@ data class Place(
     val image: String,
     val reviewCount: Int,
     val likeCount: Int,
-    val tags: String
+    val tags: String,
+    val filter: String,
 )

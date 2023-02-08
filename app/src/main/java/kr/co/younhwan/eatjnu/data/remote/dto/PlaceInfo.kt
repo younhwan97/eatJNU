@@ -8,7 +8,8 @@ data class PlaceInfo(
     val image: String,
     val reviewCount: Int,
     val likeCount: Int,
-    val tags: String
+    val tags: String,
+    val filter: String,
 )
 
 fun PlaceInfo.toPlace(): Place {
@@ -18,6 +19,7 @@ fun PlaceInfo.toPlace(): Place {
         image = image,
         reviewCount = reviewCount,
         likeCount = likeCount,
-        tags = tags
+        tags = tags,
+        filter = filter
     )
 }

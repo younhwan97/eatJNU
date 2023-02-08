@@ -1,13 +1,10 @@
 package kr.co.younhwan.eatjnu.presentation.place_list.components
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
-import androidx.compose.material3.AssistChipDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,11 +13,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.skydoves.landscapist.ImageOptions
@@ -55,21 +50,21 @@ fun Place(
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(
-                    painter = painterResource(id = kr.co.younhwan.eatjnu.R.drawable.ic_baseline_thumb_up_24),
+                Image(
+                    painter = painterResource(id = kr.co.younhwan.eatjnu.R.drawable.like2),
                     contentDescription = null,
-                    modifier = Modifier.size(18.dp)
+                    modifier = Modifier.size(16.dp)
                 )
 
                 Spacer(modifier = Modifier.width(2.dp))
 
                 Text(
                     text = info.likeCount.toString(),
-                    fontSize = 18.sp,
+                    fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
-                    style = androidx.compose.material.MaterialTheme.typography.body1
+                    style = androidx.compose.material.MaterialTheme.typography.h1
                 )
-                
+
                 Spacer(modifier = Modifier.width(8.dp))
 
                 Text(
@@ -100,6 +95,8 @@ fun Place(
             )
         }
     }
+    
+    Spacer(modifier = Modifier.height(16.dp))
 }
 
 @Composable
@@ -121,19 +118,4 @@ fun ImageBox(
             ),
         )
     }
-}
-
-@Preview
-@Composable
-fun PreviewGreeting() {
-    Place(
-        info = Place(
-            id = 1,
-            name = "다원",
-            image = "https://mblogthumb-phinf.pstatic.net/MjAxOTA1MjNfMjI3/MDAxNTU4NTg1ODg0OTU0.C5NtgR4-3O_oiGM0g22Apf5tBKc5W-ehhWoDGGFm2-kg.En5IL_pdwMYe26R2-4AFBZTrLEkSKFfD6d3I3v6hpygg.JPEG.95da_0/IMG_6114.jpg?type=w800",
-            reviewCount = 100,
-            likeCount = 100,
-            tags = "#맛집 #돌비"
-        )
-    )
 }

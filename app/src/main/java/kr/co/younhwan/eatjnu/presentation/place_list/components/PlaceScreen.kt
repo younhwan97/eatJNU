@@ -14,14 +14,22 @@ import kr.co.younhwan.eatjnu.domain.model.Place
 @Composable
 fun PlaceScreen(
     places: List<Place> = emptyList(),
+    selectedFilterNum: Int,
     modifier: Modifier = Modifier.fillMaxSize()
 ) {
     LazyColumn(
-        contentPadding = PaddingValues(horizontal = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        contentPadding = PaddingValues(16.dp)
     ) {
         items(items = places, itemContent = { item ->
-            Place(info = item)
+            if (selectedFilterNum == 0) {
+                Place(info = item)
+            } else if (selectedFilterNum == 1) {
+                if (item.filter == "맛집")
+                    Place(info = item)
+            } else if (selectedFilterNum == 2) {
+                if (item.filter == "술집")
+                    Place(info = item)
+            }
         })
     }
 }
