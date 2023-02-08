@@ -1,5 +1,6 @@
 package kr.co.younhwan.eatjnu.presentation.place_list
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,6 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kr.co.younhwan.eatjnu.presentation.place_list.components.FilterScreen
 import kr.co.younhwan.eatjnu.presentation.place_list.components.PlaceScreen
+import kr.co.younhwan.eatjnu.presentation.supprot.ErrorScreen
 import kr.co.younhwan.eatjnu.presentation.supprot.LoadingScreen
 
 @Composable
@@ -64,7 +66,7 @@ fun PlaceListScreen(
         if (isLoading) {
             // Loading
             LoadingScreen()
-        } else if (filterList.isNotEmpty()) {
+        } else if (placeList.isNotEmpty()) {
             // Success
             PlaceScreen(
                 places = placeList,
@@ -73,7 +75,7 @@ fun PlaceListScreen(
             )
         } else {
             // Error
-
+            ErrorScreen()
         }
     }
 }

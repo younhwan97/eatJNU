@@ -51,6 +51,7 @@ class PlaceListViewModel @Inject constructor(
 
                 is Resource.Error -> {
                     isLoading.value = false
+                    placeList.value = emptyList()
                     error.value = result.message ?: ""
                 }
 
