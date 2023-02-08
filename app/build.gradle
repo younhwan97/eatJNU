@@ -96,4 +96,7 @@ dependencies {
 
     // Lottie
     implementation "com.airbnb.android:lottie-compose:5.2.0"
+
+    // Landscapist
+    implementation "com.github.skydoves:landscapist-glide:2.1.2"
 }
