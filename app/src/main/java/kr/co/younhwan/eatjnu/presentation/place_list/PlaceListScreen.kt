@@ -17,6 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kr.co.younhwan.eatjnu.presentation.place_list.components.FilterScreen
 import kr.co.younhwan.eatjnu.presentation.place_list.components.PlaceScreen
+import kr.co.younhwan.eatjnu.presentation.supprot.LoadingScreen
 
 @Composable
 fun PlaceListScreen(
@@ -50,20 +51,21 @@ fun PlaceListScreen(
             }
         )
 
+        FilterScreen(
+            filters = filterList,
+            selectedFilterNum = selectedFilter,
+            viewModel = viewModel
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Divider(modifier = Modifier.height(1.dp))
+
         if (isLoading) {
             // Loading
+            LoadingScreen()
         } else if (filterList.isNotEmpty()) {
             // Success
-            FilterScreen(
-                filters = filterList,
-                selectedFilterNum = selectedFilter,
-                viewModel = viewModel
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Divider(modifier = Modifier.height(1.dp))
-
             PlaceScreen(
                 places = placeList,
                 modifier = Modifier.fillMaxSize()

@@ -93,4 +93,7 @@ dependencies {
 
     // system bars customization
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.28.0"
+
+    // Lottie
+    implementation "com.airbnb.android:lottie-compose:5.2.0"
 }
