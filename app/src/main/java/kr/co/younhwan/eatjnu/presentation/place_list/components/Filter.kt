@@ -1,5 +1,6 @@
 package kr.co.younhwan.eatjnu.presentation.place_list.components
 
+import android.util.Log
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -14,11 +15,14 @@ import kr.co.younhwan.eatjnu.domain.model.FilterInfo
 fun Filter(
     info: FilterInfo,
     selected: Boolean = false,
-    onClickFilter: () -> Unit
+    index: Int,
+    onClickFilter: (Int) -> Unit
 ) {
     if (selected) {
         AssistChip(
-            onClick = { /*TODO*/ },
+            onClick = {
+                      onClickFilter(index)
+            },
             label = {
                 Text(
                     text = info.text
@@ -45,7 +49,9 @@ fun Filter(
         )
     } else {
         AssistChip(
-            onClick = { /*TODO*/ },
+            onClick = {
+                onClickFilter(index)
+            },
             label = {
                 Text(
                     text = info.text
