@@ -27,6 +27,7 @@ class PlaceListViewModel @Inject constructor(
     var placeList = mutableStateOf<List<Place>>(listOf())
     var error = mutableStateOf("")
     var isLoading = mutableStateOf(false)
+    var area = mutableStateOf("")
     var selectedFilter = mutableStateOf(1)
     val filterList = mutableStateOf<List<FilterInfo>>(listOf())
 
@@ -37,7 +38,15 @@ class PlaceListViewModel @Inject constructor(
 
         // Area Type에 따라 장소 리스트 로드
         savedStateHandle.get<String>(Constants.PARAM_AREA_TYPE)?.let { areaType ->
+            // 장소 리스트 초기화
             getPlaceList(areaType)
+
+            // area 변수 초기화
+            when(areaType){
+                "0" -> area.value = "후문"
+                "1" -> area.value = "상대"
+                "2" -> area.value = "정문"
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 package kr.co.younhwan.eatjnu.presentation.place_list.components
 
 import android.util.Log
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -21,11 +22,12 @@ fun Filter(
     if (selected) {
         AssistChip(
             onClick = {
-                      onClickFilter(index)
+                onClickFilter(index)
             },
             label = {
                 Text(
-                    text = info.text
+                    text = info.text,
+                    modifier = Modifier.padding(vertical = 10.dp)
                 )
             },
             colors = AssistChipDefaults.assistChipColors(
@@ -54,7 +56,8 @@ fun Filter(
             },
             label = {
                 Text(
-                    text = info.text
+                    text = info.text,
+                    modifier = Modifier.padding(vertical = 10.dp)
                 )
             },
             colors = AssistChipDefaults.assistChipColors(
@@ -74,7 +77,7 @@ fun Filter(
                     tint = Color.Black,
                     modifier = Modifier.size(AssistChipDefaults.IconSize)
                 )
-            }
+            },
         )
     }
 }
