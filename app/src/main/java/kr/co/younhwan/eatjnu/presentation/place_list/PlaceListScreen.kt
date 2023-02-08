@@ -42,7 +42,8 @@ fun PlaceListScreen(
         )
 
         FilterScreen(
-            filters = state.filter
+            filters = state.filter,
+            selectedFilterNum = state.selectedFilter
         )
 
         Spacer(modifier = Modifier.height(8.dp))

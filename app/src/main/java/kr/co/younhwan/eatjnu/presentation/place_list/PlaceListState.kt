@@ -8,5 +8,6 @@ data class PlaceListState(
     val isLoading: Boolean = false,
     val error: String = "",
     val data: List<Place> = emptyList(),
-    val filter: List<FilterInfo> = emptyList()
+    val filter: List<FilterInfo> = emptyList(),
+    val selectedFilter: Int = 1
 )

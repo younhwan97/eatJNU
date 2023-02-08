@@ -8,43 +8,15 @@ class GetFilterUseCase @Inject constructor() {
     val data = listOf(
         FilterInfo(
             resource = R.drawable.ic_baseline_local_dining_24,
-            text = "맛집",
-            selected = false
+            text = "전체"
+        ),
+        FilterInfo(
+            resource = R.drawable.ic_baseline_local_dining_24,
+            text = "맛집"
         ),
         FilterInfo(
             resource = R.drawable.ic_baseline_wine_bar_24,
-            text = "술집",
-            selected = true
-        ),
-        FilterInfo(
-            resource = R.drawable.ic_baseline_wine_bar_24,
-            text = "술집",
-            selected = true
-        ),
-        FilterInfo(
-            resource = R.drawable.ic_baseline_wine_bar_24,
-            text = "술집",
-            selected = true
-        ),
-        FilterInfo(
-            resource = R.drawable.ic_baseline_wine_bar_24,
-            text = "술집",
-            selected = true
-        ),
-        FilterInfo(
-            resource = R.drawable.ic_baseline_wine_bar_24,
-            text = "술집",
-            selected = true
-        ),
-        FilterInfo(
-            resource = R.drawable.ic_baseline_wine_bar_24,
-            text = "술집",
-            selected = true
-        ),
-        FilterInfo(
-            resource = R.drawable.ic_baseline_wine_bar_24,
-            text = "술집",
-            selected = true
+            text = "술집"
         )
     )
 
