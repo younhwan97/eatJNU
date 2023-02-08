@@ -24,25 +24,26 @@ class PlaceListViewModel @Inject constructor(
 ) : ViewModel() {
 
     /* State */
-    var placeList = mutableStateOf<List<Place>>(listOf())
     var error = mutableStateOf("")
     var isLoading = mutableStateOf(false)
+
+    val filterList = mutableStateOf<List<FilterInfo>>(listOf())
+
     var area = mutableStateOf("")
     var selectedFilter = mutableStateOf(1)
-    val filterList = mutableStateOf<List<FilterInfo>>(listOf())
+    var placeList = mutableStateOf<List<Place>>(listOf())
 
     /* Init */
     init {
-        // 필터 정보 초기화
+        // 필터 리스트 초기화
         filterList.value = getFilterUseCase()
 
-        // Area Type에 따라 장소 리스트 로드
         savedStateHandle.get<String>(Constants.PARAM_AREA_TYPE)?.let { areaType ->
             // 장소 리스트 초기화
             getPlaceList(areaType)
 
             // area 변수 초기화
-            when(areaType){
+            when (areaType) {
                 "0" -> area.value = "후문"
                 "1" -> area.value = "상대"
                 "2" -> area.value = "정문"
@@ -60,7 +61,6 @@ class PlaceListViewModel @Inject constructor(
 
                 is Resource.Error -> {
                     isLoading.value = false
-                    placeList.value = emptyList()
                     error.value = result.message ?: ""
                 }
 

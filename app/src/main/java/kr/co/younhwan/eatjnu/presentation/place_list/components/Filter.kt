@@ -1,14 +1,16 @@
 package kr.co.younhwan.eatjnu.presentation.place_list.components
 
-import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kr.co.younhwan.eatjnu.domain.model.FilterInfo
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -19,65 +21,51 @@ fun Filter(
     index: Int,
     onClickFilter: (Int) -> Unit
 ) {
+
+    // 필터 변수
+    var tintColor = Color.Black // 아이콘, 글씨 색
+    var containerColor = Color.White // 배경 색
+    val borderColor = MaterialTheme.colors.secondary // 테두리 색(변경x)
+    var fontWeight = FontWeight.Normal // 글씨 두께
+
     if (selected) {
-        AssistChip(
-            onClick = {
-                onClickFilter(index)
-            },
-            label = {
-                Text(
-                    text = info.text,
-                    modifier = Modifier.padding(vertical = 10.dp)
-                )
-            },
-            colors = AssistChipDefaults.assistChipColors(
-                containerColor = Color(0XFF28943E),
-                labelColor = Color.White
-            ),
-            border = AssistChipDefaults.assistChipBorder(
-                borderColor = Color.LightGray
-            ),
-            elevation = AssistChipDefaults.assistChipElevation(
-                defaultElevation = 4.dp
-            ),
-            leadingIcon = {
-                Icon(
-                    painter = painterResource(id = info.resource),
-                    contentDescription = null,
-                    tint = Color.White,
-                    modifier = Modifier.size(AssistChipDefaults.IconSize)
-                )
-            }
-        )
-    } else {
-        AssistChip(
-            onClick = {
-                onClickFilter(index)
-            },
-            label = {
-                Text(
-                    text = info.text,
-                    modifier = Modifier.padding(vertical = 10.dp)
-                )
-            },
-            colors = AssistChipDefaults.assistChipColors(
-                containerColor = Color.White,
-                labelColor = Color.Black
-            ),
-            border = AssistChipDefaults.assistChipBorder(
-                borderColor = Color.LightGray
-            ),
-            elevation = AssistChipDefaults.assistChipElevation(
-                defaultElevation = 4.dp
-            ),
-            leadingIcon = {
-                Icon(
-                    painter = painterResource(id = info.resource),
-                    contentDescription = null,
-                    tint = Color.Black,
-                    modifier = Modifier.size(AssistChipDefaults.IconSize)
-                )
-            },
-        )
+        // 선택된 필터의 경우 색상 변경
+        tintColor = Color.White
+        containerColor = MaterialTheme.colors.primary
+        fontWeight = FontWeight.Bold
     }
+
+    // 필터
+    AssistChip(
+        onClick = {
+            onClickFilter(index)
+        },
+        label = {
+            Text(
+                text = info.text,
+                style = MaterialTheme.typography.body1,
+                fontSize = 12.sp,
+                fontWeight = fontWeight,
+                modifier = Modifier.padding(vertical = 12.dp)
+            )
+        },
+        colors = AssistChipDefaults.assistChipColors(
+            containerColor = containerColor,
+            labelColor = tintColor
+        ),
+        border = AssistChipDefaults.assistChipBorder(
+            borderColor = borderColor
+        ),
+        elevation = AssistChipDefaults.assistChipElevation(
+            defaultElevation = 4.dp
+        ),
+        leadingIcon = {
+            Icon(
+                painter = painterResource(id = info.resource),
+                contentDescription = null,
+                tint = tintColor,
+                modifier = Modifier.size(AssistChipDefaults.IconSize)
+            )
+        }
+    )
 }

@@ -26,7 +26,7 @@ fun AreaButton(
         onClick = { onAreaClick(Area(type, placeName)) },
         shape = RoundedCornerShape(8.dp),
         border = BorderStroke(4.dp, Color.Black),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0XFF28943E)),
+        colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primary),
         modifier = Modifier
             .fillMaxWidth()
             .height(54.dp)
