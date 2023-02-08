@@ -1,5 +1,6 @@
 package kr.co.younhwan.eatjnu.presentation.place_list.components
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -21,14 +22,15 @@ import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 import kr.co.younhwan.eatjnu.domain.model.Place
 
+@SuppressLint("ModifierParameter")
 @Composable
 fun Place(
     info: Place,
-    modifier: Modifier = Modifier
-        .fillMaxWidth()
+    modifier: Modifier = Modifier.fillMaxWidth()
 ) {
+
     Row(
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier
     ) {
         // 장소 이미지
         ImageBox(imageUrl = info.image)
@@ -40,7 +42,7 @@ fun Place(
             // 이름
             Text(
                 text = info.name,
-                fontSize = 18.sp,
+                fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
                 style = androidx.compose.material.MaterialTheme.typography.body1
             )
@@ -94,7 +96,7 @@ fun Place(
                 text = info.tags,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Normal,
-                color = Color.Gray,
+                color = Color.LightGray,
                 style = androidx.compose.material.MaterialTheme.typography.body1,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
