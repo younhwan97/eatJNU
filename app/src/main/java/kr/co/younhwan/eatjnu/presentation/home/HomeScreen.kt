@@ -18,6 +18,7 @@ import androidx.navigation.NavController
 import kr.co.younhwan.eatjnu.R
 import kr.co.younhwan.eatjnu.presentation.Screen
 import kr.co.younhwan.eatjnu.presentation.home.components.AreaButton
+import kr.co.younhwan.eatjnu.presentation.home.components.AreaButtonScreen
 
 @Composable
 fun HomeScreen(
@@ -26,7 +27,6 @@ fun HomeScreen(
 ) {
     /* State */
     val areaList by remember { viewModel.areaList }
-
     /* UI */
     Box(
         contentAlignment = Alignment.BottomCenter,
@@ -54,24 +54,13 @@ fun HomeScreen(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
+            AreaButtonScreen(
+                areaList = areaList,
+                navController = navController,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp)
-            ) {
-                // 장소 버튼 생성
-                for (i in 0 until areaList.count()) {
-                    AreaButton(
-                        type = areaList[i].type,
-                        placeName = areaList[i].title,
-                        onAreaClick = {
-                            navController.navigate(Screen.PlaceListScreen.route + "/${areaList[i].type}")
-                        }
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                }
-            }
+            )
 
             Spacer(modifier = Modifier.height(32.dp))
         }
