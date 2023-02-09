@@ -1,10 +1,8 @@
 package kr.co.younhwan.eatjnu.domain.repository
 
-import kr.co.younhwan.eatjnu.data.remote.dto.PlaceInfo
+import kr.co.younhwan.eatjnu.data.remote.dto.Place
 
 interface EatJnuRepository {
 
-    suspend fun getPlaceList(areaType: String): List<PlaceInfo>
-
-
+    suspend fun getPlaceList(areaType: String): List<Place>
 }

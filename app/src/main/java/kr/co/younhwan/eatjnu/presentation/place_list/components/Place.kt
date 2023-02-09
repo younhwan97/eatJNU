@@ -20,12 +20,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
-import kr.co.younhwan.eatjnu.domain.model.Place
+import kr.co.younhwan.eatjnu.domain.model.PlaceInfo
 
 @SuppressLint("ModifierParameter")
 @Composable
 fun Place(
-    info: Place,
+    info: PlaceInfo,
     modifier: Modifier = Modifier.fillMaxWidth()
 ) {
 

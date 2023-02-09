@@ -8,12 +8,12 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import kr.co.younhwan.eatjnu.domain.model.Place
+import kr.co.younhwan.eatjnu.domain.model.PlaceInfo
 
 @SuppressLint("ModifierParameter")
 @Composable
 fun PlaceScreen(
-    places: List<Place> = emptyList(),
+    places: List<PlaceInfo> = emptyList(),
     selectedFilterNum: Int,
     modifier: Modifier = Modifier.fillMaxSize()
 ) {

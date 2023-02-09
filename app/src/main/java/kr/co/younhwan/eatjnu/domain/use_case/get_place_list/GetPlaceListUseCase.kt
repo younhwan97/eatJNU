@@ -1,11 +1,10 @@
 package kr.co.younhwan.eatjnu.domain.use_case.get_place_list
 
-import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kr.co.younhwan.eatjnu.common.Resource
 import kr.co.younhwan.eatjnu.data.remote.dto.toPlace
-import kr.co.younhwan.eatjnu.domain.model.Place
+import kr.co.younhwan.eatjnu.domain.model.PlaceInfo
 import kr.co.younhwan.eatjnu.domain.repository.EatJnuRepository
 import retrofit2.HttpException
 import java.io.IOException
@@ -15,7 +14,7 @@ class GetPlaceListUseCase @Inject constructor(
     private val repository: EatJnuRepository
 ) {
 
-    operator fun invoke(areaType: String): Flow<Resource<List<Place>>> = flow {
+    operator fun invoke(areaType: String): Flow<Resource<List<PlaceInfo>>> = flow {
         try {
             emit(Resource.Loading())
             val places = repository.getPlaceList(areaType = areaType).map { it.toPlace() }

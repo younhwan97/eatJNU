@@ -1,6 +1,5 @@
 package kr.co.younhwan.eatjnu.presentation.place_list
 
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -11,7 +10,7 @@ import kotlinx.coroutines.flow.onEach
 import kr.co.younhwan.eatjnu.common.Constants
 import kr.co.younhwan.eatjnu.common.Resource
 import kr.co.younhwan.eatjnu.domain.model.FilterInfo
-import kr.co.younhwan.eatjnu.domain.model.Place
+import kr.co.younhwan.eatjnu.domain.model.PlaceInfo
 import kr.co.younhwan.eatjnu.domain.use_case.get_filter.GetFilterUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_place_list.GetPlaceListUseCase
 import javax.inject.Inject
@@ -31,7 +30,7 @@ class PlaceListViewModel @Inject constructor(
 
     var area = mutableStateOf("")
     var selectedFilter = mutableStateOf(1)
-    var placeList = mutableStateOf<List<Place>>(listOf())
+    var placeList = mutableStateOf<List<PlaceInfo>>(listOf())
 
     /* Init */
     init {
