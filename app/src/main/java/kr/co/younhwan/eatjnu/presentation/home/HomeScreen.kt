@@ -4,7 +4,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -22,8 +24,10 @@ fun HomeScreen(
     navController: NavController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
-    val state = viewModel.state.value
+    /* State */
+    val areaList by remember { viewModel.areaList }
 
+    /* UI */
     Box(
         contentAlignment = Alignment.BottomCenter,
         modifier = Modifier
@@ -56,15 +60,13 @@ fun HomeScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp)
             ) {
-                val areas = state.data
-
                 // 장소 버튼 생성
-                for (i in 0 until areas.count()) {
+                for (i in 0 until areaList.count()) {
                     AreaButton(
-                        type = areas[i].type,
-                        placeName = areas[i].title,
+                        type = areaList[i].type,
+                        placeName = areaList[i].title,
                         onAreaClick = {
-                            navController.navigate(Screen.PlaceListScreen.route + "/${areas[i].type}")
+                            navController.navigate(Screen.PlaceListScreen.route + "/${areaList[i].type}")
                         }
                     )
                     Spacer(modifier = Modifier.height(16.dp))
