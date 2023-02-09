@@ -33,7 +33,7 @@ fun Place(
         modifier = modifier
     ) {
         // 장소 이미지
-        ImageBox(imageUrl = info.image)
+        ImageBox(imageUrl = info.image ?: "")
 
         Spacer(Modifier.width(16.dp))
 
@@ -93,7 +93,7 @@ fun Place(
 
             // 태그
             Text(
-                text = info.tags,
+                text = info.tags ?: "",
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Normal,
                 color = Color.LightGray,

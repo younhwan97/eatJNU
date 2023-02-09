@@ -24,11 +24,12 @@ fun PlaceScreen(
     ) {
 
         items(items = places) { item ->
-            
+
             when (selectedFilterNum) {
                 0 -> Place(info = item)
                 1 -> if (item.filter == "맛집") Place(info = item)
                 2 -> if (item.filter == "술집") Place(info = item)
+                3 -> if (item.filter == "카페") Place(info = item)
             }
         }
     }
