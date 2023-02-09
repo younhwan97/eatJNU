@@ -98,7 +98,7 @@ fun Place(
                 fontWeight = FontWeight.Normal,
                 color = Color.LightGray,
                 style = androidx.compose.material.MaterialTheme.typography.body1,
-                maxLines = 1,
+                maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
         }
