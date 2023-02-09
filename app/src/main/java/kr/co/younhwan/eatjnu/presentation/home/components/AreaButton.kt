@@ -14,16 +14,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kr.co.younhwan.eatjnu.domain.model.Area
+import kr.co.younhwan.eatjnu.domain.model.AreaInfo
 
 @Composable
 fun AreaButton(
     type: Int,
     placeName: String,
-    onAreaClick: (Area) -> Unit
+    onAreaClick: (AreaInfo) -> Unit
 ) {
     OutlinedButton(
-        onClick = { onAreaClick(Area(type, placeName)) },
+        onClick = { onAreaClick(AreaInfo(type, placeName)) },
         shape = RoundedCornerShape(8.dp),
         border = BorderStroke(4.dp, Color.Black),
         colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primary),
