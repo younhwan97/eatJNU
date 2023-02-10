@@ -1,6 +1,5 @@
 package kr.co.younhwan.eatjnu.presentation.place_detail
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -24,6 +23,7 @@ class PlaceDetailViewModel @Inject constructor(
     var error = mutableStateOf("")
     var isLoading = mutableStateOf(false)
 
+    val modalImageUrl = mutableStateOf("")
     val placeDetail = mutableStateOf(
         PlaceDetailInfo(
             id = -1,
@@ -39,8 +39,6 @@ class PlaceDetailViewModel @Inject constructor(
             images = emptyList()
         )
     )
-
-    val modalImageUrl = mutableStateOf("")
 
     /* Init */
     init {

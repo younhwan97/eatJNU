@@ -35,7 +35,7 @@ fun PlaceDetailScreen(
             // Loading
             LoadingScreen()
         } else if (placeDetail.id != -1) {
-            // Success
+            // 좋아요, 리뷰 및 가게 메인 사진
             Header(
                 placeDetail = placeDetail,
                 navController = navController
@@ -49,7 +49,12 @@ fun PlaceDetailScreen(
             )
 
             if (placeDetail.images.isNotEmpty()) {
+                // 음식 사진 리스트
                 ImageScreen(images = placeDetail.images, viewModel = viewModel)
+
+                // 음식 사진 모달
+                if (modalImageUrl != "")
+                    ImageModal(url = modalImageUrl, viewModel = viewModel)
 
                 Divider(
                     color = Color(0XFFF4F4F4),
@@ -57,10 +62,6 @@ fun PlaceDetailScreen(
                         .fillMaxWidth()
                         .height(8.dp)
                 )
-
-                if (modalImageUrl != "") {
-                    ImageModal(url = modalImageUrl, viewModel = viewModel)
-                }
             }
 
         } else {
