@@ -1,5 +1,6 @@
 package kr.co.younhwan.eatjnu.presentation.place_list
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.getValue
@@ -18,8 +19,8 @@ import kr.co.younhwan.eatjnu.presentation.place_list.components.FilterScreen
 import kr.co.younhwan.eatjnu.presentation.place_list.components.PlaceScreen
 import kr.co.younhwan.eatjnu.presentation.supprot.ErrorScreen
 import kr.co.younhwan.eatjnu.presentation.supprot.LoadingScreen
+import kr.co.younhwan.eatjnu.presentation.supprot.MyTopAppBar
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlaceListScreen(
     navController: NavController,
@@ -36,26 +37,10 @@ fun PlaceListScreen(
 
     /* UI */
     Column {
-        CenterAlignedTopAppBar(
-            title = {
-                Text(
-                    text = area,
-                    style = MaterialTheme.typography.body1,
-                    fontWeight = FontWeight.Bold
-                )
-            },
-            navigationIcon = {
-                IconButton(
-                    onClick = {
-                        navController.popBackStack()
-                    }
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = null
-                    )
-                }
-            }
+        MyTopAppBar(
+            title = area,
+            navController = navController,
+            isVisibleHomeBtn = false
         )
 
         FilterScreen(
@@ -82,6 +67,7 @@ fun PlaceListScreen(
         } else {
             // Error
             ErrorScreen()
+            Log.e("error", "Error on PlaceList: $error")
         }
     }
 }
