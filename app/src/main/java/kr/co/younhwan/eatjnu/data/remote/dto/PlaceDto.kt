@@ -2,7 +2,7 @@ package kr.co.younhwan.eatjnu.data.remote.dto
 
 import kr.co.younhwan.eatjnu.domain.model.PlaceInfo
 
-data class Place(
+data class PlaceDto(
     val id: Int,
     val name: String,
     val image: String?,
@@ -12,7 +12,7 @@ data class Place(
     val filter: String?,
 )
 
-fun Place.toPlace(): PlaceInfo {
+fun PlaceDto.toPlaceInfo(): PlaceInfo {
     return PlaceInfo(
         id = id,
         name = name,
