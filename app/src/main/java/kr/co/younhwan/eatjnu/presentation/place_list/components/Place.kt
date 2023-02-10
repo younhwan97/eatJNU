@@ -60,7 +60,7 @@ fun Place(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    painter = painterResource(id = kr.co.younhwan.eatjnu.R.drawable.like),
+                    painter = painterResource(id = kr.co.younhwan.eatjnu.R.drawable.like32),
                     contentDescription = null,
                     modifier = Modifier.size(16.dp)
                 )

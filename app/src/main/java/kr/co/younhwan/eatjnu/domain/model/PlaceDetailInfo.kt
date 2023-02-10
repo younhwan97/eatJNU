@@ -8,6 +8,7 @@ data class PlaceDetailInfo(
     val filter: String,
     val tags: String?,
     val image: String?,
+    val images: List<FoodImageInfo>,
     val location: String?,
     val number: String?,
     val openingInfo: String?,

@@ -1,47 +1,21 @@
 package kr.co.younhwan.eatjnu.presentation.place_detail
 
 import android.util.Log
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.skydoves.landscapist.ImageOptions
-import com.skydoves.landscapist.glide.GlideImage
-import kr.co.younhwan.eatjnu.R
-import kr.co.younhwan.eatjnu.domain.model.PlaceDetailInfo
-import kr.co.younhwan.eatjnu.presentation.Screen
 import kr.co.younhwan.eatjnu.presentation.place_detail.components.Header
+import kr.co.younhwan.eatjnu.presentation.place_detail.components.ImageModal
+import kr.co.younhwan.eatjnu.presentation.place_detail.components.ImageScreen
 import kr.co.younhwan.eatjnu.presentation.supprot.ErrorScreen
 import kr.co.younhwan.eatjnu.presentation.supprot.LoadingScreen
-import kr.co.younhwan.eatjnu.presentation.supprot.MyTopAppBar
 
 @Composable
 fun PlaceDetailScreen(
@@ -53,6 +27,7 @@ fun PlaceDetailScreen(
     val isLoading by remember { viewModel.isLoading }
 
     val placeDetail by remember { viewModel.placeDetail }
+    val modalImageUrl by remember { viewModel.modalImageUrl }
 
     /* UI */
     Column {
@@ -66,8 +41,27 @@ fun PlaceDetailScreen(
                 navController = navController
             )
 
-            
+            Divider(
+                color = Color(0XFFF4F4F4),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(8.dp)
+            )
 
+            if (placeDetail.images.isNotEmpty()) {
+                ImageScreen(images = placeDetail.images, viewModel = viewModel)
+
+                Divider(
+                    color = Color(0XFFF4F4F4),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(8.dp)
+                )
+
+                if (modalImageUrl != "") {
+                    ImageModal(url = modalImageUrl, viewModel = viewModel)
+                }
+            }
 
         } else {
             // Error

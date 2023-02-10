@@ -1,5 +1,6 @@
 package kr.co.younhwan.eatjnu.data.remote.dto
 
+import kr.co.younhwan.eatjnu.domain.model.FoodImageInfo
 import kr.co.younhwan.eatjnu.domain.model.PlaceDetailInfo
 
 data class PlaceDetailDto(
@@ -13,6 +14,7 @@ data class PlaceDetailDto(
     val location: String?,
     val number: String?,
     val openingInfo: String?,
+    val images: List<FoodImageInfo>?,
 )
 
 fun PlaceDetailDto.toPlaceDetail(): PlaceDetailInfo {
@@ -24,6 +26,7 @@ fun PlaceDetailDto.toPlaceDetail(): PlaceDetailInfo {
         filter = filter,
         tags = tags ?: "",
         image = image ?: "",
+        images = images ?: emptyList(),
         location = location ?: "",
         number = number ?: "",
         openingInfo = openingInfo ?: ""
