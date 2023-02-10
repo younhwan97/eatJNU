@@ -17,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kr.co.younhwan.eatjnu.presentation.place_list.PlaceListViewModel
+import kr.co.younhwan.eatjnu.presentation.supprot.ErrorScreen
 import kr.co.younhwan.eatjnu.presentation.supprot.LoadingScreen
 import javax.inject.Inject
 
@@ -64,6 +65,6 @@ fun PlaceDetailScreen(
         }
     } else {
         // Error
-
+        ErrorScreen()
     }
 }
