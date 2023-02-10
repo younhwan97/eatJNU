@@ -3,6 +3,7 @@ package kr.co.younhwan.eatjnu.presentation.place_list.components
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -26,11 +27,16 @@ import kr.co.younhwan.eatjnu.domain.model.PlaceInfo
 @Composable
 fun Place(
     info: PlaceInfo,
+    onClickPlace: () -> Unit,
     modifier: Modifier = Modifier.fillMaxWidth()
 ) {
 
     Row(
         modifier = modifier
+            .fillMaxWidth()
+            .clickable(
+                onClick = onClickPlace
+            )
     ) {
         // 장소 이미지
         ImageBox(imageUrl = info.image ?: "")

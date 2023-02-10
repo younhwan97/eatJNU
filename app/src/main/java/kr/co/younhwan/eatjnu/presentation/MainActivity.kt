@@ -26,6 +26,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.younhwan.eatjnu.R
 import kr.co.younhwan.eatjnu.presentation.home.HomeScreen
+import kr.co.younhwan.eatjnu.presentation.place_detail.PlaceDetailScreen
 import kr.co.younhwan.eatjnu.presentation.place_list.PlaceListScreen
 import kr.co.younhwan.eatjnu.presentation.ui.theme.EatJNUTheme
 
@@ -64,6 +65,12 @@ class MainActivity : ComponentActivity() {
                             route = Screen.PlaceListScreen.route + "/{areaType}"
                         ) {
                             PlaceListScreen(navController)
+                        }
+
+                        composable(
+                            route = Screen.PlaceDetailScreen.route + "/{placeId}"
+                        ) {
+                            PlaceDetailScreen(navController)
                         }
                     }
                 }

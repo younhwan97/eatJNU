@@ -74,6 +74,7 @@ fun PlaceListScreen(
         } else if (placeList.isNotEmpty()) {
             // Success
             PlaceScreen(
+                navController = navController,
                 places = placeList,
                 selectedFilterNum = selectedFilter,
                 modifier = Modifier.fillMaxSize()
