@@ -26,15 +26,17 @@ fun PlaceScreen(
         modifier = modifier
     ) {
 
-        items(items = places) { item ->
+        items(items = places) { place ->
 
-            val onClickPlace = { navController.navigate(Screen.PlaceDetailScreen.route + "/${item.id}") }
+            if (place.id != -1) {
+                val onClickPlace = { navController.navigate(Screen.PlaceDetailScreen.route + "/${place.id}") }
 
-            when (selectedFilterNum) {
-                0 -> Place(info = item, onClickPlace = onClickPlace)
-                1 -> if (item.filter == "맛집") Place(info = item, onClickPlace = onClickPlace)
-                2 -> if (item.filter == "술집") Place(info = item, onClickPlace = onClickPlace)
-                3 -> if (item.filter == "카페") Place(info = item, onClickPlace = onClickPlace)
+                when (selectedFilterNum) {
+                    0 -> Place(info = place, onClickPlace = onClickPlace)
+                    1 -> if (place.filter == "맛집") Place(info = place, onClickPlace = onClickPlace)
+                    2 -> if (place.filter == "술집") Place(info = place, onClickPlace = onClickPlace)
+                    3 -> if (place.filter == "카페") Place(info = place, onClickPlace = onClickPlace)
+                }
             }
         }
     }

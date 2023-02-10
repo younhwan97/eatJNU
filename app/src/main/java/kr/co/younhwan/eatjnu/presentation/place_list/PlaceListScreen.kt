@@ -39,8 +39,7 @@ fun PlaceListScreen(
     Column {
         MyTopAppBar(
             title = area,
-            navController = navController,
-            isVisibleHomeBtn = false
+            navController = navController
         )
 
         FilterScreen(

@@ -99,8 +99,4 @@ dependencies {
 
     // Landscapist
     implementation "com.github.skydoves:landscapist-glide:2.1.2"
-
-    // Google Map
-    implementation 'com.google.maps.android:maps-compose:2.9.1'
-    implementation 'com.google.android.gms:play-services-maps:18.1.0'
 }

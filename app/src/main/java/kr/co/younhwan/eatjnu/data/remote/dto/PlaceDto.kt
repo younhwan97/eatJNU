@@ -3,8 +3,8 @@ package kr.co.younhwan.eatjnu.data.remote.dto
 import kr.co.younhwan.eatjnu.domain.model.PlaceInfo
 
 data class PlaceDto(
-    val id: Int,
-    val name: String,
+    val id: Int?,
+    val name: String?,
     val image: String?,
     val reviewCount: Int?,
     val likeCount: Int?,
@@ -14,8 +14,8 @@ data class PlaceDto(
 
 fun PlaceDto.toPlaceInfo(): PlaceInfo {
     return PlaceInfo(
-        id = id,
-        name = name,
+        id = id ?: -1,
+        name = name ?: "",
         image = image ?: "",
         reviewCount = reviewCount ?: 0,
         likeCount = likeCount ?: 0,
