@@ -40,8 +40,8 @@ class MainActivity : ComponentActivity() {
                 val systemUiController = rememberSystemUiController()
                 SideEffect {
                     systemUiController.setStatusBarColor(
-                        color = Color(0XFFFFFFFF),
-                        darkIcons = true
+                        darkIcons = true,
+                        color = Color.White
                     )
                 }
 

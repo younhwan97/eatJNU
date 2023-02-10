@@ -15,6 +15,8 @@ data class PlaceDetailDto(
     val number: String?,
     val openingInfo: String?,
     val images: List<FoodImageInfo>?,
+    val lat: Double?,
+    val lon: Double?
 )
 
 fun PlaceDetailDto.toPlaceDetail(): PlaceDetailInfo {
@@ -29,6 +31,8 @@ fun PlaceDetailDto.toPlaceDetail(): PlaceDetailInfo {
         images = images ?: emptyList(),
         location = location ?: "",
         number = number ?: "",
-        openingInfo = openingInfo ?: ""
+        openingInfo = openingInfo ?: "",
+        lat = lat ?: 0.0,
+        lon = lon ?: 0.0
     )
 }

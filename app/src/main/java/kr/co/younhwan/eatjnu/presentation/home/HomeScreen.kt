@@ -27,6 +27,7 @@ fun HomeScreen(
 ) {
     /* State */
     val areaList by remember { viewModel.areaList }
+
     /* UI */
     Box(
         contentAlignment = Alignment.BottomCenter,
@@ -39,6 +40,8 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxWidth()
         ) {
+
+            // 메인 이미지
             Image(
                 painter = painterResource(R.drawable.image),
                 contentDescription = null,
@@ -46,6 +49,7 @@ fun HomeScreen(
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
 
+            // 메인 타이틀
             Text(
                 text = "전대 밥토끼",
                 style = MaterialTheme.typography.h1,
@@ -54,6 +58,7 @@ fun HomeScreen(
 
             Spacer(modifier = Modifier.height(8.dp))
 
+            // 장소 버튼
             AreaButtonScreen(
                 areaList = areaList,
                 navController = navController,

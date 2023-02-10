@@ -18,13 +18,14 @@ import kr.co.younhwan.eatjnu.domain.model.AreaInfo
 
 @Composable
 fun AreaButton(
-    type: Int,
     placeName: String,
-    onAreaClick: (AreaInfo) -> Unit
+    onAreaClick: () -> Unit
 ) {
     OutlinedButton(
-        onClick = { onAreaClick(AreaInfo(type, placeName)) },
-        shape = RoundedCornerShape(8.dp),
+        onClick = {
+            onAreaClick()
+        },
+        shape = RoundedCornerShape(12.dp),
         border = BorderStroke(4.dp, Color.Black),
         colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primary),
         modifier = Modifier
@@ -33,10 +34,10 @@ fun AreaButton(
     ) {
         Text(
             text = placeName,
-            color = Color(0XFFFFFFFF),
-            style = MaterialTheme.typography.body1,
+            color = Color.White,
+            letterSpacing = 10.sp,
             fontWeight = FontWeight.Bold,
-            letterSpacing = 10.sp
+            style = MaterialTheme.typography.body1,
         )
     }
 }

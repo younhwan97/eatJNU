@@ -9,7 +9,9 @@ data class PlaceDetailInfo(
     val tags: String?,
     val image: String?,
     val images: List<FoodImageInfo>,
-    val location: String?,
+    val location: String,
     val number: String?,
     val openingInfo: String?,
+    val lat: Double,
+    val lon: Double,
 )

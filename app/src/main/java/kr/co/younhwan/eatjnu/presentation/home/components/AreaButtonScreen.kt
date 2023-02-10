@@ -17,7 +17,6 @@ fun AreaButtonScreen(
     navController: NavController,
     modifier: Modifier = Modifier.fillMaxWidth()
 ) {
-
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
@@ -26,9 +25,12 @@ fun AreaButtonScreen(
         // 장소 버튼 생성
         areaList.forEach { info ->
 
-            AreaButton(type = info.type, placeName = info.title, onAreaClick = {
-                navController.navigate(Screen.PlaceListScreen.route + "/${info.type}")
-            })
+            AreaButton(
+                placeName = info.title,
+                onAreaClick = {
+                    navController.navigate(Screen.PlaceListScreen.route + "/${info.type}")
+                }
+            )
 
             Spacer(modifier = Modifier.height(16.dp))
         }
