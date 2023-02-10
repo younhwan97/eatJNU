@@ -1,5 +1,6 @@
 package kr.co.younhwan.eatjnu.presentation.place_detail
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -23,7 +24,7 @@ class PlaceDetailViewModel @Inject constructor(
     var error = mutableStateOf("")
     var isLoading = mutableStateOf(false)
 
-    val placeDetail = mutableStateOf<PlaceDetailInfo>(
+    val placeDetail = mutableStateOf(
         PlaceDetailInfo(
             id = -1,
             name = "",
@@ -61,6 +62,7 @@ class PlaceDetailViewModel @Inject constructor(
                 is Resource.Success -> {
                     isLoading.value = false
                     placeDetail.value = result.data ?: placeDetail.value
+
                 }
             }
         }.launchIn(viewModelScope)
