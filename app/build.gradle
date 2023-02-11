@@ -106,4 +106,8 @@ dependencies {
 
     // Landscapist
     implementation "com.github.skydoves:landscapist-glide:2.1.2"
+
+    // Kakao map
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/libDaumMapAndroid.jar')
 }
