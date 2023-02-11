@@ -2,6 +2,8 @@ package kr.co.younhwan.eatjnu.presentation.place_detail
 
 import android.util.Log
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
@@ -16,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kr.co.younhwan.eatjnu.presentation.place_detail.components.Header
@@ -24,9 +25,6 @@ import kr.co.younhwan.eatjnu.presentation.place_detail.components.ImageModal
 import kr.co.younhwan.eatjnu.presentation.place_detail.components.ImageScreen
 import kr.co.younhwan.eatjnu.presentation.supprot.ErrorScreen
 import kr.co.younhwan.eatjnu.presentation.supprot.LoadingScreen
-import net.daum.mf.map.api.MapPOIItem
-import net.daum.mf.map.api.MapPoint
-import net.daum.mf.map.api.MapView
 
 @Composable
 fun PlaceDetailScreen(
@@ -40,8 +38,10 @@ fun PlaceDetailScreen(
     val placeDetail by remember { viewModel.placeDetail }
     val modalImageUrl by remember { viewModel.modalImageUrl }
 
+    val scrollState = rememberScrollState()
+
     /* UI */
-    Column {
+    Column(modifier = Modifier.verticalScroll(scrollState)) {
         if (isLoading) {
             // Loading
             LoadingScreen()
@@ -98,33 +98,9 @@ fun PlaceDetailScreen(
                     }
 
                     if (placeDetail.lat != 0.0 && placeDetail.lon != 0.0) {
-                        AndroidView(
-                            factory = {
-                                MapView(it)
-                            },
-                            update = {
-                                // 중심점 변경 + 줌 레벨 변경
-                                it.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(placeDetail.lat, placeDetail.lon), 2, false);
-
-                                // 마커 생성
-                                val marker = MapPOIItem()
-                                marker.itemName = placeDetail.name
-                                marker.tag = 0
-                                marker.markerType = MapPOIItem.MarkerType.CustomImage
-                                marker.customImageResourceId = kr.co.younhwan.eatjnu.R.drawable.rabbit64
-                                marker.mapPoint = MapPoint.mapPointWithGeoCoord(placeDetail.lat, placeDetail.lon)
-                                it.addPOIItem(marker)
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(168.dp)
-                                .padding(top = 8.dp)
-                        )
                     }
                 }
             }
-
-
         } else {
             // Error
             ErrorScreen()

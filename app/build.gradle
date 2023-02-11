@@ -8,7 +8,6 @@ plugins {
 // local.properties 사용을 위함
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
-def kakaoMapApiKey = properties.getProperty("kakao.key")
 
 android {
     namespace 'kr.co.younhwan.eatjnu'
@@ -25,9 +24,6 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-
-        // kakao key 변수 지정
-        manifestPlaceholders = [kakaoMapApiKey: kakaoMapApiKey]
     }
 
     buildTypes {
@@ -107,8 +103,4 @@ dependencies {
 
     // Landscapist
     implementation "com.github.skydoves:landscapist-glide:2.1.2"
-
-    // Kakao map
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation files('libs/libDaumMapAndroid.jar')
 }
