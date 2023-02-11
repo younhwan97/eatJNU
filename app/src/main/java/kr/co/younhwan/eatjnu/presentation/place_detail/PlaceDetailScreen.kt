@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import kr.co.younhwan.eatjnu.BuildConfig
 import kr.co.younhwan.eatjnu.presentation.place_detail.components.Header
 import kr.co.younhwan.eatjnu.presentation.place_detail.components.ImageModal
 import kr.co.younhwan.eatjnu.presentation.place_detail.components.ImageScreen
