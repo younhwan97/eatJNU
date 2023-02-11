@@ -43,7 +43,7 @@ fun ImageScreen(
                 // 메뉴 사진
                 Box(
                     modifier = Modifier
-                        .size(width = 130.dp, height = 130.dp)
+                        .size(120.dp)
                         .clickable {
                             viewModel.setModalImageUrl(item.url)
                         }
@@ -80,7 +80,7 @@ fun ImageScreen(
                 // 음식 사진
                 GlideImage(
                     modifier = Modifier
-                        .size(130.dp, 130.dp)
+                        .size(120.dp)
                         .clickable {
                             viewModel.setModalImageUrl(item.url)
                         },

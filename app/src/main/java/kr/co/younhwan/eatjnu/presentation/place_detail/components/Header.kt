@@ -22,12 +22,12 @@ import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 import kr.co.younhwan.eatjnu.R
 import kr.co.younhwan.eatjnu.domain.model.PlaceDetailInfo
+import kr.co.younhwan.eatjnu.presentation.supprot.MyDivider
 import kr.co.younhwan.eatjnu.presentation.supprot.MyTopAppBar
 
 @Composable
 fun Header(
-    placeDetail: PlaceDetailInfo,
-    navController: NavController
+    placeDetail: PlaceDetailInfo
 ) {
     Box(
         modifier = Modifier
@@ -52,14 +52,6 @@ fun Header(
                 )
             }
     ) {
-        // 앱바
-        MyTopAppBar(
-            navController = navController,
-            containerColor = Color.White.copy(alpha = 0f),
-            isVisibleHomeBtn = true,
-            modifier = Modifier.zIndex(2f)
-        )
-
         // 가게 이미지
         GlideImage(
             imageModel = {

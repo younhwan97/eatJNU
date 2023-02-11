@@ -7,7 +7,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kr.co.younhwan.eatjnu.presentation.place_detail.components.Header
@@ -25,6 +25,8 @@ import kr.co.younhwan.eatjnu.presentation.place_detail.components.ImageModal
 import kr.co.younhwan.eatjnu.presentation.place_detail.components.ImageScreen
 import kr.co.younhwan.eatjnu.presentation.supprot.ErrorScreen
 import kr.co.younhwan.eatjnu.presentation.supprot.LoadingScreen
+import kr.co.younhwan.eatjnu.presentation.supprot.MyDivider
+import kr.co.younhwan.eatjnu.presentation.supprot.MyTopAppBar
 
 @Composable
 fun PlaceDetailScreen(
@@ -38,66 +40,61 @@ fun PlaceDetailScreen(
     val placeDetail by remember { viewModel.placeDetail }
     val modalImageUrl by remember { viewModel.modalImageUrl }
 
-    val scrollState = rememberScrollState()
-
     /* UI */
-    Column(modifier = Modifier.verticalScroll(scrollState)) {
+    Box {
+        // 앱바
+        MyTopAppBar(
+            navController = navController,
+            containerColor = Color.White.copy(alpha = 0f),
+            isVisibleHomeBtn = true,
+            modifier = Modifier.zIndex(2f)
+        )
+
         if (isLoading) {
             // Loading
             LoadingScreen()
         } else if (placeDetail.id != -1) {
-            // 좋아요, 리뷰 및 가게 메인 사진
-            Header(
-                placeDetail = placeDetail,
-                navController = navController
-            )
 
-            Divider(
-                color = Color(0XFFF4F4F4),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(8.dp)
-            )
+            val scrollState = rememberScrollState()
 
-            if (placeDetail.images.isNotEmpty()) {
-                // 음식 사진 리스트
-                ImageScreen(images = placeDetail.images, viewModel = viewModel)
+            // 메인 사진 및 좋아요, 리뷰
+            Column(modifier = Modifier.verticalScroll(scrollState)) {
+                Header(placeDetail = placeDetail)
 
-                // 음식 사진 모달
-                if (modalImageUrl != "")
-                    ImageModal(url = modalImageUrl, viewModel = viewModel)
+                MyDivider()
 
-                Divider(
-                    color = Color(0XFFF4F4F4),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(8.dp)
-                )
-            }
+                if (placeDetail.images.isNotEmpty()) {
+                    // 음식 사진 리스트
+                    ImageScreen(images = placeDetail.images, viewModel = viewModel)
 
-            Column(modifier = Modifier.padding(16.dp)) {
-                if (placeDetail.location.isNotBlank()) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.LocationOn,
-                            contentDescription = null,
-                            tint = Color.Gray,
-                            modifier = Modifier.size(16.dp)
-                        )
+                    // 음식 사진 모달
+                    if (modalImageUrl != "")
+                        ImageModal(url = modalImageUrl, viewModel = viewModel)
 
-                        Spacer(modifier = Modifier.width(4.dp))
+                    MyDivider()
+                }
 
-                        Text(
-                            text = placeDetail.location,
-                            style = MaterialTheme.typography.body1,
-                            fontSize = 14.sp,
-                            color = Color.Gray
-                        )
-                    }
+                Column(modifier = Modifier.padding(16.dp)) {
+                    if (placeDetail.location.isNotBlank()) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Filled.LocationOn,
+                                contentDescription = null,
+                                tint = Color.Gray,
+                                modifier = Modifier.size(16.dp)
+                            )
 
-                    if (placeDetail.lat != 0.0 && placeDetail.lon != 0.0) {
+                            Spacer(modifier = Modifier.width(4.dp))
+
+                            Text(
+                                text = placeDetail.location,
+                                style = MaterialTheme.typography.body1,
+                                fontSize = 14.sp,
+                                color = Color.Gray
+                            )
+                        }
                     }
                 }
             }
