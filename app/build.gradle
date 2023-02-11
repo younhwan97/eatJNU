@@ -8,6 +8,7 @@ plugins {
 // local.properties 사용을 위함
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def kakaoMapApiKey = properties.getProperty("kakao.key")
 
 android {
     namespace 'kr.co.younhwan.eatjnu'
@@ -26,7 +27,7 @@ android {
         }
 
         // kakao key 변수 지정
-        buildConfigField "String", "KAKAO_KEY", properties['kakao.key']
+        manifestPlaceholders = [kakaoMapApiKey: kakaoMapApiKey]
     }
 
     buildTypes {
