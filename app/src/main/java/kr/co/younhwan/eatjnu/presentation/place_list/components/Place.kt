@@ -123,10 +123,10 @@ fun ImageBox(
 ) {
     Box(
         modifier = Modifier
-            .size(width = 88.dp, height = 90.dp)
+            .size(width = 78.dp, height = 80.dp)
             .clip(RoundedCornerShape(roundedDp))
             .border(
-                width = (1.15).dp,
+                width = 1.dp,
                 color = Color.Black, RoundedCornerShape(roundedDp)
             )
     ) {
