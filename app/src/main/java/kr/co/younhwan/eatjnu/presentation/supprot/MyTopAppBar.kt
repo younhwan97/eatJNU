@@ -8,6 +8,8 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
@@ -26,9 +28,9 @@ fun MyTopAppBar(
     containerColor: Color = Color.White,
     navController: NavController,
     isVisibleHomeBtn: Boolean = false,
+    isVisibleLikeBtn: Boolean = false,
     modifier: Modifier = Modifier
 ) {
-    val iconColor = if (containerColor == Color.White.copy(0f)) Color.White else Color.Black
 
     CenterAlignedTopAppBar(
         title = {
@@ -50,17 +52,28 @@ fun MyTopAppBar(
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
                     contentDescription = null,
-                    tint = iconColor
+                    tint = Color.Black
                 )
             }
         },
         actions = {
+            // 홈 버튼
             if (isVisibleHomeBtn) {
                 IconButton(onClick = { navController.navigate(Screen.HomeScreen.route) { popUpTo(0) } }) {
                     Icon(
                         imageVector = Icons.Filled.Home,
                         contentDescription = null,
-                        tint = iconColor
+                        tint = Color.Black
+                    )
+                }
+            }
+
+            // 좋아요 버튼
+            if (isVisibleLikeBtn) {
+                IconButton(onClick = {}) {
+                    Icon(
+                        imageVector = Icons.Outlined.FavoriteBorder,
+                        contentDescription = null
                     )
                 }
             }

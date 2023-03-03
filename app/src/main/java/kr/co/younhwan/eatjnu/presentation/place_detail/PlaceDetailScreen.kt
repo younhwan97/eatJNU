@@ -31,7 +31,8 @@ fun PlaceDetailScreen(
     ) {
         MyTopAppBar(
             title = placeDetail.name,
-            navController = navController
+            navController = navController,
+            isVisibleLikeBtn = true
         )
 
         if (isLoading) {
@@ -39,10 +40,7 @@ fun PlaceDetailScreen(
             LoadingScreen()
         } else if (placeDetail.id != -1) {
             // Success
-            ImageSlider(
-                images = placeDetail.images
-            )
-
+            ImageSlider(images = placeDetail.images)
         } else {
             // Error
             ErrorScreen()
