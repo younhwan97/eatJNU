@@ -23,7 +23,6 @@ class PlaceDetailViewModel @Inject constructor(
     var error = mutableStateOf("")
     var isLoading = mutableStateOf(false)
 
-    val modalImageUrl = mutableStateOf("")
     val placeDetail = mutableStateOf(
         PlaceDetailInfo(
             id = -1,
@@ -69,9 +68,5 @@ class PlaceDetailViewModel @Inject constructor(
                 }
             }
         }.launchIn(viewModelScope)
-    }
-
-    fun setModalImageUrl(url: String) {
-        modalImageUrl.value = url
     }
 }

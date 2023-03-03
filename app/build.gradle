@@ -103,4 +103,7 @@ dependencies {
 
     // Landscapist
     implementation "com.github.skydoves:landscapist-glide:2.1.2"
+
+    // Pager
+    implementation "com.google.accompanist:accompanist-pager:0.28.0"
 }

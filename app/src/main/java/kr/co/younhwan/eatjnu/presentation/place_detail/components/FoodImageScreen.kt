@@ -44,9 +44,6 @@ fun ImageScreen(
                 Box(
                     modifier = Modifier
                         .size(120.dp)
-                        .clickable {
-                            viewModel.setModalImageUrl(item.url)
-                        }
                 ) {
                     GlideImage(
                         modifier = Modifier
@@ -80,10 +77,7 @@ fun ImageScreen(
                 // 음식 사진
                 GlideImage(
                     modifier = Modifier
-                        .size(120.dp)
-                        .clickable {
-                            viewModel.setModalImageUrl(item.url)
-                        },
+                        .size(120.dp),
                     imageModel = { item.url }, // loading a network image using an URL.
                     imageOptions = ImageOptions(
                         contentScale = ContentScale.Crop,
