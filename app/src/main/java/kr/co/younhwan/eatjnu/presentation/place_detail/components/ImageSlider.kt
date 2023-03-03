@@ -1,20 +1,13 @@
 package kr.co.younhwan.eatjnu.presentation.place_detail.components
 
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Canvas
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
@@ -23,6 +16,7 @@ import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 import kr.co.younhwan.eatjnu.domain.model.FoodImageInfo
 
+@SuppressLint("ModifierParameter")
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ImageSlider(
@@ -30,9 +24,9 @@ fun ImageSlider(
     modifier: Modifier = Modifier.fillMaxWidth()
 ) {
 
-    Box(modifier = Modifier.fillMaxWidth()) {
-        val pagerState = rememberPagerState(initialPage = 0)
+    val pagerState = rememberPagerState(initialPage = 0)
 
+    Box(modifier = Modifier.fillMaxWidth()) {
         HorizontalPager(
             count = images.size,
             state = pagerState,
@@ -56,20 +50,17 @@ fun ImageSlider(
             )
         }
 
-        Box(
+        PageIndicator(
+            numberOfPages = pagerState.pageCount,
+            selectedPage = pagerState.currentPage,
+            defaultRadius = 8.dp,
+            selectedLength = 16.dp,
+            space = 8.dp,
+            animationDurationInMillis = 500,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(bottom = 8.dp)
-        ) {
-            PageIndicator(
-                numberOfPages = pagerState.pageCount,
-                selectedPage = pagerState.currentPage,
-                defaultRadius = 8.dp,
-                selectedLength = 16.dp,
-                space = 8.dp,
-                animationDurationInMillis = 500
-            )
-        }
+                .padding(8.dp)
+        )
     }
 }
 
