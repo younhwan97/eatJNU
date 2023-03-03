@@ -32,7 +32,7 @@ fun FilterScreen(
                     viewModel.changeFilter(it)
                 }
             else
-                Filter(info = item, index = index) {
+                Filter(info = item, selected = false, index = index) {
                     viewModel.changeFilter(it)
                 }
         }

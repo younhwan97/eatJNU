@@ -22,14 +22,14 @@ fun Filter(
     onClickFilter: (Int) -> Unit
 ) {
 
-    // 필터 변수
+    // 필터 속성
     var tintColor = Color.Black // 아이콘, 글씨 색
     var containerColor = Color.White // 배경 색
-    val borderColor = MaterialTheme.colors.secondary // 테두리 색(변경x)
+    val borderColor = MaterialTheme.colors.secondary // 테두리 색
     var fontWeight = FontWeight.Normal // 글씨 두께
 
+    // 선택된 필터 속성
     if (selected) {
-        // 선택된 필터의 경우 색상 변경
         tintColor = Color.White
         containerColor = MaterialTheme.colors.primary
         fontWeight = FontWeight.Bold
