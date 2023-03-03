@@ -95,13 +95,6 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.2"
     implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
 
-    // Room
-    implementation "androidx.room:room-common:2.5.0"
-    kapt "androidx.room:room-compiler:2.5.0"
-
-    // Kotlin Extensions and Coroutines support for Room
-    implementation "androidx.room:room-ktx:2.5.0"
-
     // system bars customization
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.28.0"
 
@@ -114,4 +107,7 @@ dependencies {
     // Pager
     implementation "com.google.accompanist:accompanist-pager:0.28.0"
     implementation 'com.google.accompanist:accompanist-pager-indicators:0.28.0'
+
+    // DataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
 }
