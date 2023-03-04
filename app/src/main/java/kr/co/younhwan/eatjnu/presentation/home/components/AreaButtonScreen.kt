@@ -15,6 +15,7 @@ import kr.co.younhwan.eatjnu.presentation.Screen
 fun AreaButtonScreen(
     areaList: List<AreaInfo>,
     navController: NavController,
+    userId: String,
     modifier: Modifier = Modifier.fillMaxWidth()
 ) {
     Column(
@@ -28,10 +29,9 @@ fun AreaButtonScreen(
             AreaButton(
                 placeName = info.title,
                 onAreaClick = {
-                    navController.navigate(Screen.PlaceListScreen.route + "/${info.type}")
+                    navController.navigate(Screen.PlaceListScreen.route + "/${info.type}" + "/${userId}")
                 }
             )
-
             Spacer(modifier = Modifier.height(16.dp))
         }
     }

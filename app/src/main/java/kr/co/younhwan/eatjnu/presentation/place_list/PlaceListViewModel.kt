@@ -1,5 +1,6 @@
 package kr.co.younhwan.eatjnu.presentation.place_list
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -31,6 +32,7 @@ class PlaceListViewModel @Inject constructor(
     var area = mutableStateOf("")
     var selectedFilter = mutableStateOf(1)
     var placeList = mutableStateOf<List<PlaceInfo>>(listOf())
+    val userId = mutableStateOf("")
 
     /* Init */
     init {
@@ -47,6 +49,10 @@ class PlaceListViewModel @Inject constructor(
                 "1" -> area.value = "상대"
                 "2" -> area.value = "정문"
             }
+        }
+
+        savedStateHandle.get<String>(Constants.PARAM_USER_ID)?.let { userId ->
+            this.userId.value = userId
         }
     }
 

@@ -26,4 +26,8 @@ class EatJnuRepositoryImpl @Inject constructor(
     override suspend fun addLikePlace(userId: String, placeId: String): LikePlaceDto {
         return api.addLikePlace(userId = userId, placeId = placeId)
     }
+
+    override suspend fun removeLikePlace(userId: String, placeId: String): LikePlaceDto {
+        return api.removeLikePlace(userId = userId, placeId = placeId)
+    }
 }

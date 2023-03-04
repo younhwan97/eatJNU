@@ -13,4 +13,6 @@ interface EatJnuRepository {
     suspend fun getLikePlaceList(userId: String): List<LikePlaceDto>
 
     suspend fun addLikePlace(userId:String, placeId: String) : LikePlaceDto
+
+    suspend fun removeLikePlace(userId: String, placeId: String) : LikePlaceDto
 }

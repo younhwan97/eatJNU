@@ -24,23 +24,31 @@ fun PlaceDetailScreen(
     val isLoading by remember { viewModel.isLoading }
 
     val placeDetail by remember { viewModel.placeDetail }
+    val isLikePlace by remember { viewModel.isLikePlace }
 
     /* UI */
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        MyTopAppBar(
-            title = placeDetail.name,
-            navController = navController,
-            isVisibleLikeBtn = true,
-            isLikePlace = (viewModel.likePlaceList.value).contains(placeDetail.id)
-        )
-
         if (isLoading) {
             // Loading
             LoadingScreen()
         } else if (placeDetail.id != -1) {
             // Success
+            MyTopAppBar(
+                title = placeDetail.name,
+                navController = navController,
+                isVisibleLikeBtn = true,
+                isLikePlace = isLikePlace,
+                onClickLikeBtn = {
+                    if (isLikePlace) {
+                        viewModel.removeLikePlace(placeId = placeDetail.id)
+                    } else {
+                        viewModel.addLikePlace(placeId = placeDetail.id)
+                    }
+                }
+            )
+
             ImageSlider(images = placeDetail.images)
         } else {
             // Error

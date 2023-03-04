@@ -18,6 +18,7 @@ fun PlaceScreen(
     navController: NavController,
     places: List<PlaceInfo> = emptyList(),
     selectedFilterNum: Int,
+    userId: String,
     modifier: Modifier = Modifier.fillMaxSize()
 ) {
 
@@ -29,7 +30,7 @@ fun PlaceScreen(
         items(items = places) { place ->
 
             if (place.id != -1) {
-                val onClickPlace = { navController.navigate(Screen.PlaceDetailScreen.route + "/${place.id}") }
+                val onClickPlace = { navController.navigate(Screen.PlaceDetailScreen.route + "/${place.id}" + "/${userId}") }
 
                 when (selectedFilterNum) {
                     0 -> Place(info = place, onClickPlace = onClickPlace)

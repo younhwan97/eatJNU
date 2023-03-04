@@ -34,12 +34,14 @@ fun PlaceListScreen(
     val selectedFilter by remember { viewModel.selectedFilter }
     val placeList by remember { viewModel.placeList }
     val filterList by remember { viewModel.filterList }
+    val userId by remember { viewModel.userId }
 
     /* UI */
     Column {
         MyTopAppBar(
             title = area,
-            navController = navController
+            navController = navController,
+            onClickLikeBtn = {}
         )
 
         FilterScreen(
@@ -61,6 +63,7 @@ fun PlaceListScreen(
                 navController = navController,
                 places = placeList,
                 selectedFilterNum = selectedFilter,
+                userId = userId,
                 modifier = Modifier.fillMaxSize()
             )
         } else {

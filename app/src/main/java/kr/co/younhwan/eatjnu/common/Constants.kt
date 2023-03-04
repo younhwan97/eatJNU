@@ -8,4 +8,6 @@ object Constants {
     const val PARAM_AREA_TYPE = "areaType"
 
     const val PARAM_PLACE_ID = "placeId"
+
+    const val PARAM_USER_ID = "userId"
 }

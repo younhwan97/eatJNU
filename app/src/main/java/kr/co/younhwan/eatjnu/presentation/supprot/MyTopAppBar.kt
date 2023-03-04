@@ -33,6 +33,7 @@ fun MyTopAppBar(
     isVisibleHomeBtn: Boolean = false,
     isVisibleLikeBtn: Boolean = false,
     isLikePlace: Boolean = false,
+    onClickLikeBtn: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
 
@@ -74,14 +75,14 @@ fun MyTopAppBar(
 
             // 좋아요 버튼
             if (isVisibleLikeBtn) {
-                IconButton(onClick = {}) {
-                    if (isLikePlace){
+                IconButton(onClick = onClickLikeBtn) {
+                    if (isLikePlace) {
                         Icon(
                             imageVector = Icons.Filled.Favorite,
                             contentDescription = null,
                             tint = Color(0XFFF40028)
                         )
-                    } else{
+                    } else {
                         Icon(
                             imageVector = Icons.Outlined.FavoriteBorder,
                             contentDescription = null

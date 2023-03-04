@@ -27,6 +27,7 @@ fun HomeScreen(
 ) {
     /* State */
     val areaList by remember { viewModel.areaList }
+    val userId by remember { viewModel.userId }
 
     /* UI */
     Box(
@@ -62,6 +63,7 @@ fun HomeScreen(
             AreaButtonScreen(
                 areaList = areaList,
                 navController = navController,
+                userId = userId,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp)

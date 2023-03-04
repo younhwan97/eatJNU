@@ -17,25 +17,25 @@ import kr.co.younhwan.eatjnu.domain.use_case.create_user_id.CreateUserIdUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_like_place_list.GetLikePlaceListUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_place_detail.GetPlaceDetailUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_user_id.GetUserIdUseCase
+import kr.co.younhwan.eatjnu.domain.use_case.remove_like_place.RemoveLikePlaceUseCase
 import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
 class PlaceDetailViewModel @Inject constructor(
     private val getPlaceDetailUseCase: GetPlaceDetailUseCase,
-    private val createUserIdUseCase: CreateUserIdUseCase,
-    private val getUserIdUseCase: GetUserIdUseCase,
     private val addLikePlaceUseCase: AddLikePlaceUseCase,
     private val getLikePlaceListUseCase: GetLikePlaceListUseCase,
+    private val removeLikePlaceUseCase: RemoveLikePlaceUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     /* State */
     var error = mutableStateOf("")
-    var isLoading = mutableStateOf(false)
+    var isLoading = mutableStateOf(true)
 
     val userId = mutableStateOf("")
-    val likePlaceList = mutableStateOf<List<Int>>(emptyList())
+    val isLikePlace = mutableStateOf(false)
     val placeDetail = mutableStateOf(
         PlaceDetailInfo(
             id = -1,
@@ -56,65 +56,60 @@ class PlaceDetailViewModel @Inject constructor(
 
     /* Init */
     init {
-        savedStateHandle.get<String>(Constants.PARAM_PLACE_ID)?.let { placeId ->
-            getPlaceDetail(placeId = placeId)
-        }
-
         viewModelScope.launch {
-            userId.value = getUserIdUseCase() ?: ""
+            val placeId = savedStateHandle.get<String>(Constants.PARAM_PLACE_ID) ?: "-1"
+            userId.value = savedStateHandle.get<String>(Constants.PARAM_USER_ID) ?: ""
 
-            if (userId.value == ""){
-                userId.value = UUID.randomUUID().toString()
-                createUserIdUseCase(userId.value)
-            }
-
-            getLikePlaceList(userId.value)
+            getPlaceDetail(placeId = placeId)
+            checkLikePlace(userId = userId.value, placeId = placeId)
         }
     }
 
     /* Function */
-    private fun getPlaceDetail(placeId: String) {
+    private fun getPlaceDetail(placeId: String)  {
+        // 장소 리스트 초기화
         getPlaceDetailUseCase(placeId = placeId).onEach { result ->
             when (result) {
-                is Resource.Loading -> {
-                    isLoading.value = true
-                }
-
+                is Resource.Loading -> {}
                 is Resource.Error -> {
                     isLoading.value = false
                     error.value = result.message ?: ""
                 }
-
                 is Resource.Success -> {
                     isLoading.value = false
                     placeDetail.value = result.data ?: placeDetail.value
-
                 }
             }
         }.launchIn(viewModelScope)
     }
 
-    fun getLikePlaceList(userId: String) {
+    fun checkLikePlace(userId: String, placeId: String) {
         getLikePlaceListUseCase(userId = userId).onEach { result ->
             when (result) {
-                is Resource.Loading -> {
-
-                }
-
-                is Resource.Error -> {
-
-                }
-
-                is Resource.Success -> {
-                    likePlaceList.value = result.data ?: emptyList()
-                }
+                is Resource.Loading -> Unit
+                is Resource.Error -> Unit
+                is Resource.Success -> isLikePlace.value = result.data?.contains(placeId.toInt()) ?: false
             }
         }.launchIn(viewModelScope)
     }
 
     fun addLikePlace(placeId: Int) {
-        addLikePlaceUseCase(userId = userId.value, placeId = placeId.toString()).onEach {
+        addLikePlaceUseCase(userId = userId.value, placeId = placeId.toString()).onEach { result ->
+            when (result) {
+                is Resource.Loading -> Unit
+                is Resource.Error -> Unit
+                is Resource.Success -> isLikePlace.value = true
+            }
+        }.launchIn(viewModelScope)
+    }
 
+    fun removeLikePlace(placeId: Int) {
+        removeLikePlaceUseCase(userId = userId.value, placeId = placeId.toString()).onEach { result ->
+            when (result) {
+                is Resource.Loading -> Unit
+                is Resource.Error -> Unit
+                is Resource.Success -> isLikePlace.value = false
+            }
         }.launchIn(viewModelScope)
     }
 }

@@ -4,6 +4,7 @@ import kr.co.younhwan.eatjnu.data.remote.dto.LikePlaceDto
 import kr.co.younhwan.eatjnu.data.remote.dto.LikePlaceListDto
 import kr.co.younhwan.eatjnu.data.remote.dto.PlaceDetailDto
 import kr.co.younhwan.eatjnu.data.remote.dto.PlaceListDto
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.PUT
 import retrofit2.http.Path
@@ -22,4 +23,7 @@ interface EatJnuApi {
 
     @PUT("LikePlace/{userId}/{placeId}")
     suspend fun addLikePlace(@Path("userId") userId: String, @Path("placeId") placeId: String): LikePlaceDto
+
+    @DELETE("LikePlace/{userId}/{placeId}")
+    suspend fun removeLikePlace(@Path("userId") userId: String, @Path("placeId") placeId: String): LikePlaceDto
 }

@@ -62,13 +62,13 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable(
-                            route = Screen.PlaceListScreen.route + "/{areaType}"
+                            route = Screen.PlaceListScreen.route + "/{areaType}" + "/{userId}"
                         ) {
                             PlaceListScreen(navController)
                         }
 
                         composable(
-                            route = Screen.PlaceDetailScreen.route + "/{placeId}"
+                            route = Screen.PlaceDetailScreen.route + "/{placeId}" + "/{userId}"
                         ) {
                             PlaceDetailScreen(navController)
                         }
