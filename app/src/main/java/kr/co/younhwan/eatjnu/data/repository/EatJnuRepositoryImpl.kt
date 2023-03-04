@@ -1,6 +1,7 @@
 package kr.co.younhwan.eatjnu.data.repository
 
 import kr.co.younhwan.eatjnu.data.remote.EatJnuApi
+import kr.co.younhwan.eatjnu.data.remote.dto.LikePlaceDto
 import kr.co.younhwan.eatjnu.data.remote.dto.PlaceDetailDto
 import kr.co.younhwan.eatjnu.data.remote.dto.PlaceDto
 import kr.co.younhwan.eatjnu.domain.repository.EatJnuRepository
@@ -16,5 +17,13 @@ class EatJnuRepositoryImpl @Inject constructor(
 
     override suspend fun getPlaceDetail(placeId: String): PlaceDetailDto {
         return api.getPlaceDetail(placeId = placeId)
+    }
+
+    override suspend fun getLikePlaceList(userId: String): List<LikePlaceDto> {
+        return api.getLikePlaceList(userId = userId).items
+    }
+
+    override suspend fun addLikePlace(userId: String, placeId: String): LikePlaceDto {
+        return api.addLikePlace(userId = userId, placeId = placeId)
     }
 }

@@ -1,12 +1,15 @@
 package kr.co.younhwan.eatjnu.presentation.supprot
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
@@ -29,6 +32,7 @@ fun MyTopAppBar(
     navController: NavController,
     isVisibleHomeBtn: Boolean = false,
     isVisibleLikeBtn: Boolean = false,
+    isLikePlace: Boolean = false,
     modifier: Modifier = Modifier
 ) {
 
@@ -71,10 +75,18 @@ fun MyTopAppBar(
             // 좋아요 버튼
             if (isVisibleLikeBtn) {
                 IconButton(onClick = {}) {
-                    Icon(
-                        imageVector = Icons.Outlined.FavoriteBorder,
-                        contentDescription = null
-                    )
+                    if (isLikePlace){
+                        Icon(
+                            imageVector = Icons.Filled.Favorite,
+                            contentDescription = null,
+                            tint = Color(0XFFF40028)
+                        )
+                    } else{
+                        Icon(
+                            imageVector = Icons.Outlined.FavoriteBorder,
+                            contentDescription = null
+                        )
+                    }
                 }
             }
         },

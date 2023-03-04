@@ -25,8 +25,6 @@ fun PlaceDetailScreen(
 
     val placeDetail by remember { viewModel.placeDetail }
 
-    viewModel.getUsedId()
-
     /* UI */
     Column(
         modifier = Modifier.fillMaxSize()
@@ -34,7 +32,8 @@ fun PlaceDetailScreen(
         MyTopAppBar(
             title = placeDetail.name,
             navController = navController,
-            isVisibleLikeBtn = true
+            isVisibleLikeBtn = true,
+            isLikePlace = (viewModel.likePlaceList.value).contains(placeDetail.id)
         )
 
         if (isLoading) {

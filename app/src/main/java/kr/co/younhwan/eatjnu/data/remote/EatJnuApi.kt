@@ -1,8 +1,11 @@
 package kr.co.younhwan.eatjnu.data.remote
 
+import kr.co.younhwan.eatjnu.data.remote.dto.LikePlaceDto
+import kr.co.younhwan.eatjnu.data.remote.dto.LikePlaceListDto
 import kr.co.younhwan.eatjnu.data.remote.dto.PlaceDetailDto
 import kr.co.younhwan.eatjnu.data.remote.dto.PlaceListDto
 import retrofit2.http.GET
+import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -13,4 +16,10 @@ interface EatJnuApi {
 
     @GET("PlaceDetail/{placeId}")
     suspend fun getPlaceDetail(@Path("placeId") placeId: String): PlaceDetailDto
+
+    @GET("LikePlace/{userId}")
+    suspend fun getLikePlaceList(@Path("userId") userId: String): LikePlaceListDto
+
+    @PUT("LikePlace/{userId}/{placeId}")
+    suspend fun addLikePlace(@Path("userId") userId: String, @Path("placeId") placeId: String): LikePlaceDto
 }
