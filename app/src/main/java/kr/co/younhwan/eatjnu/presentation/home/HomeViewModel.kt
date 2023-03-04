@@ -26,7 +26,14 @@ class HomeViewModel @Inject constructor(
     /* Init */
     init {
         getArea()
-        getOrCreateUserId()
+
+        viewModelScope.launch {
+            getUserId()
+            if (userId.value == "") {
+                createUserId()
+                getUserId()
+            }
+        }
     }
 
     /* Function */
@@ -35,14 +42,13 @@ class HomeViewModel @Inject constructor(
         areaList.value = getAreaUseCase()
     }
 
-    // 유저 아이디를 초기화 또는 생성하는 함수
-    private fun getOrCreateUserId() = viewModelScope.launch {
-        // 유저 아이디를 가져온다
+    // 유저 아이디 초기화
+    private suspend fun getUserId() {
         userId.value = getUserIdUseCase()
-        // 유저 아이디가 아직 없을 경우
-        if (userId.value == "") {
-            createUserIdUseCase(UUID.randomUUID().toString())
-            getUserIdUseCase()
-        }
+    }
+
+    // 유저 아이디 생성
+    private suspend fun createUserId() {
+        createUserIdUseCase(UUID.randomUUID().toString())
     }
 }

@@ -1,5 +1,6 @@
 package kr.co.younhwan.eatjnu.presentation.home
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
