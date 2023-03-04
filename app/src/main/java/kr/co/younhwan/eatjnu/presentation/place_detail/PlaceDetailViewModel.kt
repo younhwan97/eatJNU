@@ -98,7 +98,10 @@ class PlaceDetailViewModel @Inject constructor(
             when (result) {
                 is Resource.Loading -> Unit
                 is Resource.Error -> Unit
-                is Resource.Success -> isLikePlace.value = true
+                is Resource.Success -> {
+                    isLikePlace.value = true
+                    placeDetail.value = placeDetail.value.copy(likeCount = placeDetail.value.likeCount?.plus(1))
+                }
             }
         }.launchIn(viewModelScope)
     }
@@ -108,7 +111,10 @@ class PlaceDetailViewModel @Inject constructor(
             when (result) {
                 is Resource.Loading -> Unit
                 is Resource.Error -> Unit
-                is Resource.Success -> isLikePlace.value = false
+                is Resource.Success -> {
+                    isLikePlace.value = false
+                    placeDetail.value = placeDetail.value.copy(likeCount = placeDetail.value.likeCount?.minus(1))
+                }
             }
         }.launchIn(viewModelScope)
     }
