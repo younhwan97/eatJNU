@@ -27,40 +27,45 @@ fun ImageSlider(
     val pagerState = rememberPagerState(initialPage = 0)
 
     Box(modifier = Modifier.fillMaxWidth()) {
-        HorizontalPager(
-            count = images.size,
-            state = pagerState,
-            contentPadding = PaddingValues(start = 0.dp, end = 0.dp),
-            modifier = Modifier.background(color = Color.Black)
-        ) { page ->
 
-            GlideImage(
+        if(images.isNotEmpty()){
+            HorizontalPager(
+                count = images.size,
+                state = pagerState,
+                contentPadding = PaddingValues(start = 0.dp, end = 0.dp),
+                modifier = Modifier.background(color = Color.Black)
+            ) { page ->
+
+                GlideImage(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(286.dp),
+                    imageModel = { images[page].url },
+                    imageOptions = ImageOptions(
+                        contentScale = ContentScale.Crop,
+                        alignment = Alignment.Center
+                    ),
+                    requestOptions = {
+                        RequestOptions()
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    },
+                )
+            }
+
+            PageIndicator(
+                numberOfPages = pagerState.pageCount,
+                selectedPage = pagerState.currentPage,
+                defaultRadius = 8.dp,
+                selectedLength = 16.dp,
+                space = 8.dp,
+                animationDurationInMillis = 500,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(286.dp),
-                imageModel = { images[page].url },
-                imageOptions = ImageOptions(
-                    contentScale = ContentScale.Crop,
-                    alignment = Alignment.Center
-                ),
-                requestOptions = {
-                    RequestOptions()
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                },
+                    .align(Alignment.BottomCenter)
+                    .padding(8.dp)
             )
-        }
+        } else {
 
-        PageIndicator(
-            numberOfPages = pagerState.pageCount,
-            selectedPage = pagerState.currentPage,
-            defaultRadius = 8.dp,
-            selectedLength = 16.dp,
-            space = 8.dp,
-            animationDurationInMillis = 500,
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(8.dp)
-        )
+        }
     }
 }
 

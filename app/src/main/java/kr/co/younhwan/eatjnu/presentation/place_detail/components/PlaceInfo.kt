@@ -34,14 +34,10 @@ fun PlaceInfo(
                 .padding(horizontal = 16.dp)
                 .padding(top = 16.dp)
         )
-
-        Text(
-            text = info.location,
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Normal,
-            color = Color.DarkGray,
-            style = androidx.compose.material.MaterialTheme.typography.body1,
-            modifier = Modifier.padding(horizontal = 16.dp)
+        
+        ExpandableCard(
+            title = info.location,
+            horizontalPadding = 16.dp
         )
 
         Spacer(modifier = Modifier.height(8.dp))
