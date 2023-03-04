@@ -25,6 +25,8 @@ fun PlaceDetailScreen(
 
     val placeDetail by remember { viewModel.placeDetail }
 
+    viewModel.getUsedId()
+
     /* UI */
     Column(
         modifier = Modifier.fillMaxSize()
