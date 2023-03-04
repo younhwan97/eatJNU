@@ -4,6 +4,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,6 +25,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -41,13 +43,13 @@ fun ExpandableCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(horizontal = horizontalPadding)
             .animateContentSize(
                 animationSpec = tween(
                     durationMillis = 300,
                     easing = LinearOutSlowInEasing
                 )
-            )
-            .padding(horizontal = horizontalPadding),
+            ),
         shape = Shapes.medium,
         colors = CardDefaults.cardColors(
             containerColor = Color.White
@@ -66,15 +68,19 @@ fun ExpandableCard(
                     text = title,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Normal,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
                     style = androidx.compose.material.MaterialTheme.typography.body1
                 )
 
                 IconButton(
                     modifier = Modifier
                         .alpha(ContentAlpha.medium)
-                        .rotate(rotateState),
+                        .rotate(rotateState)
+                        .padding(horizontal = 0.dp)
+                        .weight(1f),
                     onClick = {
-                        expandableState != expandableState
+                        expandableState = !expandableState
                     }
                 ) {
                     Icon(

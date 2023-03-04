@@ -40,8 +40,6 @@ fun PlaceInfo(
             horizontalPadding = 16.dp
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
-
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(horizontal = 16.dp)

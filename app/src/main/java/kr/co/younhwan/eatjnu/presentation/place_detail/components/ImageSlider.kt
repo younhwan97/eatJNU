@@ -1,46 +1,53 @@
 package kr.co.younhwan.eatjnu.presentation.place_detail.components
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Divider
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.google.accompanist.pager.*
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
+import kr.co.younhwan.eatjnu.R
 import kr.co.younhwan.eatjnu.domain.model.FoodImageInfo
 
 @SuppressLint("ModifierParameter")
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ImageSlider(
+    mainImage: String = "",
     images: List<FoodImageInfo> = emptyList(),
     modifier: Modifier = Modifier.fillMaxWidth()
 ) {
 
-    val pagerState = rememberPagerState(initialPage = 0)
+    Box(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        if (images.isNotEmpty()) { // 이미지가 여러장 있는 경우
+            // State
+            val pagerState = rememberPagerState(initialPage = 0)
 
-    Box(modifier = Modifier.fillMaxWidth()) {
-
-        if(images.isNotEmpty()){
+            // Images
             HorizontalPager(
                 count = images.size,
                 state = pagerState,
-                contentPadding = PaddingValues(start = 0.dp, end = 0.dp),
-                modifier = Modifier.background(color = Color.Black)
-            ) { page ->
+                contentPadding = PaddingValues(start = 0.dp, end = 0.dp)
+            ) { index ->
 
                 GlideImage(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(286.dp),
-                    imageModel = { images[page].url },
+                        .height(368.dp),
+                    imageModel = { images[index].url },
                     imageOptions = ImageOptions(
                         contentScale = ContentScale.Crop,
                         alignment = Alignment.Center
@@ -52,6 +59,7 @@ fun ImageSlider(
                 )
             }
 
+            // Indicator
             PageIndicator(
                 numberOfPages = pagerState.pageCount,
                 selectedPage = pagerState.currentPage,
@@ -63,8 +71,31 @@ fun ImageSlider(
                     .align(Alignment.BottomCenter)
                     .padding(8.dp)
             )
-        } else {
-
+        } else if (mainImage != "") { // 메인 이미지만 있는 경우
+            GlideImage(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(368.dp),
+                imageModel = { mainImage },
+                imageOptions = ImageOptions(
+                    contentScale = ContentScale.Crop,
+                    alignment = Alignment.Center
+                ),
+                requestOptions = {
+                    RequestOptions()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                },
+            )
+        } else { // 이미지가 하나도 없는 경우
+            Image(
+                painter = painterResource(R.drawable.image),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(368.dp),
+            )
         }
     }
 }
