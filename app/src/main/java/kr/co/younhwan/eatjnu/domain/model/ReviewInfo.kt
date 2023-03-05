@@ -4,4 +4,5 @@ data class ReviewInfo(
     val name: String? = null,
     val comment: String? = null,
     val writingTime: String? = null,
+    val userId: String? = null
 )

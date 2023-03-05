@@ -25,7 +25,8 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun ReviewDialog(
-    onDismissRequest: () -> Unit = {}
+    onDismissRequest: () -> Unit = {},
+    onSavaBtnClick: () -> Unit = {}
 ) {
     Dialog(
         onDismissRequest = onDismissRequest
@@ -36,7 +37,9 @@ fun ReviewDialog(
             contentColor = Color.Black
         ) {
             Column(
-                modifier = Modifier.padding(16.dp).fillMaxWidth()
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
             ) {
                 Text(
                     text = "닉네임",
@@ -104,9 +107,7 @@ fun ReviewDialog(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedButton(
-                    onClick = {
-
-                    },
+                    onClick = onSavaBtnClick,
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primary),
                     enabled = text.length >= 5,

@@ -3,23 +3,15 @@ package kr.co.younhwan.eatjnu.presentation.place_detail
 import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import kr.co.younhwan.eatjnu.domain.model.ReviewInfo
 import kr.co.younhwan.eatjnu.presentation.place_detail.components.ImageSlider
 import kr.co.younhwan.eatjnu.presentation.place_detail.components.PlaceInfo
 import kr.co.younhwan.eatjnu.presentation.place_detail.components.PlaceReview
@@ -39,6 +31,7 @@ fun PlaceDetailScreen(
 
     val placeDetail by remember { viewModel.placeDetail }
     val isLikePlace by remember { viewModel.isLikePlace }
+    val userId by remember { viewModel.userId }
 
     var isVisibleReviewDialog by remember { mutableStateOf(false) }
 
@@ -72,6 +65,19 @@ fun PlaceDetailScreen(
                 ReviewDialog(
                     onDismissRequest = {
                         isVisibleReviewDialog = !isVisibleReviewDialog
+                    },
+                    onSavaBtnClick = {
+                        var alreadyWritten = false
+
+                        for (review in placeDetail.reviews)
+                            if (review.userId == userId)
+                                alreadyWritten = true
+
+                        if (alreadyWritten) {
+
+                        } else {
+                            // viewModel.
+                        }
                     }
                 )
             }
