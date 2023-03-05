@@ -1,7 +1,7 @@
 package kr.co.younhwan.eatjnu.domain.model
 
 data class ReviewInfo(
-    val name: String?,
-    val comment: String?,
-    val writingTime: String?,
+    val name: String? = null,
+    val comment: String? = null,
+    val writingTime: String? = null,
 )

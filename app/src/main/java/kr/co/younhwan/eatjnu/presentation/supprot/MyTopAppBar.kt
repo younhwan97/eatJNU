@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -31,6 +32,8 @@ fun MyTopAppBar(
     containerColor: Color = Color.White,
     navController: NavController,
     isVisibleHomeBtn: Boolean = false,
+    isVisibleReviewBtn: Boolean = false,
+    onClickReviewBtn: () -> Unit = {},
     isVisibleLikeBtn: Boolean = false,
     isLikePlace: Boolean = false,
     onClickLikeBtn: () -> Unit = {},
@@ -69,6 +72,16 @@ fun MyTopAppBar(
                         imageVector = Icons.Filled.Home,
                         contentDescription = null,
                         tint = Color.Black
+                    )
+                }
+            }
+
+            // 리뷰 버튼
+            if (isVisibleReviewBtn) {
+                IconButton(onClick = onClickReviewBtn) {
+                    Icon(
+                        imageVector = Icons.Outlined.Edit,
+                        contentDescription = null
                     )
                 }
             }
