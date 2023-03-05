@@ -28,7 +28,7 @@ fun PlaceDetailDto.toPlaceDetail(): PlaceDetailInfo {
         likeCount = likeCount ?: 0,
         reviewCount = reviewCount ?: 0,
         filter = filter,
-        tags = tags ?: "",
+        tags = tags,
         image = image ?: "",
         images = images ?: emptyList(),
         location = location ?: "",

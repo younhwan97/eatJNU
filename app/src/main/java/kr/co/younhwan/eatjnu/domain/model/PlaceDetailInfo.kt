@@ -6,7 +6,7 @@ data class PlaceDetailInfo(
     val likeCount: Int?,
     val reviewCount: Int?,
     val filter: String,
-    val tags: String?,
+    val tags: String? = null,
     val image: String?,
     val images: List<FoodImageInfo>,
     val location: String,
