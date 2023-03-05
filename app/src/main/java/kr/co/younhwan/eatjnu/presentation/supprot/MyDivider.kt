@@ -11,9 +11,12 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun MyDivider() {
     Divider(
-        color = Color(0XFFF4F4F4),
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(8.dp)
+        thickness = 1.dp,
+        color = Color(0XFFDFDFDF)
+    )
+
+    Divider(
+        thickness = 8.dp,
+        color = Color(0XFFF4F4F4)
     )
 }

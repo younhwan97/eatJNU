@@ -1,11 +1,9 @@
 package kr.co.younhwan.eatjnu.presentation.place_detail.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,10 +16,9 @@ import kr.co.younhwan.eatjnu.R
 import kr.co.younhwan.eatjnu.domain.model.ReviewInfo
 
 @Composable
-fun PlaceReview(
+fun ReviewItem(
     review: ReviewInfo
 ) {
-
     if (review.comment != "" && review.comment != null) { // 댓글 내용이 있는 경우
         val reviewImages = arrayListOf(
             painterResource(id = R.drawable.fox),
@@ -85,11 +82,5 @@ fun PlaceReview(
                 }
             }
         }
-
-        Divider(
-            thickness = (1.25).dp,
-            color = Color(0XFFD5D5D5),
-            modifier = Modifier.padding(horizontal = 16.dp)
-        )
     }
 }

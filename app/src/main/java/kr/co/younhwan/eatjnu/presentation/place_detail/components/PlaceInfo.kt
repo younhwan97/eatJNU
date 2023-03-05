@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kr.co.younhwan.eatjnu.R
 import kr.co.younhwan.eatjnu.domain.model.PlaceDetailInfo
+import kr.co.younhwan.eatjnu.presentation.supprot.MyDivider
 import java.time.format.TextStyle
 
 @Composable
@@ -80,19 +81,17 @@ fun PlaceInfo(
             )
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(16.dp))
+
+        MyDivider()
 
         Text(
             text = "매장 정보",
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
             style = androidx.compose.material.MaterialTheme.typography.body1,
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .padding(top = 8.dp)
+            modifier = Modifier.padding(horizontal = 16.dp).padding(top = 16.dp, bottom = 12.dp)
         )
-
-        Spacer(modifier = Modifier.height(8.dp))
 
         // 운영 시간
         Row(
@@ -185,6 +184,6 @@ fun PlaceInfo(
             )
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }

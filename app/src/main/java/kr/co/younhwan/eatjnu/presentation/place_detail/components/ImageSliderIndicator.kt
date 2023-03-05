@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun PageIndicator(
+fun ImageSliderIndicator(
     numberOfPages: Int,
     modifier: Modifier = Modifier,
     selectedPage: Int = 0,
@@ -37,7 +37,7 @@ fun PageIndicator(
     ) {
         for (i in 0 until numberOfPages) {
             val isSelected = i == selectedPage
-            PageIndicatorView(
+            IndicatorView(
                 isSelected = isSelected,
                 selectedColor = selectedColor,
                 defaultColor = defaultColor,
@@ -50,7 +50,7 @@ fun PageIndicator(
 }
 
 @Composable
-fun PageIndicatorView(
+fun IndicatorView(
     isSelected: Boolean,
     selectedColor: Color,
     defaultColor: Color,
