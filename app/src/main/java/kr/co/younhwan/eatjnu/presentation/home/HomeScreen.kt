@@ -25,23 +25,19 @@ fun HomeScreen(
     navController: NavController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
-    /* State */
-    val areaList by remember { viewModel.areaList }
     val userId by remember { viewModel.userId }
+    val areaList by remember { viewModel.areaList }
 
-    /* UI */
     Box(
-        contentAlignment = Alignment.BottomCenter,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 16.dp)
+        modifier = Modifier.fillMaxSize()
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
+                .align(Alignment.BottomCenter)
+                .padding(horizontal = 16.dp)
         ) {
-
             // 메인 이미지
             Image(
                 painter = painterResource(R.drawable.image),
@@ -53,17 +49,17 @@ fun HomeScreen(
             // 메인 타이틀
             Text(
                 text = "전대 밥토끼",
-                style = MaterialTheme.typography.h1,
                 fontSize = 48.sp,
+                style = MaterialTheme.typography.h1,
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
             // 장소 버튼
             AreaButtonScreen(
+                userId = userId,
                 areaList = areaList,
                 navController = navController,
-                userId = userId,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp)

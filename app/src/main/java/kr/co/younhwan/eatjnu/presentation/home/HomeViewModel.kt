@@ -19,11 +19,9 @@ class HomeViewModel @Inject constructor(
     private val createUserIdUseCase: CreateUserIdUseCase
 ) : ViewModel() {
 
-    /* State */
     var areaList = mutableStateOf<List<AreaInfo>>(listOf())
     val userId = mutableStateOf("")
 
-    /* Init */
     init {
         getArea()
 
@@ -36,7 +34,6 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    /* Function */
     // 후문, 상대, 정문 등의 '지역' 정보를 초기화
     private fun getArea() {
         areaList.value = getAreaUseCase()
