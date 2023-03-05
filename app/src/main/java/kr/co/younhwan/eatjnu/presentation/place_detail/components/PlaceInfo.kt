@@ -34,7 +34,7 @@ fun PlaceInfo(
                 .padding(horizontal = 16.dp)
                 .padding(top = 16.dp)
         )
-        
+
         ExpandableCard(
             title = info.location,
             horizontalPadding = 16.dp
@@ -94,16 +94,26 @@ fun PlaceInfo(
                 contentDescription = null,
                 modifier = Modifier.size(20.dp)
             )
-            
+
             Spacer(modifier = Modifier.width(8.dp))
 
-            Text(
-                text = info.openingInfo.toString(),
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Normal,
-                color = Color.Black,
-                style = androidx.compose.material.MaterialTheme.typography.body1
-            )
+            if (info.openingInfo == "" || info.openingInfo == null) {
+                Text(
+                    text = "운영시간이 제공되지 않습니다 :(",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Normal,
+                    color = Color.Gray,
+                    style = androidx.compose.material.MaterialTheme.typography.body1
+                )
+            } else {
+                Text(
+                    text = info.openingInfo.toString(),
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Normal,
+                    color = Color.Black,
+                    style = androidx.compose.material.MaterialTheme.typography.body1
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -120,13 +130,23 @@ fun PlaceInfo(
 
             Spacer(modifier = Modifier.width(8.dp))
 
-            Text(
-                text = info.number.toString(),
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Normal,
-                color = Color.Black,
-                style = androidx.compose.material.MaterialTheme.typography.body1
-            )
+            if (info.number == "" || info.number == null) {
+                Text(
+                    text = "전화번호가 제공되지 않습니다 :(",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Normal,
+                    color = Color.Gray,
+                    style = androidx.compose.material.MaterialTheme.typography.body1
+                )
+            } else {
+                Text(
+                    text = info.number,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Normal,
+                    color = Color.Black,
+                    style = androidx.compose.material.MaterialTheme.typography.body1
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(8.dp))

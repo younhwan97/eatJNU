@@ -32,8 +32,8 @@ fun PlaceDetailDto.toPlaceDetail(): PlaceDetailInfo {
         image = image ?: "",
         images = images ?: emptyList(),
         location = location ?: "",
-        number = number ?: "",
-        openingInfo = openingInfo ?: "",
+        number = number,
+        openingInfo = openingInfo,
         lat = lat ?: 0.0,
         lon = lon ?: 0.0,
         reviews = reviews ?: emptyList()
