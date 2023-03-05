@@ -50,7 +50,8 @@ class PlaceDetailViewModel @Inject constructor(
             openingInfo = "",
             images = emptyList(),
             lat = 0.0,
-            lon = 0.0
+            lon = 0.0,
+            reviews = emptyList()
         )
     )
 

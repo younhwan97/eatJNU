@@ -2,6 +2,7 @@ package kr.co.younhwan.eatjnu.data.remote.dto
 
 import kr.co.younhwan.eatjnu.domain.model.FoodImageInfo
 import kr.co.younhwan.eatjnu.domain.model.PlaceDetailInfo
+import kr.co.younhwan.eatjnu.domain.model.ReviewInfo
 
 data class PlaceDetailDto(
     val id: Int,
@@ -16,7 +17,8 @@ data class PlaceDetailDto(
     val openingInfo: String?,
     val images: List<FoodImageInfo>?,
     val lat: Double?,
-    val lon: Double?
+    val lon: Double?,
+    val reviews: List<ReviewInfo>?
 )
 
 fun PlaceDetailDto.toPlaceDetail(): PlaceDetailInfo {
@@ -33,6 +35,7 @@ fun PlaceDetailDto.toPlaceDetail(): PlaceDetailInfo {
         number = number ?: "",
         openingInfo = openingInfo ?: "",
         lat = lat ?: 0.0,
-        lon = lon ?: 0.0
+        lon = lon ?: 0.0,
+        reviews = reviews ?: emptyList()
     )
 }

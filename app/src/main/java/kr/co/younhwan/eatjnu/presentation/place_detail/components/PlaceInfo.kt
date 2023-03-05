@@ -27,7 +27,7 @@ fun PlaceInfo(
     Column {
         Text(
             text = info.name,
-            fontSize = 24.sp,
+            fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
             style = androidx.compose.material.MaterialTheme.typography.body1,
             modifier = Modifier
@@ -73,11 +73,6 @@ fun PlaceInfo(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        Divider(
-            color = Color(0XFFF2F4F6),
-            modifier = Modifier.height(8.dp)
-        )
-
         Text(
             text = "매장 정보",
             fontSize = 16.sp,
@@ -85,7 +80,7 @@ fun PlaceInfo(
             style = androidx.compose.material.MaterialTheme.typography.body1,
             modifier = Modifier
                 .padding(horizontal = 16.dp)
-                .padding(top = 16.dp)
+                .padding(top = 8.dp)
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -146,10 +141,5 @@ fun PlaceInfo(
         )
 
         Spacer(modifier = Modifier.height(8.dp))
-
-        Divider(
-            color = Color(0XFFF2F4F6),
-            modifier = Modifier.height(8.dp)
-        )
     }
 }

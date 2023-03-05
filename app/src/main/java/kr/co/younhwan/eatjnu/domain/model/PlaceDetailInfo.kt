@@ -14,4 +14,5 @@ data class PlaceDetailInfo(
     val openingInfo: String?,
     val lat: Double,
     val lon: Double,
+    val reviews: List<ReviewInfo>
 )
