@@ -5,8 +5,8 @@ import kr.co.younhwan.eatjnu.domain.model.PlaceDetailInfo
 import kr.co.younhwan.eatjnu.domain.model.ReviewInfo
 
 data class PlaceDetailDto(
-    val id: Int,
-    val name: String,
+    val id: Int?,
+    val name: String?,
     val likeCount: Int?,
     val reviewCount: Int?,
     val filter: String,
@@ -23,17 +23,17 @@ data class PlaceDetailDto(
 
 fun PlaceDetailDto.toPlaceDetail(): PlaceDetailInfo {
     return PlaceDetailInfo(
-        id = id,
-        name = name,
+        id = id ?: -1,
+        name = name ?: "",
         likeCount = likeCount ?: 0,
         reviewCount = reviewCount ?: 0,
         filter = filter,
-        tags = tags,
+        tags = tags ?: "",
         image = image ?: "",
         images = images ?: emptyList(),
         location = location ?: "",
-        number = number,
-        openingInfo = openingInfo,
+        number = number ?: "",
+        openingInfo = openingInfo ?: "",
         lat = lat ?: 0.0,
         lon = lon ?: 0.0,
         reviews = reviews ?: emptyList()

@@ -25,16 +25,19 @@ fun PlaceDetailScreen(
     val error by remember { viewModel.error }
     val isLoading by remember { viewModel.isLoading }
 
-    val placeDetail by remember { viewModel.placeDetail }
-    val isLikePlace by remember { viewModel.isLikePlace }
-    val userId by remember { viewModel.userId }
-
     if (isLoading) {
         LoadingScreen()
-    } else if (error != "") {
+    } else if (error.isNotEmpty()) {
         ErrorScreen()
     } else {
-        Column(modifier = Modifier.fillMaxSize()) {
+        val userId by remember { viewModel.userId } // 유저 고유 식별값
+        val placeDetail by remember { viewModel.placeDetail } // 장소 정보
+        val isLikePlace by remember { viewModel.isLikePlace } // 유저가 좋아요를 누른 장소인지
+
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            // 앱바
             MyTopAppBar(
                 title = placeDetail.name,
                 navController = navController,
@@ -53,26 +56,22 @@ fun PlaceDetailScreen(
                 }
             )
 
+            // 컨텐츠
             LazyColumn {
-                /************ 매장 이미지 ************/
                 // 이미지 슬라이드
                 item {
                     ImageSlider(
-                        mainImage = placeDetail.image ?: "",
+                        image = placeDetail.image,
                         images = placeDetail.images
                     )
                 }
 
-                /************ 매장 정보 ************/
                 // 매장 정보
                 item {
-                    PlaceInfo(
-                        info = placeDetail
-                    )
+                    PlaceInfo(info = placeDetail)
                     MyDivider()
                 }
 
-                /************ 리뷰 ************/
                 // 리뷰 타이틀
                 item {
                     Text(
@@ -85,6 +84,7 @@ fun PlaceDetailScreen(
                             .padding(top = 16.dp, bottom = 4.dp)
                     )
                 }
+
                 // 상위 5개 리뷰
                 items(placeDetail.reviews.size) { index ->
                     ReviewItem(review = placeDetail.reviews[index])
@@ -97,6 +97,7 @@ fun PlaceDetailScreen(
                         )
                     }
                 }
+
                 // 리뷰 버튼
                 item {
                     ReviewButton(onCLickBtn = {})

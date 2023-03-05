@@ -21,11 +21,10 @@ import kr.co.younhwan.eatjnu.domain.model.FoodImageInfo
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ImageSlider(
-    mainImage: String = "",
+    image: String? = null,
     images: List<FoodImageInfo> = emptyList(),
     modifier: Modifier = Modifier.fillMaxWidth()
 ) {
-
     Box(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -68,12 +67,12 @@ fun ImageSlider(
                     .align(Alignment.BottomCenter)
                     .padding(8.dp)
             )
-        } else if (mainImage != "") { // 메인 이미지만 있는 경우
+        } else if (!image.isNullOrBlank()) { // 메인 이미지만 있는 경우
             GlideImage(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(368.dp),
-                imageModel = { mainImage },
+                imageModel = { image },
                 imageOptions = ImageOptions(
                     contentScale = ContentScale.Crop,
                     alignment = Alignment.Center

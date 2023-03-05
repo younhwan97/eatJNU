@@ -30,7 +30,6 @@ class PlaceDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    /* State */
     var error = mutableStateOf("")
     var isLoading = mutableStateOf(true)
 
@@ -55,7 +54,6 @@ class PlaceDetailViewModel @Inject constructor(
         )
     )
 
-    /* Init */
     init {
         viewModelScope.launch {
             val placeId = savedStateHandle.get<String>(Constants.PARAM_PLACE_ID) ?: "-1"
@@ -66,15 +64,14 @@ class PlaceDetailViewModel @Inject constructor(
         }
     }
 
-    /* Function */
     private fun getPlaceDetail(placeId: String)  {
         // 장소 리스트 초기화
         getPlaceDetailUseCase(placeId = placeId).onEach { result ->
             when (result) {
-                is Resource.Loading -> {}
+                is Resource.Loading -> Unit
                 is Resource.Error -> {
                     isLoading.value = false
-                    error.value = result.message ?: ""
+                    error.value = result.message ?: "error"
                 }
                 is Resource.Success -> {
                     isLoading.value = false
@@ -101,7 +98,7 @@ class PlaceDetailViewModel @Inject constructor(
                 is Resource.Error -> Unit
                 is Resource.Success -> {
                     isLikePlace.value = true
-                    placeDetail.value = placeDetail.value.copy(likeCount = placeDetail.value.likeCount?.plus(1))
+                    placeDetail.value = placeDetail.value.copy(likeCount = placeDetail.value.likeCount.plus(1))
                 }
             }
         }.launchIn(viewModelScope)
@@ -114,7 +111,7 @@ class PlaceDetailViewModel @Inject constructor(
                 is Resource.Error -> Unit
                 is Resource.Success -> {
                     isLikePlace.value = false
-                    placeDetail.value = placeDetail.value.copy(likeCount = placeDetail.value.likeCount?.minus(1))
+                    placeDetail.value = placeDetail.value.copy(likeCount = placeDetail.value.likeCount.minus(1))
                 }
             }
         }.launchIn(viewModelScope)

@@ -90,7 +90,9 @@ fun PlaceInfo(
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
             style = androidx.compose.material.MaterialTheme.typography.body1,
-            modifier = Modifier.padding(horizontal = 16.dp).padding(top = 16.dp, bottom = 12.dp)
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .padding(top = 16.dp, bottom = 12.dp)
         )
 
         // 운영 시간
@@ -106,7 +108,7 @@ fun PlaceInfo(
 
             Spacer(modifier = Modifier.width(8.dp))
 
-            if (info.openingInfo == "" || info.openingInfo == null) { // 가게 운영시간이 없는 경우
+            if (info.openingInfo.isEmpty()) { // 가게 운영시간이 없는 경우
                 Text(
                     text = "운영시간이 제공되지 않습니다 :(",
                     fontSize = 12.sp,
@@ -140,7 +142,7 @@ fun PlaceInfo(
 
             Spacer(modifier = Modifier.width(8.dp))
 
-            if (info.number == "" || info.number == null || info.number.length <= 3) { // 가게 전화번호가 없는 경우
+            if (info.number.isEmpty() || info.number.length <= 3) { // 가게 전화번호가 없는 경우
                 Text(
                     text = "전화번호가 제공되지 않습니다 :(",
                     fontSize = 12.sp,
@@ -173,7 +175,7 @@ fun PlaceInfo(
         Spacer(modifier = Modifier.height(8.dp))
 
         // 태그
-        if (info.tags != null && info.tags != "") {
+        if (info.tags.isNotEmpty()) {
             Text(
                 text = info.tags,
                 fontSize = 12.sp,
