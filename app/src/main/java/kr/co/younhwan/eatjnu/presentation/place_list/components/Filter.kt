@@ -18,10 +18,8 @@ import kr.co.younhwan.eatjnu.domain.model.FilterInfo
 fun Filter(
     info: FilterInfo,
     selected: Boolean = false,
-    index: Int,
-    onClickFilter: (Int) -> Unit
+    onClickFilter: () -> Unit
 ) {
-
     // 필터 속성
     var tintColor = Color.Black // 아이콘, 글씨 색
     var containerColor = Color.White // 배경 색
@@ -37,9 +35,7 @@ fun Filter(
 
     // 필터
     AssistChip(
-        onClick = {
-            onClickFilter(index)
-        },
+        onClick = onClickFilter,
         label = {
             Text(
                 text = info.text,

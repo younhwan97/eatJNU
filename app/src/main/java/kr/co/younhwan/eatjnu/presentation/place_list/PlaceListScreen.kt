@@ -1,17 +1,11 @@
 package kr.co.younhwan.eatjnu.presentation.place_list
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.getValue
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -26,50 +20,49 @@ fun PlaceListScreen(
     navController: NavController,
     viewModel: PlaceListViewModel = hiltViewModel()
 ) {
-    /* State */
     val isLoading by remember { viewModel.isLoading }
     val error by remember { viewModel.error }
-
-    val area by remember { viewModel.area }
-    val selectedFilter by remember { viewModel.selectedFilter }
     val placeList by remember { viewModel.placeList }
-    val filterList by remember { viewModel.filterList }
-    val userId by remember { viewModel.userId }
 
-    /* UI */
-    Column {
-        MyTopAppBar(
-            title = area,
-            navController = navController,
-            onClickLikeBtn = {}
-        )
+    if (isLoading) {
+        LoadingScreen()
+    } else if (error.isNotEmpty()) {
+        ErrorScreen()
+    } else {
+        val areaType by remember { viewModel.areaType } // 정문, 후문, 상대 등의 지역정보
+        val selectedFilter by remember { viewModel.selectedFilter } // 선택된 필터 이름(전체, 맛집, 술집, 카페)
 
-        FilterScreen(
-            filters = filterList,
-            selectedFilterNum = selectedFilter,
-            viewModel = viewModel
-        )
+        val filterList by remember { viewModel.filterList }
+        val userId by remember { viewModel.userId }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            // 앱바
+            MyTopAppBar(
+                title = areaType,
+                navController = navController
+            )
 
-        Divider(modifier = Modifier.height(1.dp))
+            // 필터 리스트
+            FilterScreen(
+                selectedFilter = selectedFilter,
+                filters = filterList,
+                viewModel = viewModel
+            )
 
-        if (isLoading) {
-            // Loading
-            LoadingScreen()
-        } else if (placeList.isNotEmpty()) {
-            // Success
+            Spacer(modifier = Modifier.height(4.dp))
+
+            Divider(modifier = Modifier.height(1.dp))
+
+            // 장소 리스트
             PlaceScreen(
                 navController = navController,
                 places = placeList,
-                selectedFilterNum = selectedFilter,
+                selectedFilter = selectedFilter,
                 userId = userId,
                 modifier = Modifier.fillMaxSize()
             )
-        } else {
-            // Error
-            ErrorScreen()
-            Log.e("error", "Error on PlaceList: $error")
         }
     }
 }

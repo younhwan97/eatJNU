@@ -24,7 +24,5 @@ class GetFilterUseCase @Inject constructor() {
         )
     )
 
-    operator fun invoke(): List<FilterInfo> {
-        return data
-    }
+    operator fun invoke() = data
 }
