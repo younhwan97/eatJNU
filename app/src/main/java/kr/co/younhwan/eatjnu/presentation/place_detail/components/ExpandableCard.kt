@@ -4,13 +4,8 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.ContentAlpha
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.*
@@ -29,12 +24,18 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.CameraPosition
+import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.compose.*
 import kr.co.younhwan.eatjnu.presentation.ui.theme.Shapes
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalNaverMapApi::class)
 @Composable
 fun ExpandableCard(
     title: String,
+    lat: Double,
+    lon: Double,
     horizontalPadding: Dp = 16.dp
 ) {
     var expandableState by remember { mutableStateOf(false) }
@@ -91,7 +92,43 @@ fun ExpandableCard(
             }
 
             if (expandableState) {
-                Text("123")
+                var mapProperties by remember {
+                    mutableStateOf(
+                        MapProperties(
+                            maxZoom = 18.0,
+                            minZoom = 12.0,
+                            symbolScale = 1f,
+                        )
+                    )
+                }
+
+                var mapUiSettings by remember {
+                    mutableStateOf(
+                        MapUiSettings(
+                            isCompassEnabled = false, // 나침반
+                            isZoomGesturesEnabled = false, // 줌
+                            isLocationButtonEnabled = false, // 현재위치
+                            isScrollGesturesEnabled = false, // 스크롤
+                            isRotateGesturesEnabled = false, // 회전
+                            isTiltGesturesEnabled = false, // 각도
+
+                        )
+                    )
+                }
+
+                val cameraPositionState: CameraPositionState = rememberCameraPositionState {
+                    // 카메라 초기 위치를 설정합니다.
+                    position = CameraPosition(LatLng(lat, lon), 15.0)
+                }
+                Box(
+                    Modifier.fillMaxWidth().height(160.dp).padding(bottom = 16.dp)
+                ) {
+                    NaverMap(
+                        cameraPositionState = cameraPositionState,
+                        uiSettings = mapUiSettings,
+                        properties = mapProperties,
+                    )
+                }
             }
         }
     }

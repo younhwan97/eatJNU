@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kr.co.younhwan.eatjnu.R
@@ -45,10 +46,16 @@ fun PlaceInfo(
                 .padding(top = 16.dp)
         )
 
-        ExpandableCard(
-            title = info.location,
-            horizontalPadding = 16.dp
-        )
+        if (info.lat != 0.0 && info.lon != 0.0) {
+            ExpandableCard(
+                title = info.location,
+                lat = info.lat,
+                lon = info.lon,
+                horizontalPadding = 16.dp
+            )
+        } else {
+
+        }
 
         Row(
             verticalAlignment = Alignment.CenterVertically,

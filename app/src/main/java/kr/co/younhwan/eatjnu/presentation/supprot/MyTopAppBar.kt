@@ -67,7 +67,11 @@ fun MyTopAppBar(
         actions = {
             // 홈 버튼
             if (isVisibleHomeBtn) {
-                IconButton(onClick = { navController.navigate(Screen.HomeScreen.route) { popUpTo(0) } }) {
+                IconButton(onClick = {
+                    navController.navigate(Screen.HomeScreen.route) {
+                        popUpTo(0)
+                    }
+                }) {
                     Icon(
                         imageVector = Icons.Filled.Home,
                         contentDescription = null,
