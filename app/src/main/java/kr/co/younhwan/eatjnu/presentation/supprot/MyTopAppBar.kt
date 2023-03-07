@@ -1,7 +1,6 @@
 package kr.co.younhwan.eatjnu.presentation.supprot
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -9,20 +8,15 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.outlined.Edit
-import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
-import kr.co.younhwan.eatjnu.presentation.Screen
 
 @SuppressLint("ModifierParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -37,12 +31,14 @@ fun MyTopAppBar(
     modifier: Modifier = Modifier
 ) {
 
+    var navigationEnabled by remember { mutableStateOf(true) }
+
     CenterAlignedTopAppBar(
         title = {
             Text(
                 text = title,
+                fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.body1,
-                fontWeight = FontWeight.Bold
             )
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
@@ -50,8 +46,10 @@ fun MyTopAppBar(
         ),
         navigationIcon = {
             IconButton(
+                enabled = navigationEnabled,
                 onClick = {
                     navController.popBackStack()
+                    navigationEnabled = !navigationEnabled
                 }
             ) {
                 Icon(
