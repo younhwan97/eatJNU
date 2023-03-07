@@ -4,6 +4,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.icons.Icons
@@ -13,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,7 +45,7 @@ fun ExpandableCard(
     content: @Composable() () -> Unit,
     horizontalPadding: Dp = 16.dp
 ) {
-    var expandableState by remember { mutableStateOf(false) }
+    var expandableState by rememberSaveable { mutableStateOf(false) }
     val rotateState by animateFloatAsState(targetValue = if (expandableState) 180f else 0f)
 
     Card(
@@ -59,10 +61,7 @@ fun ExpandableCard(
         shape = Shapes.medium,
         colors = CardDefaults.cardColors(
             containerColor = Color.White
-        ),
-        onClick = {
-            expandableState = !expandableState
-        }
+        )
     ) {
         Column(
             modifier = Modifier
@@ -97,7 +96,13 @@ fun ExpandableCard(
                     }
                 } else {
                     Text(
-                        modifier = Modifier.weight(1f).alpha(ContentAlpha.medium).padding(vertical = 16.dp),
+                        modifier = Modifier
+                            .weight(1f)
+                            .alpha(ContentAlpha.medium)
+                            .padding(vertical = 16.dp)
+                            .clickable {
+                                expandableState = !expandableState
+                            },
                         text = toggleButtonText,
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Normal,
