@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun AddReview(
+    alreadyWrittenReview: Boolean = false,
     onClickEnterBtn: (String) -> Unit
 ) {
     var text by remember { mutableStateOf("") }
@@ -38,6 +39,7 @@ fun AddReview(
 
     BasicTextField(
         value = text,
+        enabled = !alreadyWrittenReview,
         onValueChange = {
             if (it.length <= 99) {
                 text = it
@@ -60,8 +62,11 @@ fun AddReview(
                     .focusRequester(focusRequester)
             ) {
                 if (text.isEmpty()) {
+                    var placeholder = "리뷰를 입력해주세요 :)"
+                    if (alreadyWrittenReview) placeholder = "이미 리뷰를 입력하셨습니다!"
+
                     Text(
-                        text = "리뷰를 입력해주세요 :)",
+                        text = placeholder,
                         color = Color.LightGray,
                         fontWeight = FontWeight.Normal,
                         fontSize = 14.sp,
@@ -72,21 +77,37 @@ fun AddReview(
                     innerTextField()
                 }
 
-                IconButton(
-                    onClick = {
-                        onClickEnterBtn(text)
-                        keyboardController?.hide()
-                        text = ""
-                        focusManager.clearFocus()
-                    },
-                    modifier = Modifier
-                        .weight(1f)
-                        .size(18.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Send,
-                        contentDescription = null,
-                    )
+                if (alreadyWrittenReview) {
+                    IconButton(
+                        enabled = false,
+                        onClick = { },
+                        modifier = Modifier
+                            .weight(1f)
+                            .size(18.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Send,
+                            contentDescription = null,
+                            tint = Color.LightGray
+                        )
+                    }
+                } else {
+                    IconButton(
+                        onClick = {
+                            onClickEnterBtn(text)
+                            keyboardController?.hide()
+                            text = ""
+                            focusManager.clearFocus()
+                        },
+                        modifier = Modifier
+                            .weight(1f)
+                            .size(18.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Send,
+                            contentDescription = null,
+                        )
+                    }
                 }
             }
         },
