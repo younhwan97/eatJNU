@@ -3,15 +3,8 @@ package kr.co.younhwan.eatjnu.presentation.place_detail.components
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.outlined.LocationOn
-import androidx.compose.material3.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,14 +22,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.naver.maps.geometry.LatLng
 import kr.co.younhwan.eatjnu.R
-import kr.co.younhwan.eatjnu.domain.model.PlaceDetailInfo
+import kr.co.younhwan.eatjnu.domain.model.PlaceDetail
 import kr.co.younhwan.eatjnu.presentation.supprot.MyDivider
-import java.time.format.TextStyle
-import kotlin.text.Typography.nbsp
 
 @Composable
 fun PlaceInfo(
-    info: PlaceDetailInfo
+    info: PlaceDetail
 ) {
     Column {
         // 가게 이름
@@ -92,7 +83,7 @@ fun PlaceInfo(
             Spacer(modifier = Modifier.width(4.dp))
 
             Text(
-                text = info.reviewCount.toString(),
+                text = info.reviews.size.toString(),
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Normal,
                 color = Color.Black,

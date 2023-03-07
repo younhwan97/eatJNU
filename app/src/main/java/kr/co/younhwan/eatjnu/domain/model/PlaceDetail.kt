@@ -1,6 +1,6 @@
 package kr.co.younhwan.eatjnu.domain.model
 
-data class PlaceDetailInfo(
+data class PlaceDetail(
     val id: Int,
     val name: String,
     val likeCount: Int,
@@ -10,9 +10,9 @@ data class PlaceDetailInfo(
     val image: String,
     val images: List<FoodImageInfo>,
     val location: String,
-    val number: String,
-    val openingInfo: String,
     val lat: Double,
     val lon: Double,
+    val number: String,
+    val openingInfo: String,
     val reviews: List<ReviewInfo>
 )

@@ -16,6 +16,7 @@ import kr.co.younhwan.eatjnu.presentation.supprot.ErrorScreen
 import kr.co.younhwan.eatjnu.presentation.supprot.LoadingScreen
 import kr.co.younhwan.eatjnu.presentation.supprot.MyDivider
 import kr.co.younhwan.eatjnu.presentation.supprot.MyTopAppBar
+import kotlin.text.Typography.nbsp
 
 @Composable
 fun PlaceDetailScreen(
@@ -30,24 +31,24 @@ fun PlaceDetailScreen(
     } else if (error.isNotEmpty()) {
         ErrorScreen()
     } else {
-        val userId by remember { viewModel.userId } // 유저 고유 식별값
-        val placeDetail by remember { viewModel.placeDetail } // 장소 정보
-        val isLikePlace by remember { viewModel.isLikePlace } // 유저가 좋아요를 누른 장소인지
+        val userId by remember { viewModel.userId } // 유저 식별값
+        val detail by remember { viewModel.placeDetail } // 장소 정보
+        val isLikePlace by remember { viewModel.isLikePlace } // 유저가 '좋아요'를 누른 장소인지
 
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
             // 앱바
             MyTopAppBar(
-                title = placeDetail.name,
+                title = detail.name,
                 navController = navController,
                 isVisibleLikeBtn = true,
                 isLikePlace = isLikePlace,
                 onClickLikeBtn = {
                     if (isLikePlace) {
-                        viewModel.removeLikePlace(placeId = placeDetail.id)
+                        viewModel.removeLikePlace(placeId = detail.id)
                     } else {
-                        viewModel.addLikePlace(placeId = placeDetail.id)
+                        viewModel.addLikePlace(placeId = detail.id)
                     }
                 }
             )
@@ -57,21 +58,21 @@ fun PlaceDetailScreen(
                 // 이미지 슬라이드
                 item {
                     ImageSlider(
-                        image = placeDetail.image,
-                        images = placeDetail.images
+                        image = detail.image,
+                        images = detail.images
                     )
                 }
 
                 // 매장 정보
                 item {
-                    PlaceInfo(info = placeDetail)
+                    PlaceInfo(info = detail)
                     MyDivider()
                 }
 
                 // 리뷰 타이틀
                 item {
                     Text(
-                        text = "리뷰",
+                        text = "리뷰${nbsp}(" + detail.reviews.size + ")",
                         fontWeight = FontWeight.Bold,
                         fontSize = 16.sp,
                         style = androidx.compose.material.MaterialTheme.typography.body1,
@@ -83,7 +84,7 @@ fun PlaceDetailScreen(
                 item {
                     var alreadyWrittenReview = false
 
-                    for (review in placeDetail.reviews) {
+                    for (review in detail.reviews) {
                         if (review.userId == userId) {
                             alreadyWrittenReview = true
                             break
@@ -95,18 +96,20 @@ fun PlaceDetailScreen(
                         onClickEnterBtn = {
                             viewModel.createPlaceReview(
                                 userId = userId,
-                                placeId = placeDetail.id.toString(),
+                                placeId = detail.id.toString(),
                                 comment = it
                             )
                         }
                     )
+
+                    Spacer(modifier = Modifier.height(8.dp))
                 }
 
                 // 리뷰
-                items(placeDetail.reviews.size) { index ->
-                    ReviewItem(review = placeDetail.reviews[index])
+                items(detail.reviews.size) { index ->
+                    ReviewItem(review = detail.reviews[index])
 
-                    if (index + 1 != placeDetail.reviews.size) {
+                    if (index + 1 != detail.reviews.size) {
                         Divider(
                             thickness = 1.dp,
                             color = Color(0XFFD5D5D5),
@@ -116,6 +119,8 @@ fun PlaceDetailScreen(
                 }
 
                 item {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    
                     MyDivider()
                 }
             }

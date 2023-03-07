@@ -1,6 +1,5 @@
 package kr.co.younhwan.eatjnu.presentation.place_detail
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -11,16 +10,14 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kr.co.younhwan.eatjnu.common.Constants
 import kr.co.younhwan.eatjnu.common.Resource
-import kr.co.younhwan.eatjnu.domain.model.PlaceDetailInfo
+import kr.co.younhwan.eatjnu.domain.model.FoodImageInfo
+import kr.co.younhwan.eatjnu.domain.model.PlaceDetail
 import kr.co.younhwan.eatjnu.domain.model.ReviewInfo
 import kr.co.younhwan.eatjnu.domain.use_case.add_like_place.AddLikePlaceUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.create_review.CreateReviewUseCase
-import kr.co.younhwan.eatjnu.domain.use_case.create_user_id.CreateUserIdUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_like_place_list.GetLikePlaceListUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_place_detail.GetPlaceDetailUseCase
-import kr.co.younhwan.eatjnu.domain.use_case.get_user_id.GetUserIdUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.remove_like_place.RemoveLikePlaceUseCase
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,7 +36,7 @@ class PlaceDetailViewModel @Inject constructor(
     val userId = mutableStateOf("")
     val isLikePlace = mutableStateOf(false)
     val placeDetail = mutableStateOf(
-        PlaceDetailInfo(
+        PlaceDetail(
             id = -1,
             name = "",
             likeCount = 0,
@@ -50,7 +47,7 @@ class PlaceDetailViewModel @Inject constructor(
             location = "",
             number = "",
             openingInfo = "",
-            images = emptyList(),
+            images = emptyList<FoodImageInfo>(),
             lat = 0.0,
             lon = 0.0,
             reviews = emptyList()
@@ -84,7 +81,7 @@ class PlaceDetailViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun checkLikePlace(userId: String, placeId: String) {
+    private fun checkLikePlace(userId: String, placeId: String) {
         getLikePlaceListUseCase(userId = userId).onEach { result ->
             when (result) {
                 is Resource.Loading -> Unit
@@ -126,17 +123,20 @@ class PlaceDetailViewModel @Inject constructor(
                 is Resource.Loading -> Unit
                 is Resource.Error -> Unit
                 is Resource.Success -> {
-                    placeDetail.value = placeDetail.value.copy(
-                        reviews = listOf(
-                            ReviewInfo(
-                                placeId = placeId,
-                                comment = comment,
-                                writingTime = "지금",
-                                likeCount = 0,
-                                userId = userId
-                            )
-                        ) + placeDetail.value.reviews
-                    )
+                    if (result.data == true) { // 리뷰가 추가 됐을 때
+                        // (제일 앞에) 가짜 데이터 추가
+                        placeDetail.value = placeDetail.value.copy(
+                            reviews = listOf(
+                                ReviewInfo(
+                                    placeId = placeId,
+                                    comment = comment,
+                                    writingTime = "지금",
+                                    likeCount = 0,
+                                    userId = userId
+                                )
+                            ) + placeDetail.value.reviews
+                        )
+                    }
                 }
             }
         }.launchIn(viewModelScope)
