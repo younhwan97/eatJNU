@@ -48,8 +48,8 @@ fun MyTopAppBar(
             IconButton(
                 enabled = navigationEnabled,
                 onClick = {
-                    navController.popBackStack()
                     navigationEnabled = !navigationEnabled
+                    navController.popBackStack()
                 }
             ) {
                 Icon(
