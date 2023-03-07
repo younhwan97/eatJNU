@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kr.co.younhwan.eatjnu.common.Constants
 import kr.co.younhwan.eatjnu.common.Resource
-import kr.co.younhwan.eatjnu.domain.model.FoodImage
 import kr.co.younhwan.eatjnu.domain.model.PlaceDetail
 import kr.co.younhwan.eatjnu.domain.model.Review
 import kr.co.younhwan.eatjnu.domain.use_case.add_like_place.AddLikePlaceUseCase
@@ -37,35 +36,24 @@ class PlaceDetailViewModel @Inject constructor(
     val isLikePlace = mutableStateOf(false)
     val placeDetail = mutableStateOf(
         PlaceDetail(
-            id = -1,
-            name = "",
-            likeCount = 0,
-            reviewCount = 0,
-            filter = "",
-            tags = "",
-            image = "",
-            location = "",
-            number = "",
-            openingInfo = "",
-            images = emptyList<FoodImage>(),
-            lat = 0.0,
-            lon = 0.0,
-            reviews = emptyList()
+            -1, "", 0, 0, "", "", "", "", 0.0, 0.0, "", "", emptyList(), emptyList()
         )
     )
 
     init {
         viewModelScope.launch {
-            val placeId = savedStateHandle.get<String>(Constants.PARAM_PLACE_ID) ?: "-1"
+            // 1. 유저 아이디 값 초기화
             userId.value = savedStateHandle.get<String>(Constants.PARAM_USER_ID) ?: ""
-
+            // 2. 장소 아이디 값 초기화
+            val placeId = savedStateHandle.get<String>(Constants.PARAM_PLACE_ID) ?: "1"
+            // 3. 장소 세부 정보 초기화
             getPlaceDetail(placeId = placeId)
+            // 4. like place 체크
             checkLikePlace(userId = userId.value, placeId = placeId)
         }
     }
 
     private fun getPlaceDetail(placeId: String) {
-        // 장소 리스트 초기화
         getPlaceDetailUseCase(placeId = placeId).onEach { result ->
             when (result) {
                 is Resource.Loading -> Unit
@@ -80,6 +68,8 @@ class PlaceDetailViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope)
     }
+
+    // 여기까지
 
     private fun checkLikePlace(userId: String, placeId: String) {
         getLikePlaceListUseCase(userId = userId).onEach { result ->
