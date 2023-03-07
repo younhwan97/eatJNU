@@ -34,8 +34,7 @@ import kr.co.younhwan.eatjnu.presentation.ui.theme.Shapes
 @Composable
 fun ExpandableCard(
     title: String,
-    lat: Double,
-    lon: Double,
+    latLng: LatLng,
     horizontalPadding: Dp = 16.dp
 ) {
     var expandableState by remember { mutableStateOf(false) }
@@ -118,10 +117,10 @@ fun ExpandableCard(
 
                 val cameraPositionState: CameraPositionState = rememberCameraPositionState {
                     // 카메라 초기 위치를 설정합니다.
-                    position = CameraPosition(LatLng(lat, lon), 15.0)
+                    position = CameraPosition(latLng, 15.0)
                 }
                 Box(
-                    Modifier.fillMaxWidth().height(160.dp).padding(bottom = 16.dp)
+                    Modifier.fillMaxWidth().height(160.dp)
                 ) {
                     NaverMap(
                         cameraPositionState = cameraPositionState,
@@ -129,6 +128,8 @@ fun ExpandableCard(
                         properties = mapProperties,
                     )
                 }
+
+                Spacer(modifier = Modifier.height(8.dp))
             }
         }
     }

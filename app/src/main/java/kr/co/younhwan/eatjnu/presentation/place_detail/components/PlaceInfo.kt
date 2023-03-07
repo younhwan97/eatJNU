@@ -3,6 +3,7 @@ package kr.co.younhwan.eatjnu.presentation.place_detail.components
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -26,37 +27,30 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.naver.maps.geometry.LatLng
 import kr.co.younhwan.eatjnu.R
 import kr.co.younhwan.eatjnu.domain.model.PlaceDetailInfo
 import kr.co.younhwan.eatjnu.presentation.supprot.MyDivider
 import java.time.format.TextStyle
+import kotlin.text.Typography.nbsp
 
 @Composable
 fun PlaceInfo(
     info: PlaceDetailInfo
 ) {
     Column {
+        // 가게 이름
         Text(
             text = info.name,
-            fontSize = 28.sp,
+            fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
             style = androidx.compose.material.MaterialTheme.typography.body1,
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .padding(top = 16.dp)
+            modifier = Modifier.padding(16.dp)
         )
 
-        if (info.lat != 0.0 && info.lon != 0.0) {
-            ExpandableCard(
-                title = info.location,
-                lat = info.lat,
-                lon = info.lon,
-                horizontalPadding = 16.dp
-            )
-        } else {
-
-        }
-
+        // 좋아요 및 리뷰 개수
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(horizontal = 16.dp)
@@ -76,6 +70,34 @@ fun PlaceInfo(
                 color = Color.Black,
                 style = androidx.compose.material.MaterialTheme.typography.body1
             )
+            
+            Spacer(modifier = Modifier.width(2.dp))
+
+            Text(
+                text = "개",
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Normal,
+                color = Color.Black,
+                style = androidx.compose.material.MaterialTheme.typography.body1
+            )
+
+            Spacer(modifier = Modifier.width(16.dp))
+
+            Image(
+                painter = painterResource(id = R.drawable.comment),
+                contentDescription = null,
+                modifier = Modifier.size(14.dp)
+            )
+
+            Spacer(modifier = Modifier.width(4.dp))
+
+            Text(
+                text = info.reviewCount.toString(),
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Normal,
+                color = Color.Black,
+                style = androidx.compose.material.MaterialTheme.typography.body1
+            )
 
             Spacer(modifier = Modifier.width(2.dp))
 
@@ -88,7 +110,22 @@ fun PlaceInfo(
             )
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        // 주소
+        if (info.lat != 0.0 && info.lon != 0.0) { // 위도, 경도 값이 있는 경우
+            ExpandableCard(
+                title = info.location,
+                latLng = LatLng(info.lat, info.lon),
+                horizontalPadding = 16.dp
+            )
+        } else { // 위도, 경도 값이 없는 경우
+            Text(
+                text = info.location,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Normal,
+                style = androidx.compose.material.MaterialTheme.typography.body1,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp)
+            )
+        }
 
         MyDivider()
 
@@ -97,9 +134,7 @@ fun PlaceInfo(
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
             style = androidx.compose.material.MaterialTheme.typography.body1,
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .padding(top = 16.dp, bottom = 12.dp)
+            modifier = Modifier.padding(16.dp)
         )
 
         // 운영 시간

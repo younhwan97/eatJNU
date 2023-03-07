@@ -113,9 +113,7 @@ fun PlaceDetailScreen(
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
                             style = androidx.compose.material.MaterialTheme.typography.body1,
-                            modifier = Modifier
-                                .padding(horizontal = 16.dp)
-                                .padding(top = 16.dp, bottom = 4.dp)
+                            modifier = Modifier.padding(16.dp)
                         )
                     }
 
