@@ -62,7 +62,10 @@ fun ExpandableCard(
         shape = Shapes.medium,
         colors = CardDefaults.cardColors(
             containerColor = Color.White
-        )
+        ),
+        onClick = {
+            expandableState = !expandableState
+        }
     ) {
         Column(
             modifier = Modifier

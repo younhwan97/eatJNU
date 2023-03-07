@@ -80,22 +80,23 @@ fun PlaceDetailScreen(
 
                 // 리뷰 타이틀
                 item {
-                    ExpandableCard(
-                        title = "리뷰",
-                        titleWeight = FontWeight.Bold,
-                        titleSize = 16.sp,
-                        toggleButtonIsIcon = false,
-                        toggleButtonText = "리뷰작성",
-                        isExpanded = false,
-                        content = {
-                            AddReview(
-                                onClickEnterBtn = {
-                                    viewModel.createPlaceReview(
-                                        userId = userId,
-                                        placeId = placeDetail.id.toString(),
-                                        comment = it
-                                    )
-                                }
+                    Text(
+                        text = "리뷰",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp,
+                        style = androidx.compose.material.MaterialTheme.typography.body1,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
+
+                // 리뷰 입력
+                item {
+                    AddReview(
+                        onClickEnterBtn = {
+                            viewModel.createPlaceReview(
+                                userId = userId,
+                                placeId = placeDetail.id.toString(),
+                                comment = it
                             )
                         }
                     )

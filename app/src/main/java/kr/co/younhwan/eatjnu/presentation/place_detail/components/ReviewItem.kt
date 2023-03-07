@@ -1,5 +1,7 @@
 package kr.co.younhwan.eatjnu.presentation.place_detail.components
 
+import android.os.Build
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -14,6 +16,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kr.co.younhwan.eatjnu.R
 import kr.co.younhwan.eatjnu.domain.model.ReviewInfo
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 @Composable
 fun ReviewItem(
@@ -50,7 +56,7 @@ fun ReviewItem(
             Column() {
                 // 댓글 작성자
                 Text(
-                    text = review.name ?: "익명",
+                    text = "익명",
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
                     maxLines = 1,

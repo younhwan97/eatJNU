@@ -127,11 +127,15 @@ class PlaceDetailViewModel @Inject constructor(
                 is Resource.Error -> Unit
                 is Resource.Success -> {
                     placeDetail.value = placeDetail.value.copy(
-                        reviews = listOf(ReviewInfo(
-                            name = "",
-                            placeId = placeId,
-                            comment = comment
-                        )) + placeDetail.value.reviews
+                        reviews = listOf(
+                            ReviewInfo(
+                                placeId = placeId,
+                                comment = comment,
+                                writingTime = "지금",
+                                likeCount = 0,
+                                userId = userId
+                            )
+                        ) + placeDetail.value.reviews
                     )
                 }
             }
