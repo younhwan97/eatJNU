@@ -16,8 +16,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kr.co.younhwan.eatjnu.R
-import kr.co.younhwan.eatjnu.presentation.Screen
-import kr.co.younhwan.eatjnu.presentation.home.components.AreaButton
 import kr.co.younhwan.eatjnu.presentation.home.components.AreaButtonScreen
 
 @Composable
@@ -25,8 +23,8 @@ fun HomeScreen(
     navController: NavController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
+    val areas by remember { viewModel.areas }
     val userId by remember { viewModel.userId }
-    val areaList by remember { viewModel.areaList }
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -57,12 +55,9 @@ fun HomeScreen(
 
             // 장소 버튼
             AreaButtonScreen(
+                areas = areas,
                 userId = userId,
-                areaList = areaList,
-                navController = navController,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 32.dp)
+                navController = navController
             )
 
             Spacer(modifier = Modifier.height(32.dp))

@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import kr.co.younhwan.eatjnu.domain.model.AreaInfo
+import kr.co.younhwan.eatjnu.domain.model.Area
 import kr.co.younhwan.eatjnu.domain.use_case.create_user_id.CreateUserIdUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_area.GetAreaUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_user_id.GetUserIdUseCase
@@ -19,14 +19,16 @@ class HomeViewModel @Inject constructor(
     private val createUserIdUseCase: CreateUserIdUseCase
 ) : ViewModel() {
 
-    var areaList = mutableStateOf<List<AreaInfo>>(listOf())
+    var areas = mutableStateOf<List<Area>>(listOf())
     val userId = mutableStateOf("")
 
     init {
+        // 1. 지역 정보 초기화
         getArea()
-
         viewModelScope.launch {
+            // 2. 유저 아이디 초기화
             getUserId()
+            // 3. (아이디가 없는 경우) 유저 아이디 생성 및 초기화
             if (userId.value == "") {
                 createUserId()
                 getUserId()
@@ -34,17 +36,14 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    // 후문, 상대, 정문 등의 '지역' 정보를 초기화
     private fun getArea() {
-        areaList.value = getAreaUseCase()
+        areas.value = getAreaUseCase()
     }
 
-    // 유저 아이디 초기화
     private suspend fun getUserId() {
         userId.value = getUserIdUseCase()
     }
 
-    // 유저 아이디 생성
     private suspend fun createUserId() {
         createUserIdUseCase(UUID.randomUUID().toString())
     }

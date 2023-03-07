@@ -69,8 +69,6 @@ class PlaceDetailViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    // 여기까지
-
     private fun checkLikePlace(userId: String, placeId: String) {
         getLikePlaceListUseCase(userId = userId).onEach { result ->
             when (result) {

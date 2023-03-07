@@ -32,7 +32,7 @@ fun PlaceDetailScreen(
         ErrorScreen()
     } else {
         val userId by remember { viewModel.userId } // 유저 식별값
-        val detail by remember { viewModel.placeDetail } // 장소 정보
+        val detail by remember { viewModel.placeDetail } // 세부 정보
         val isLikePlace by remember { viewModel.isLikePlace } // 유저가 '좋아요'를 누른 장소인지
 
         Column(
