@@ -15,7 +15,7 @@ class GetLikePlaceListUseCase @Inject constructor(
     operator fun invoke(userId: String): Flow<Resource<List<Int>>> = flow {
         try {
             emit(Resource.Loading())
-            val likePlaces = repository.getLikePlaceList(userId = userId).map { it.placeId }
+            val likePlaces = repository.getLikePlaceList(userId = userId).map { it.placeId ?: -1 }
             emit(Resource.Success(data = likePlaces))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "An expected error!"))

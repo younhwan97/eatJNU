@@ -21,7 +21,7 @@ class EatJnuRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getLikePlaceList(userId: String): List<LikePlaceDto> {
-        return api.getLikePlaceList(userId = userId).items
+        return api.getLikePlaceList(userId = userId).items ?: emptyList()
     }
 
     override suspend fun addLikePlace(userId: String, placeId: String): LikePlaceDto {
