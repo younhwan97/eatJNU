@@ -1,6 +1,5 @@
 package kr.co.younhwan.eatjnu.presentation.supprot
 
-import android.annotation.SuppressLint
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -13,22 +12,18 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 
-@SuppressLint("ModifierParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyTopAppBar(
     title: String = "",
-    containerColor: Color = Color.White,
     navController: NavController,
     isVisibleLikeBtn: Boolean = false,
     isLikePlace: Boolean = false,
-    onClickLikeBtn: () -> Unit = {},
-    modifier: Modifier = Modifier
+    onClickLikeBtn: () -> Unit = {}
 ) {
 
     var navigationEnabled by remember { mutableStateOf(true) }
@@ -42,7 +37,7 @@ fun MyTopAppBar(
             )
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = containerColor
+            containerColor = Color.White
         ),
         navigationIcon = {
             IconButton(
@@ -63,13 +58,13 @@ fun MyTopAppBar(
             // 좋아요 버튼
             if (isVisibleLikeBtn) {
                 IconButton(onClick = onClickLikeBtn) {
-                    if (isLikePlace) {
+                    if (isLikePlace) { // 이미 좋아요를 누른 장소일 때
                         Icon(
                             imageVector = Icons.Filled.Favorite,
                             contentDescription = null,
                             tint = Color(0XFFF40028)
                         )
-                    } else {
+                    } else { // 아직 좋아요를 누르지 않은 장소일 때
                         Icon(
                             imageVector = Icons.Outlined.FavoriteBorder,
                             contentDescription = null
@@ -77,7 +72,6 @@ fun MyTopAppBar(
                     }
                 }
             }
-        },
-        modifier = modifier
+        }
     )
 }
