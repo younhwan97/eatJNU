@@ -20,8 +20,10 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.naver.maps.geometry.LatLng
@@ -30,11 +32,15 @@ import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.compose.*
 import kr.co.younhwan.eatjnu.presentation.ui.theme.Shapes
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalNaverMapApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExpandableCard(
     title: String,
-    latLng: LatLng,
+    titleWeight: FontWeight = FontWeight.Normal,
+    titleSize: TextUnit = 14.sp,
+    toggleButtonIsIcon: Boolean = true,
+    toggleButtonText: String = "",
+    content: @Composable() () -> Unit,
     horizontalPadding: Dp = 16.dp
 ) {
     var expandableState by remember { mutableStateOf(false) }
@@ -66,70 +72,46 @@ fun ExpandableCard(
                 Text(
                     modifier = Modifier.weight(6f),
                     text = title,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Normal,
+                    fontSize = titleSize,
+                    fontWeight = titleWeight,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     style = androidx.compose.material.MaterialTheme.typography.body1
                 )
 
-                IconButton(
-                    modifier = Modifier
-                        .alpha(ContentAlpha.medium)
-                        .rotate(rotateState)
-                        .padding(horizontal = 0.dp)
-                        .weight(1f),
-                    onClick = {
-                        expandableState = !expandableState
+                if (toggleButtonIsIcon) {
+                    IconButton(
+                        modifier = Modifier
+                            .alpha(ContentAlpha.medium)
+                            .rotate(rotateState)
+                            .padding(horizontal = 0.dp)
+                            .weight(1f),
+                        onClick = {
+                            expandableState = !expandableState
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowDropDown,
+                            contentDescription = null,
+                        )
                     }
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowDropDown,
-                        contentDescription = null
+                } else {
+                    Text(
+                        modifier = Modifier.weight(1f).alpha(ContentAlpha.medium).padding(vertical = 16.dp),
+                        text = toggleButtonText,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Normal,
+                        color = Color.DarkGray,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        style = androidx.compose.material.MaterialTheme.typography.body1,
+                        textAlign = TextAlign.Right
                     )
                 }
             }
 
             if (expandableState) {
-                var mapProperties by remember {
-                    mutableStateOf(
-                        MapProperties(
-                            maxZoom = 18.0,
-                            minZoom = 12.0,
-                            symbolScale = 1f,
-                        )
-                    )
-                }
-
-                var mapUiSettings by remember {
-                    mutableStateOf(
-                        MapUiSettings(
-                            isCompassEnabled = false, // 나침반
-                            isZoomGesturesEnabled = false, // 줌
-                            isLocationButtonEnabled = false, // 현재위치
-                            isScrollGesturesEnabled = false, // 스크롤
-                            isRotateGesturesEnabled = false, // 회전
-                            isTiltGesturesEnabled = false, // 각도
-
-                        )
-                    )
-                }
-
-                val cameraPositionState: CameraPositionState = rememberCameraPositionState {
-                    // 카메라 초기 위치를 설정합니다.
-                    position = CameraPosition(latLng, 15.0)
-                }
-                Box(
-                    Modifier.fillMaxWidth().height(160.dp)
-                ) {
-                    NaverMap(
-                        cameraPositionState = cameraPositionState,
-                        uiSettings = mapUiSettings,
-                        properties = mapProperties,
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(8.dp))
+                content()
             }
         }
     }

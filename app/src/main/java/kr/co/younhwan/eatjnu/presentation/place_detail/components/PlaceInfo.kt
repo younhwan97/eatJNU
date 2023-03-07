@@ -114,8 +114,12 @@ fun PlaceInfo(
         if (info.lat != 0.0 && info.lon != 0.0) { // 위도, 경도 값이 있는 경우
             ExpandableCard(
                 title = info.location,
-                latLng = LatLng(info.lat, info.lon),
-                horizontalPadding = 16.dp
+                titleWeight = FontWeight.Normal,
+                titleSize = 14.sp,
+                toggleButtonIsIcon = true,
+                content = {
+                    NaverMap(latLng = LatLng(info.lat, info.lon))
+                }
             )
         } else { // 위도, 경도 값이 없는 경우
             Text(

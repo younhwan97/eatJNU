@@ -31,9 +31,6 @@ fun MyTopAppBar(
     title: String = "",
     containerColor: Color = Color.White,
     navController: NavController,
-    isVisibleHomeBtn: Boolean = false,
-    isVisibleReviewBtn: Boolean = false,
-    onClickReviewBtn: () -> Unit = {},
     isVisibleLikeBtn: Boolean = false,
     isLikePlace: Boolean = false,
     onClickLikeBtn: () -> Unit = {},
@@ -65,31 +62,6 @@ fun MyTopAppBar(
             }
         },
         actions = {
-            // 홈 버튼
-            if (isVisibleHomeBtn) {
-                IconButton(onClick = {
-                    navController.navigate(Screen.HomeScreen.route) {
-                        popUpTo(0)
-                    }
-                }) {
-                    Icon(
-                        imageVector = Icons.Filled.Home,
-                        contentDescription = null,
-                        tint = Color.Black
-                    )
-                }
-            }
-
-            // 리뷰 버튼
-            if (isVisibleReviewBtn) {
-                IconButton(onClick = onClickReviewBtn) {
-                    Icon(
-                        imageVector = Icons.Outlined.Edit,
-                        contentDescription = null
-                    )
-                }
-            }
-
             // 좋아요 버튼
             if (isVisibleLikeBtn) {
                 IconButton(onClick = onClickLikeBtn) {
