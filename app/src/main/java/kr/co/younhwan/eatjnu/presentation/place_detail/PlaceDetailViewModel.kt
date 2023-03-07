@@ -10,9 +10,9 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kr.co.younhwan.eatjnu.common.Constants
 import kr.co.younhwan.eatjnu.common.Resource
-import kr.co.younhwan.eatjnu.domain.model.FoodImageInfo
+import kr.co.younhwan.eatjnu.domain.model.FoodImage
 import kr.co.younhwan.eatjnu.domain.model.PlaceDetail
-import kr.co.younhwan.eatjnu.domain.model.ReviewInfo
+import kr.co.younhwan.eatjnu.domain.model.Review
 import kr.co.younhwan.eatjnu.domain.use_case.add_like_place.AddLikePlaceUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.create_review.CreateReviewUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_like_place_list.GetLikePlaceListUseCase
@@ -47,7 +47,7 @@ class PlaceDetailViewModel @Inject constructor(
             location = "",
             number = "",
             openingInfo = "",
-            images = emptyList<FoodImageInfo>(),
+            images = emptyList<FoodImage>(),
             lat = 0.0,
             lon = 0.0,
             reviews = emptyList()
@@ -127,7 +127,7 @@ class PlaceDetailViewModel @Inject constructor(
                         // (제일 앞에) 가짜 데이터 추가
                         placeDetail.value = placeDetail.value.copy(
                             reviews = listOf(
-                                ReviewInfo(
+                                Review(
                                     placeId = placeId,
                                     comment = comment,
                                     writingTime = "지금",

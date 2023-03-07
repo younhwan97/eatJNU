@@ -1,7 +1,5 @@
 package kr.co.younhwan.eatjnu.presentation.place_detail.components
 
-import android.os.Build
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -15,15 +13,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kr.co.younhwan.eatjnu.R
-import kr.co.younhwan.eatjnu.domain.model.ReviewInfo
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
+import kr.co.younhwan.eatjnu.domain.model.Review
 
 @Composable
 fun ReviewItem(
-    review: ReviewInfo
+    review: Review
 ) {
     if (review.comment != "" && review.comment != null) { // 댓글 내용이 있는 경우
         val reviewImages = arrayListOf(

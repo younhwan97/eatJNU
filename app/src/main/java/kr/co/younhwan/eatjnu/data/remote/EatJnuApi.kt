@@ -1,7 +1,7 @@
 package kr.co.younhwan.eatjnu.data.remote
 
 import kr.co.younhwan.eatjnu.data.remote.dto.*
-import kr.co.younhwan.eatjnu.domain.model.ReviewInfo
+import kr.co.younhwan.eatjnu.domain.model.Review
 import retrofit2.http.*
 
 interface EatJnuApi {
@@ -23,5 +23,5 @@ interface EatJnuApi {
 
     @Headers("Content-Type: application/json")
     @POST("PlaceReview/")
-    suspend fun createPlaceReview(@Body reviewInfo: ReviewInfo): ResponseDto
+    suspend fun createPlaceReview(@Body review: Review): ResponseDto
 }

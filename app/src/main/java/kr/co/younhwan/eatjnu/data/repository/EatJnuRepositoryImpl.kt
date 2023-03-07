@@ -4,8 +4,7 @@ import kr.co.younhwan.eatjnu.data.remote.EatJnuApi
 import kr.co.younhwan.eatjnu.data.remote.dto.LikePlaceDto
 import kr.co.younhwan.eatjnu.data.remote.dto.PlaceDetailDto
 import kr.co.younhwan.eatjnu.data.remote.dto.PlaceDto
-import kr.co.younhwan.eatjnu.data.remote.dto.ResponseDto
-import kr.co.younhwan.eatjnu.domain.model.ReviewInfo
+import kr.co.younhwan.eatjnu.domain.model.Review
 import kr.co.younhwan.eatjnu.domain.repository.EatJnuRepository
 import javax.inject.Inject
 
@@ -35,10 +34,12 @@ class EatJnuRepositoryImpl @Inject constructor(
 
     override suspend fun createPlaceReview(userId: String, placeId: String, comment: String): Boolean {
         return api.createPlaceReview(
-            reviewInfo = ReviewInfo(
+            review = Review(
                 comment = comment,
                 placeId = placeId,
-                userId = userId
+                userId = userId,
+                writingTime = "",
+                likeCount = 0
             )
         ).isSuccess
     }

@@ -21,6 +21,9 @@ import kr.co.younhwan.eatjnu.domain.model.PlaceDetail
 // | review_count | int          | YES  |     | 0       |                |
 // +--------------+--------------+------+-----+---------+----------------+
 
+// DTO의 경우 Null 값을 허용하되,
+// Model의 Data class를 Null 값을 허용하지 않도록 처리
+
 data class PlaceDetailDto(
     val id: Int?,
     val name: String?,

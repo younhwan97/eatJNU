@@ -8,11 +8,11 @@ data class PlaceDetail(
     val filter: String,
     val tags: String,
     val image: String,
-    val images: List<FoodImageInfo>,
     val location: String,
     val lat: Double,
     val lon: Double,
     val number: String,
     val openingInfo: String,
-    val reviews: List<ReviewInfo>
+    val images: List<FoodImage>,
+    val reviews: List<Review>
 )

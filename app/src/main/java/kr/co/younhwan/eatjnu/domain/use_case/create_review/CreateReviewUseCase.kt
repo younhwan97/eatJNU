@@ -1,10 +1,8 @@
 package kr.co.younhwan.eatjnu.domain.use_case.create_review
 
-import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kr.co.younhwan.eatjnu.common.Resource
-import kr.co.younhwan.eatjnu.domain.model.ReviewInfo
 import kr.co.younhwan.eatjnu.domain.repository.EatJnuRepository
 import retrofit2.HttpException
 import java.io.IOException

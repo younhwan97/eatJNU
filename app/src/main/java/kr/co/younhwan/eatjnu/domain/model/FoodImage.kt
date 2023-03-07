@@ -1,5 +1,5 @@
 package kr.co.younhwan.eatjnu.domain.model
 
-data class FoodImageInfo(
+data class FoodImage(
     val url: String
 )

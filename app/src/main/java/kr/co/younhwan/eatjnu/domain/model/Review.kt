@@ -1,6 +1,6 @@
 package kr.co.younhwan.eatjnu.domain.model
 
-data class ReviewInfo(
+data class Review(
     val comment: String,
     val writingTime: String,
     val userId: String,
