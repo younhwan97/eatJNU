@@ -1,14 +1,8 @@
 package kr.co.younhwan.eatjnu.data.remote
 
-import kr.co.younhwan.eatjnu.data.remote.dto.LikePlaceDto
-import kr.co.younhwan.eatjnu.data.remote.dto.LikePlaceListDto
-import kr.co.younhwan.eatjnu.data.remote.dto.PlaceDetailDto
-import kr.co.younhwan.eatjnu.data.remote.dto.PlaceListDto
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.PUT
-import retrofit2.http.Path
-import retrofit2.http.Query
+import kr.co.younhwan.eatjnu.data.remote.dto.*
+import kr.co.younhwan.eatjnu.domain.model.ReviewInfo
+import retrofit2.http.*
 
 interface EatJnuApi {
 
@@ -26,4 +20,8 @@ interface EatJnuApi {
 
     @DELETE("LikePlace/{userId}/{placeId}")
     suspend fun removeLikePlace(@Path("userId") userId: String, @Path("placeId") placeId: String): LikePlaceDto
+
+    @Headers("Content-Type: application/json")
+    @POST("PlaceReview/")
+    suspend fun createPlaceReview(@Body reviewInfo: ReviewInfo): ResponseDto
 }

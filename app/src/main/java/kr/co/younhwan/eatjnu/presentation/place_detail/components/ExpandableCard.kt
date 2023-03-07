@@ -42,10 +42,11 @@ fun ExpandableCard(
     titleSize: TextUnit = 14.sp,
     toggleButtonIsIcon: Boolean = true,
     toggleButtonText: String = "",
+    isExpanded: Boolean = false,
     content: @Composable() () -> Unit,
     horizontalPadding: Dp = 16.dp
 ) {
-    var expandableState by rememberSaveable { mutableStateOf(false) }
+    var expandableState by rememberSaveable { mutableStateOf(isExpanded) }
     val rotateState by animateFloatAsState(targetValue = if (expandableState) 180f else 0f)
 
     Card(

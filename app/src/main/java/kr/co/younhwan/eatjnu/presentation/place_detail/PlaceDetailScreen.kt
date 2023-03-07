@@ -86,8 +86,17 @@ fun PlaceDetailScreen(
                         titleSize = 16.sp,
                         toggleButtonIsIcon = false,
                         toggleButtonText = "리뷰작성",
+                        isExpanded = false,
                         content = {
-                            AddReview()
+                            AddReview(
+                                onClickEnterBtn = {
+                                    viewModel.createPlaceReview(
+                                        userId = userId,
+                                        placeId = placeDetail.id.toString(),
+                                        comment = it
+                                    )
+                                }
+                            )
                         }
                     )
                 }

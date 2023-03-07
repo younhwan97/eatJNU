@@ -3,6 +3,7 @@ package kr.co.younhwan.eatjnu.domain.repository
 import kr.co.younhwan.eatjnu.data.remote.dto.LikePlaceDto
 import kr.co.younhwan.eatjnu.data.remote.dto.PlaceDetailDto
 import kr.co.younhwan.eatjnu.data.remote.dto.PlaceDto
+import kr.co.younhwan.eatjnu.domain.model.ReviewInfo
 
 interface EatJnuRepository {
 
@@ -15,4 +16,6 @@ interface EatJnuRepository {
     suspend fun addLikePlace(userId:String, placeId: String) : LikePlaceDto
 
     suspend fun removeLikePlace(userId: String, placeId: String) : LikePlaceDto
+
+    suspend fun createPlaceReview(userId: String, placeId: String, comment:String) : Boolean
 }

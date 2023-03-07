@@ -12,7 +12,9 @@ import kotlinx.coroutines.launch
 import kr.co.younhwan.eatjnu.common.Constants
 import kr.co.younhwan.eatjnu.common.Resource
 import kr.co.younhwan.eatjnu.domain.model.PlaceDetailInfo
+import kr.co.younhwan.eatjnu.domain.model.ReviewInfo
 import kr.co.younhwan.eatjnu.domain.use_case.add_like_place.AddLikePlaceUseCase
+import kr.co.younhwan.eatjnu.domain.use_case.create_review.CreateReviewUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.create_user_id.CreateUserIdUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_like_place_list.GetLikePlaceListUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_place_detail.GetPlaceDetailUseCase
@@ -27,6 +29,7 @@ class PlaceDetailViewModel @Inject constructor(
     private val addLikePlaceUseCase: AddLikePlaceUseCase,
     private val getLikePlaceListUseCase: GetLikePlaceListUseCase,
     private val removeLikePlaceUseCase: RemoveLikePlaceUseCase,
+    private val createReviewUseCase: CreateReviewUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -64,7 +67,7 @@ class PlaceDetailViewModel @Inject constructor(
         }
     }
 
-    private fun getPlaceDetail(placeId: String)  {
+    private fun getPlaceDetail(placeId: String) {
         // 장소 리스트 초기화
         getPlaceDetailUseCase(placeId = placeId).onEach { result ->
             when (result) {
@@ -112,6 +115,24 @@ class PlaceDetailViewModel @Inject constructor(
                 is Resource.Success -> {
                     isLikePlace.value = false
                     placeDetail.value = placeDetail.value.copy(likeCount = placeDetail.value.likeCount.minus(1))
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    fun createPlaceReview(userId: String, placeId: String, comment: String) {
+        createReviewUseCase(userId = userId, placeId = placeId, comment = comment).onEach { result ->
+            when (result) {
+                is Resource.Loading -> Unit
+                is Resource.Error -> Unit
+                is Resource.Success -> {
+                    placeDetail.value = placeDetail.value.copy(
+                        reviews = listOf(ReviewInfo(
+                            name = "",
+                            placeId = placeId,
+                            comment = comment
+                        )) + placeDetail.value.reviews
+                    )
                 }
             }
         }.launchIn(viewModelScope)

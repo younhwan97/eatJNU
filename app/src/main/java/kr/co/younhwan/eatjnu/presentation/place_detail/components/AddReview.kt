@@ -32,7 +32,9 @@ import androidx.compose.ui.unit.sp
 import kr.co.younhwan.eatjnu.R
 
 @Composable
-fun AddReview() {
+fun AddReview(
+    onClickEnterBtn: (String) -> Unit
+) {
     var value by remember { mutableStateOf(TextFieldValue("")) }
 
     BasicTextField(
@@ -62,7 +64,10 @@ fun AddReview() {
                 }
 
                 IconButton(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        onClickEnterBtn(value.text)
+                        value = TextFieldValue("")
+                    },
                     modifier = Modifier
                         .weight(1f)
                         .size(18.dp)
