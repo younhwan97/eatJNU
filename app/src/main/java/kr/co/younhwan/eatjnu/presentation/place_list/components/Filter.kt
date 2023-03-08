@@ -31,9 +31,7 @@ fun Filter(
         label = {
             Text(
                 text = info.text,
-                style = MaterialTheme.typography.body1,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.h6,
                 color = if (selected) Color.White else Color.Black,
                 modifier = Modifier.padding(vertical = 12.dp)
             )

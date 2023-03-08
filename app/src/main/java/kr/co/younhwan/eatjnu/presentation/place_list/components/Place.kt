@@ -28,6 +28,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 import kr.co.younhwan.eatjnu.domain.model.PlaceInfo
+import androidx.compose.material.MaterialTheme
 
 @SuppressLint("ModifierParameter")
 @Composable
@@ -36,7 +37,6 @@ fun Place(
     onClickPlace: () -> Unit,
     modifier: Modifier = Modifier.fillMaxWidth()
 ) {
-
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -56,9 +56,7 @@ fun Place(
             // 이름
             Text(
                 text = info.name,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold,
-                style = androidx.compose.material.MaterialTheme.typography.body1
+                style = MaterialTheme.typography.h5
             )
 
             Spacer(modifier = Modifier.height(4.dp))
@@ -77,29 +75,23 @@ fun Place(
 
                 Text(
                     text = info.likeCount.toString(),
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold,
-                    style = androidx.compose.material.MaterialTheme.typography.h1
+                    style = MaterialTheme.typography.h6
                 )
 
                 Spacer(modifier = Modifier.width(8.dp))
 
                 Text(
                     text = "리뷰",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Normal,
                     color = colorResource(id = R.color.DarkGray),
-                    style = androidx.compose.material.MaterialTheme.typography.body1
+                    style = MaterialTheme.typography.body1
                 )
 
                 Spacer(modifier = Modifier.width(2.dp))
 
                 Text(
                     text = info.reviewCount.toString(),
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Normal,
                     color = colorResource(id = R.color.DarkGray),
-                    style = androidx.compose.material.MaterialTheme.typography.body1
+                    style = MaterialTheme.typography.body1
                 )
             }
 
@@ -108,13 +100,10 @@ fun Place(
             // 태그
             Text(
                 text = info.tags,
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Normal,
-                color = colorResource(id = R.color.Gray),
-                style = androidx.compose.material.MaterialTheme.typography.body1,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.fillMaxWidth(0.9f)
+                modifier = Modifier.fillMaxWidth(0.96f),
+                style = MaterialTheme.typography.body2,
             )
         }
     }

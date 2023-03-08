@@ -1,6 +1,8 @@
 package kr.co.younhwan.eatjnu.presentation.ui.theme
 
 import androidx.compose.material.Typography
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -23,21 +25,37 @@ val Pretendard = FontFamily(
 
 // Set of Material typography styles to start with
 val Typography = Typography(
+    defaultFontFamily = Pretendard,
+
     h1 = TextStyle(
         fontFamily = Dohyun,
         fontWeight = FontWeight.Normal,
         fontSize = 64.sp
     ),
 
-    body1 = TextStyle(
+    h5 = TextStyle(
         fontFamily = Pretendard,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Bold,
         fontSize = 16.sp
     ),
 
-    body2 = TextStyle(
-        fontFamily = FontFamily.Default,
+    h6 = TextStyle(
+        fontFamily = Pretendard,
+        fontWeight = FontWeight.Bold,
+        fontSize = 14.sp
+    ),
+
+    body1 = TextStyle(
+        fontFamily = Pretendard,
         fontWeight = FontWeight.Normal,
+        fontSize = 14.sp
+    ),
+
+    body2 = TextStyle(
+        fontFamily = Pretendard,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        color = Color.Gray
     )
 )
 

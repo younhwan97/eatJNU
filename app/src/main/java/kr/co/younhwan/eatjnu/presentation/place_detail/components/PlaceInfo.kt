@@ -1,5 +1,6 @@
 package kr.co.younhwan.eatjnu.presentation.place_detail.components
 
+import androidx.compose.material.MaterialTheme
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.Image
@@ -34,10 +35,9 @@ fun PlaceInfo(
         Text(
             text = info.name,
             fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            style = androidx.compose.material.MaterialTheme.typography.body1,
+            style = MaterialTheme.typography.h5,
             modifier = Modifier.padding(16.dp)
         )
 
@@ -57,19 +57,15 @@ fun PlaceInfo(
             Text(
                 text = info.likeCount.toString(),
                 fontSize = 16.sp,
-                fontWeight = FontWeight.Normal,
-                color = Color.Black,
-                style = androidx.compose.material.MaterialTheme.typography.body1
+                style = MaterialTheme.typography.body1
             )
-            
+
             Spacer(modifier = Modifier.width(2.dp))
 
             Text(
                 text = "개",
                 fontSize = 16.sp,
-                fontWeight = FontWeight.Normal,
-                color = Color.Black,
-                style = androidx.compose.material.MaterialTheme.typography.body1
+                style = MaterialTheme.typography.body1
             )
 
             Spacer(modifier = Modifier.width(16.dp))
@@ -85,9 +81,7 @@ fun PlaceInfo(
             Text(
                 text = info.reviews.size.toString(),
                 fontSize = 16.sp,
-                fontWeight = FontWeight.Normal,
-                color = Color.Black,
-                style = androidx.compose.material.MaterialTheme.typography.body1
+                style = MaterialTheme.typography.body1
             )
 
             Spacer(modifier = Modifier.width(2.dp))
@@ -95,9 +89,7 @@ fun PlaceInfo(
             Text(
                 text = "개",
                 fontSize = 16.sp,
-                fontWeight = FontWeight.Normal,
-                color = Color.Black,
-                style = androidx.compose.material.MaterialTheme.typography.body1
+                style = MaterialTheme.typography.body1
             )
         }
 
@@ -105,8 +97,6 @@ fun PlaceInfo(
         if (info.lat != 0.0 && info.lon != 0.0) { // 위도, 경도 값이 있는 경우
             ExpandableCard(
                 title = info.location,
-                titleWeight = FontWeight.Normal,
-                titleSize = 14.sp,
                 toggleButtonIsIcon = true,
                 content = {
                     NaverMap(latLng = LatLng(info.lat, info.lon))
@@ -115,9 +105,7 @@ fun PlaceInfo(
         } else { // 위도, 경도 값이 없는 경우
             Text(
                 text = info.location,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Normal,
-                style = androidx.compose.material.MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.body1,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp)
             )
         }
@@ -126,9 +114,7 @@ fun PlaceInfo(
 
         Text(
             text = "매장 정보",
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            style = androidx.compose.material.MaterialTheme.typography.body1,
+            style = MaterialTheme.typography.h5,
             modifier = Modifier.padding(16.dp)
         )
 
@@ -148,18 +134,12 @@ fun PlaceInfo(
             if (info.openingInfo.isEmpty()) { // 가게 운영시간이 없는 경우
                 Text(
                     text = "운영시간이 제공되지 않습니다 :(",
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Normal,
-                    color = Color.Gray,
-                    style = androidx.compose.material.MaterialTheme.typography.body1
+                    style = MaterialTheme.typography.body2
                 )
             } else { // 가게 운영시간이 있는 경우
                 Text(
-                    text = info.openingInfo.toString(),
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Normal,
-                    color = Color.Black,
-                    style = androidx.compose.material.MaterialTheme.typography.body1
+                    text = info.openingInfo,
+                    style = MaterialTheme.typography.body1
                 )
             }
         }
@@ -182,23 +162,19 @@ fun PlaceInfo(
             if (info.number.isEmpty() || info.number.length <= 3) { // 가게 전화번호가 없는 경우
                 Text(
                     text = "전화번호가 제공되지 않습니다 :(",
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Normal,
-                    color = Color.Gray,
-                    style = androidx.compose.material.MaterialTheme.typography.body1
+                    style = MaterialTheme.typography.body2
                 )
             } else { // 가게 전화번호가 있는 경우
                 val ctx = LocalContext.current
                 Text(
                     text = info.number,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Normal,
-                    color = Color.Black,
                     style = androidx.compose.ui.text.TextStyle(
                         textDecoration = TextDecoration.Underline,
                         fontFamily = FontFamily(
                             Font(R.font.pretendard_regular, FontWeight.Normal, FontStyle.Normal),
-                        )
+                        ),
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Normal
                     ),
                     modifier = Modifier.clickable {
                         val u = Uri.parse("tel:" + info.number)
@@ -215,10 +191,7 @@ fun PlaceInfo(
         if (info.tags.isNotEmpty()) {
             Text(
                 text = info.tags,
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Normal,
-                color = Color.Gray,
-                style = androidx.compose.material.MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.body2,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
         }

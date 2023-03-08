@@ -67,14 +67,9 @@ fun AddReview(
                     .focusRequester(focusRequester)
             ) {
                 if (text.isEmpty()) {
-                    var placeholder = "리뷰를 입력해주세요 :)"
-                    if (alreadyWrittenReview) placeholder = "이미 리뷰를 입력하셨습니다!"
-
                     Text(
-                        text = placeholder,
+                        text = if (alreadyWrittenReview) "이미 리뷰를 입력하셨습니다!" else "리뷰를 입력해주세요 :)",
                         color = Color.LightGray,
-                        fontWeight = FontWeight.Normal,
-                        fontSize = 14.sp,
                         style = MaterialTheme.typography.body1
                     )
                 }

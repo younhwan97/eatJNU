@@ -65,22 +65,18 @@ fun ReviewItem(
                 Text(
                     text = review.comment,
                     fontSize = 12.sp,
-                    fontWeight = FontWeight.Normal,
                     style = MaterialTheme.typography.body1
                 )
 
                 Spacer(modifier = Modifier.height(4.dp))
 
                 // 작성일
-                if (review.writingTime != null) {
-                    Text(
-                        text = review.writingTime,
-                        fontSize = 10.sp,
-                        color = colorResource(id = R.color.LightGray),
-                        fontWeight = FontWeight.Normal,
-                        style = MaterialTheme.typography.body1
-                    )
-                }
+                Text(
+                    text = review.writingTime,
+                    fontSize = 10.sp,
+                    color = colorResource(id = R.color.LightGray),
+                    style = MaterialTheme.typography.body1
+                )
             }
         }
     }

@@ -1,5 +1,6 @@
 package kr.co.younhwan.eatjnu.presentation.place_detail.components
 
+import androidx.compose.material.MaterialTheme
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -12,7 +13,6 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -28,9 +28,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.CameraPosition
-import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.compose.*
 import kr.co.younhwan.eatjnu.presentation.ui.theme.Shapes
 
@@ -38,8 +35,6 @@ import kr.co.younhwan.eatjnu.presentation.ui.theme.Shapes
 @Composable
 fun ExpandableCard(
     title: String,
-    titleWeight: FontWeight = FontWeight.Normal,
-    titleSize: TextUnit = 14.sp,
     toggleButtonIsIcon: Boolean = true,
     toggleButtonText: String = "",
     isExpanded: Boolean = false,
@@ -75,11 +70,9 @@ fun ExpandableCard(
                 Text(
                     modifier = Modifier.weight(6f),
                     text = title,
-                    fontSize = titleSize,
-                    fontWeight = titleWeight,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    style = androidx.compose.material.MaterialTheme.typography.body1
+                    style = MaterialTheme.typography.body1
                 )
 
                 if (toggleButtonIsIcon) {
@@ -109,11 +102,10 @@ fun ExpandableCard(
                             },
                         text = toggleButtonText,
                         fontSize = 12.sp,
-                        fontWeight = FontWeight.Normal,
                         color = Color.DarkGray,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
-                        style = androidx.compose.material.MaterialTheme.typography.body1,
+                        style = MaterialTheme.typography.body1,
                         textAlign = TextAlign.Right
                     )
                 }
