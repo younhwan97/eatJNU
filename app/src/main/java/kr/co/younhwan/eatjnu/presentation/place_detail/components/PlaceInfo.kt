@@ -47,16 +47,16 @@ fun PlaceInfo(
             modifier = Modifier.padding(horizontal = 16.dp)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.love),
+                painter = painterResource(id = R.drawable.heart),
                 contentDescription = null,
-                modifier = Modifier.size(14.dp)
+                modifier = Modifier.size(24.dp)
             )
 
             Spacer(modifier = Modifier.width(4.dp))
 
             Text(
                 text = info.likeCount.toString(),
-                fontSize = 14.sp,
+                fontSize = 16.sp,
                 fontWeight = FontWeight.Normal,
                 color = Color.Black,
                 style = androidx.compose.material.MaterialTheme.typography.body1
@@ -66,7 +66,7 @@ fun PlaceInfo(
 
             Text(
                 text = "개",
-                fontSize = 14.sp,
+                fontSize = 16.sp,
                 fontWeight = FontWeight.Normal,
                 color = Color.Black,
                 style = androidx.compose.material.MaterialTheme.typography.body1
@@ -75,16 +75,16 @@ fun PlaceInfo(
             Spacer(modifier = Modifier.width(16.dp))
 
             Image(
-                painter = painterResource(id = R.drawable.comment),
+                painter = painterResource(id = R.drawable.chat),
                 contentDescription = null,
-                modifier = Modifier.size(14.dp)
+                modifier = Modifier.size(22.dp)
             )
 
             Spacer(modifier = Modifier.width(4.dp))
 
             Text(
                 text = info.reviews.size.toString(),
-                fontSize = 14.sp,
+                fontSize = 16.sp,
                 fontWeight = FontWeight.Normal,
                 color = Color.Black,
                 style = androidx.compose.material.MaterialTheme.typography.body1
@@ -94,7 +94,7 @@ fun PlaceInfo(
 
             Text(
                 text = "개",
-                fontSize = 14.sp,
+                fontSize = 16.sp,
                 fontWeight = FontWeight.Normal,
                 color = Color.Black,
                 style = androidx.compose.material.MaterialTheme.typography.body1
@@ -217,7 +217,7 @@ fun PlaceInfo(
                 text = info.tags,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Normal,
-                color = Color.LightGray,
+                color = Color.Gray,
                 style = androidx.compose.material.MaterialTheme.typography.body1,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )

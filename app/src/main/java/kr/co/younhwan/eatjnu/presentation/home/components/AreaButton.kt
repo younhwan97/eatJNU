@@ -33,6 +33,7 @@ fun AreaButton(
             text = title,
             color = Color.White,
             letterSpacing = 10.sp,
+            fontSize = 22.sp,
             fontWeight = FontWeight.Bold,
             style = MaterialTheme.typography.body1,
         )

@@ -65,16 +65,16 @@ fun Place(
                 style = androidx.compose.material.MaterialTheme.typography.body1
             )
 
-            Spacer(modifier = Modifier.height(2.dp))
+            Spacer(modifier = Modifier.height(4.dp))
 
             // 좋아요 & 리뷰
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    painter = painterResource(id = kr.co.younhwan.eatjnu.R.drawable.like32),
+                    painter = painterResource(id = kr.co.younhwan.eatjnu.R.drawable.heart),
                     contentDescription = null,
-                    modifier = Modifier.size(14.dp)
+                    modifier = Modifier.size(18.dp)
                 )
 
                 Spacer(modifier = Modifier.width(2.dp))
@@ -92,7 +92,7 @@ fun Place(
                     text = "리뷰",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Normal,
-                    color = Color.Gray,
+                    color = Color(0XFF494B53),
                     style = androidx.compose.material.MaterialTheme.typography.body1
                 )
 
@@ -102,19 +102,19 @@ fun Place(
                     text = info.reviewCount.toString(),
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Normal,
-                    color = Color.Gray,
+                    color = Color(0XFF494B53),
                     style = androidx.compose.material.MaterialTheme.typography.body1
                 )
             }
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(6.dp))
 
             // 태그
             Text(
                 text = info.tags,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Normal,
-                color = Color.LightGray,
+                color = Color.Gray,
                 style = androidx.compose.material.MaterialTheme.typography.body1,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
@@ -123,13 +123,13 @@ fun Place(
         }
     }
 
-    Spacer(modifier = Modifier.height(16.dp))
+    Spacer(modifier = Modifier.height(14.dp))
 }
 
 @Composable
 fun ImageBox(
     imageUrl: String,
-    roundedDp: Dp = 24.dp
+    roundedDp: Dp = 22.dp
 ) {
     Box(
         modifier = Modifier
