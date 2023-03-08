@@ -76,6 +76,6 @@ fun Filter(
                     .padding(1.dp)
             )
         },
-        shape = RoundedCornerShape(18.dp)
+        shape = RoundedCornerShape(24.dp)
     )
 }
