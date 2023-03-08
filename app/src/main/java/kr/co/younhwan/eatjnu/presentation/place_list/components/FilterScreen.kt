@@ -26,7 +26,7 @@ fun FilterScreen(
             viewModel.changeVisibility()
 
             if (item.text == selectedFilter)
-                Filter(info = item, selected = true) { viewModel.changeFilter(item.text) }
+                Filter(info = item, selected = true) { }
             else
                 Filter(info = item, selected = false) { viewModel.changeFilter(item.text) }
         }
