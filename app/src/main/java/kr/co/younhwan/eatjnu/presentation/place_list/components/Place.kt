@@ -1,9 +1,8 @@
 package kr.co.younhwan.eatjnu.presentation.place_list.components
 
 import android.annotation.SuppressLint
-import android.content.res.Resources
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import kr.co.younhwan.eatjnu.R
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -16,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -23,14 +23,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.zIndex
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.skydoves.landscapist.ImageOptions
-import com.skydoves.landscapist.components.imageComponent
 import com.skydoves.landscapist.glide.GlideImage
-import com.skydoves.landscapist.glide.GlideImageState
-import com.skydoves.landscapist.placeholder.placeholder.PlaceholderPlugin
 import kr.co.younhwan.eatjnu.domain.model.PlaceInfo
 
 @SuppressLint("ModifierParameter")
@@ -92,7 +88,7 @@ fun Place(
                     text = "리뷰",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Normal,
-                    color = Color(0XFF494B53),
+                    color = colorResource(id = R.color.DarkGray),
                     style = androidx.compose.material.MaterialTheme.typography.body1
                 )
 
@@ -102,7 +98,7 @@ fun Place(
                     text = info.reviewCount.toString(),
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Normal,
-                    color = Color(0XFF494B53),
+                    color = colorResource(id = R.color.DarkGray),
                     style = androidx.compose.material.MaterialTheme.typography.body1
                 )
             }
@@ -114,7 +110,7 @@ fun Place(
                 text = info.tags,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Normal,
-                color = Color.Gray,
+                color = colorResource(id = R.color.Gray),
                 style = androidx.compose.material.MaterialTheme.typography.body1,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,

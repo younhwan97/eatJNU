@@ -7,6 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -75,7 +76,7 @@ fun ReviewItem(
                     Text(
                         text = review.writingTime,
                         fontSize = 10.sp,
-                        color = Color.LightGray,
+                        color = colorResource(id = R.color.LightGray),
                         fontWeight = FontWeight.Normal,
                         style = MaterialTheme.typography.body1
                     )

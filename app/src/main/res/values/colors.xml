@@ -8,11 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name='gray_1'>#dddddd</color>
-    <color name='gray_2'>#656565</color>
-    <color name="gray_4">#242424</color>
-    <color name='violet'>#7454D0</color>
-    <color name="bg_black">#171717</color>
+    <!-- Custom Colors -->
+    <color name="DarkGray">#FF494B53</color>
+    <color name="Gray">#FF888888</color>
+    <color name="LightGray">#FFCCCCCC</color>
 
-    <color name='btn_background_color'>#330C0C0C</color>
+    <!-- 컨텐츠를 분리하는 Divider와 리뷰를 작성하는 텍스트 필드의 배경 색 등에 사용되는 Gray -->
+    <color name="BackgroundGray">#FFF4F4F4</color>
+    <color name="DividerGray">#FFDFDFDF</color>
 </resources>

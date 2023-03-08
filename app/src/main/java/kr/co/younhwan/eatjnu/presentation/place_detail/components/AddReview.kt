@@ -20,11 +20,13 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kr.co.younhwan.eatjnu.R
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -57,7 +59,10 @@ fun AddReview(
         decorationBox = { innerTextField ->
             Row(
                 Modifier
-                    .background(Color(0XFFF4F4F4), RoundedCornerShape(percent = 30))
+                    .background(
+                        color = colorResource(id = R.color.BackgroundGray),
+                        shape = RoundedCornerShape(percent = 30)
+                    )
                     .padding(16.dp)
                     .focusRequester(focusRequester)
             ) {
