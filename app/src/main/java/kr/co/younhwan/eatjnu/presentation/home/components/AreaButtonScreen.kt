@@ -21,11 +21,11 @@ fun AreaButtonScreen(
             .fillMaxWidth()
             .padding(horizontal = 32.dp)
     ) {
-        areas.forEach { info ->
+        areas.forEach { area ->
             AreaButton(
-                title = info.title,
+                title = area.title,
                 onClickBtn = {
-                    navController.navigate(Screen.PlaceListScreen.route + "/${info.type}" + "/${userId}")
+                    navController.navigate(Screen.PlaceListScreen.route + "/${area.type}" + "/${userId}")
                 }
             )
             Spacer(modifier = Modifier.height(16.dp))

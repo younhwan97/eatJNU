@@ -23,6 +23,8 @@ fun FilterScreen(
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         items(filters) { item ->
+            viewModel.changeVisibility()
+
             if (item.text == selectedFilter)
                 Filter(info = item, selected = true) { viewModel.changeFilter(item.text) }
             else

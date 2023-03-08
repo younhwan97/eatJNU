@@ -1,6 +1,8 @@
 package kr.co.younhwan.eatjnu.presentation.place_list
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -25,27 +27,29 @@ class PlaceListViewModel @Inject constructor(
     var error = mutableStateOf("")
     var isLoading = mutableStateOf(false)
 
-    val filterList = mutableStateOf<List<FilterInfo>>(listOf())
-
+    val userId = mutableStateOf("")
     var areaType = mutableStateOf("")
     var selectedFilter = mutableStateOf("맛집")
-    var placeList = mutableStateOf<List<PlaceInfo>>(listOf())
-    val userId = mutableStateOf("")
+    val filters = mutableStateOf<List<FilterInfo>>(listOf())
+    var places = mutableStateOf<List<PlaceInfo>>(listOf())
+
+    val isVisiblePlaceScreen = mutableStateOf(true)
 
     init {
-        filterList.value = getFilterList()
-
+        // 1. 필터 리스트 초기화
+        filters.value = getFilterList()
         savedStateHandle.get<String>(Constants.PARAM_AREA_TYPE)?.let { areaType ->
+            // 2. 장소 리스트 초기화
             getPlaceList(areaType)
-
+            // 3. 지역 타입 초기화
             when (areaType) {
                 "0" -> this.areaType.value = "후문"
                 "1" -> this.areaType.value = "상대"
                 "2" -> this.areaType.value = "정문"
             }
         }
-
         savedStateHandle.get<String>(Constants.PARAM_USER_ID)?.let { userId ->
+            // 4. 유저 아이디 초기화
             this.userId.value = userId
         }
     }
@@ -54,10 +58,11 @@ class PlaceListViewModel @Inject constructor(
 
     fun changeFilter(newFilter: String) {
         selectedFilter.value = newFilter
+        changeVisibility()
     }
 
-    private fun getPlaceList(type: String) {
-        getPlaceListUseCase(type).onEach { result ->
+    private fun getPlaceList(areaType: String) {
+        getPlaceListUseCase(areaType).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
                     isLoading.value = true
@@ -70,9 +75,13 @@ class PlaceListViewModel @Inject constructor(
 
                 is Resource.Success -> {
                     isLoading.value = false
-                    placeList.value = result.data ?: emptyList()
+                    places.value = result.data ?: emptyList()
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun changeVisibility() {
+        isVisiblePlaceScreen.value = !isVisiblePlaceScreen.value
     }
 }

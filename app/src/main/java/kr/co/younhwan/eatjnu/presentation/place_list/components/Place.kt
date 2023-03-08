@@ -1,11 +1,14 @@
 package kr.co.younhwan.eatjnu.presentation.place_list.components
 
 import android.annotation.SuppressLint
+import android.content.res.Resources
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,12 +20,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.skydoves.landscapist.ImageOptions
+import com.skydoves.landscapist.components.imageComponent
 import com.skydoves.landscapist.glide.GlideImage
+import com.skydoves.landscapist.glide.GlideImageState
+import com.skydoves.landscapist.placeholder.placeholder.PlaceholderPlugin
 import kr.co.younhwan.eatjnu.domain.model.PlaceInfo
 
 @SuppressLint("ModifierParameter")
@@ -41,7 +49,9 @@ fun Place(
             )
     ) {
         // 장소 이미지
-        ImageBox(imageUrl = info.image)
+        ImageBox(
+            imageUrl = info.image
+        )
 
         Spacer(Modifier.width(16.dp))
 
@@ -134,8 +144,20 @@ fun ImageBox(
             imageModel = { imageUrl }, // loading a network image using an URL.
             imageOptions = ImageOptions(
                 contentScale = ContentScale.Crop,
-                alignment = Alignment.Center
+                alignment = Alignment.Center,
+                contentDescription = null,
+                colorFilter = null,
+                alpha = 1f,
+                requestSize = IntSize(400, 400)
             ),
+            loading = {
+                Box(modifier = Modifier.matchParentSize()) {
+                    CircularProgressIndicator(
+                        color = Color.Black,
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
+            },
             requestOptions = {
                 RequestOptions()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)

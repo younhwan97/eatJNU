@@ -1,9 +1,16 @@
 package kr.co.younhwan.eatjnu.presentation.place_list
 
+import android.util.Log
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -14,7 +21,13 @@ import kr.co.younhwan.eatjnu.presentation.place_list.components.PlaceScreen
 import kr.co.younhwan.eatjnu.presentation.supprot.ErrorScreen
 import kr.co.younhwan.eatjnu.presentation.supprot.LoadingScreen
 import kr.co.younhwan.eatjnu.presentation.supprot.MyTopAppBar
+import soup.compose.material.motion.MaterialMotion
+import soup.compose.material.motion.animation.materialFadeThrough
+import soup.compose.material.motion.animation.materialSharedAxisX
+import soup.compose.material.motion.animation.materialSharedAxisZ
+import soup.compose.material.motion.animation.rememberSlideDistance
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun PlaceListScreen(
     navController: NavController,
@@ -22,18 +35,19 @@ fun PlaceListScreen(
 ) {
     val isLoading by remember { viewModel.isLoading }
     val error by remember { viewModel.error }
-    val placeList by remember { viewModel.placeList }
 
     if (isLoading) {
         LoadingScreen()
     } else if (error.isNotEmpty()) {
         ErrorScreen()
     } else {
-        val areaType by remember { viewModel.areaType } // 정문, 후문, 상대 등의 지역정보
+        val userId by remember { viewModel.userId } // 유저 식별값
+        val areaType by remember { viewModel.areaType } // 정문, 후문, 상대 등의 지역타입
         val selectedFilter by remember { viewModel.selectedFilter } // 선택된 필터 이름(전체, 맛집, 술집, 카페)
+        val filters by remember { viewModel.filters } // 필터 리스트
+        val places by remember { viewModel.places } // 장소 리스트
 
-        val filterList by remember { viewModel.filterList }
-        val userId by remember { viewModel.userId }
+        val isVisiblePlaceScreen by remember { viewModel.isVisiblePlaceScreen }
 
         Column(
             modifier = Modifier.fillMaxSize()
@@ -47,7 +61,7 @@ fun PlaceListScreen(
             // 필터 리스트
             FilterScreen(
                 selectedFilter = selectedFilter,
-                filters = filterList,
+                filters = filters,
                 viewModel = viewModel
             )
 
@@ -56,13 +70,16 @@ fun PlaceListScreen(
             Divider(modifier = Modifier.height(1.dp))
 
             // 장소 리스트
-            PlaceScreen(
-                navController = navController,
-                places = placeList,
-                selectedFilter = selectedFilter,
-                userId = userId,
-                modifier = Modifier.fillMaxSize()
-            )
+            val slideDistance = rememberSlideDistance(slideDistance = 30.dp)
+            MaterialMotion(targetState = isVisiblePlaceScreen, transitionSpec = { materialSharedAxisX(forward = false, slideDistance = slideDistance) }, pop = true) {
+                PlaceScreen(
+                    userId = userId,
+                    selectedFilter = selectedFilter,
+                    places = places,
+                    navController = navController,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
         }
     }
 }
