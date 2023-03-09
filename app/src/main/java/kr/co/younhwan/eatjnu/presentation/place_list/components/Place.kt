@@ -108,7 +108,7 @@ fun Place(
         }
     }
 
-    Spacer(modifier = Modifier.height(14.dp))
+    Spacer(modifier = Modifier.height(24.dp))
 }
 
 @Composable
@@ -133,7 +133,7 @@ fun ImageBox(
                 contentDescription = null,
                 colorFilter = null,
                 alpha = 1f,
-                requestSize = IntSize(400, 400)
+                requestSize = IntSize(300, 300)
             ),
             loading = {
                 Box(modifier = Modifier.matchParentSize()) {

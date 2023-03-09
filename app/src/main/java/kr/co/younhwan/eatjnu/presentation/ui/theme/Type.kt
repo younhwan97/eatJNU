@@ -36,25 +36,25 @@ val Typography = Typography(
     h5 = TextStyle(
         fontFamily = Pretendard,
         fontWeight = FontWeight.Bold,
-        fontSize = 16.sp
+        fontSize = 18.sp
     ),
 
     h6 = TextStyle(
         fontFamily = Pretendard,
         fontWeight = FontWeight.Bold,
-        fontSize = 14.sp
+        fontSize = 16.sp
     ),
 
     body1 = TextStyle(
         fontFamily = Pretendard,
         fontWeight = FontWeight.Normal,
-        fontSize = 14.sp
+        fontSize = 16.sp
     ),
 
     body2 = TextStyle(
         fontFamily = Pretendard,
         fontWeight = FontWeight.Normal,
-        fontSize = 12.sp,
+        fontSize = 14.sp,
         color = Color.Gray
     )
 )
