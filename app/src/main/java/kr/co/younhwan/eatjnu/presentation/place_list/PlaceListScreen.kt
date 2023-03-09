@@ -68,16 +68,18 @@ fun PlaceListScreen(
             Spacer(modifier = Modifier.height(4.dp))
 
             // 장소 리스트
-            val slideDistance = rememberSlideDistance(slideDistance = 40.dp)
-            MaterialMotion(targetState = isVisiblePlaceScreen, transitionSpec = { materialSharedAxisX(forward = false, slideDistance = slideDistance) }, pop = true) {
-                PlaceScreen(
-                    userId = userId,
-                    selectedFilter = selectedFilter,
-                    places = places,
-                    navController = navController,
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
+//            val slideDistance = rememberSlideDistance(slideDistance = 40.dp)
+//            MaterialMotion(targetState = isVisiblePlaceScreen, transitionSpec = { materialSharedAxisX(forward = false, slideDistance = slideDistance) }, pop = true) {
+//
+//            }
+
+            PlaceScreen(
+                userId = userId,
+                selectedFilter = selectedFilter,
+                places = places,
+                navController = navController,
+                modifier = Modifier.fillMaxSize()
+            )
         }
     }
 }

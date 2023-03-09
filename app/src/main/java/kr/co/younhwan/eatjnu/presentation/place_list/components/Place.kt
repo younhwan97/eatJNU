@@ -22,13 +22,16 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 import kr.co.younhwan.eatjnu.domain.model.PlaceInfo
 import androidx.compose.material.MaterialTheme
+import com.skydoves.landscapist.animation.crossfade.CrossfadePlugin
+import com.skydoves.landscapist.components.imageComponent
+import com.skydoves.landscapist.components.rememberImageComponent
+import com.skydoves.landscapist.placeholder.placeholder.PlaceholderPlugin
 
 @SuppressLint("ModifierParameter")
 @Composable
@@ -133,19 +136,24 @@ fun ImageBox(
                 contentDescription = null,
                 colorFilter = null,
                 alpha = 1f,
-                requestSize = IntSize(300, 300)
+                requestSize = IntSize(256, 256)
             ),
-            loading = {
-                Box(modifier = Modifier.matchParentSize()) {
-                    CircularProgressIndicator(
-                        color = Color.Black,
-                        modifier = Modifier.align(Alignment.Center)
-                    )
-                }
+//            loading = {
+//                Box(modifier = Modifier.fillMaxSize()) {
+//                    CircularProgressIndicator(
+//                        modifier = Modifier.align(Alignment.Center)
+//                    )
+//                }
+//            },
+            component = rememberImageComponent {
+                +PlaceholderPlugin.Loading(painterResource(id = R.drawable.main3))
+                +PlaceholderPlugin.Failure(painterResource(id = R.drawable.main3))
+                +CrossfadePlugin(
+                    duration = 1500
+                )
             },
             requestOptions = {
-                RequestOptions()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL)
             }
         )
     }
