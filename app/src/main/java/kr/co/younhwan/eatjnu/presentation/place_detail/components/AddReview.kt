@@ -52,7 +52,7 @@ fun AddReview(
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
         keyboardActions = KeyboardActions(
             onDone = {
-                if (text.isNotBlank()) {
+                if (text.isNotBlank() && text.length >= 5) {
                     onClickEnterBtn(text)
                     keyboardController?.hide()
                     text = ""
@@ -96,7 +96,7 @@ fun AddReview(
                 } else {
                     IconButton(
                         onClick = {
-                            if (text.isNotBlank()) {
+                            if (text.isNotBlank() && text.length >= 5) {
                                 onClickEnterBtn(text)
                                 keyboardController?.hide()
                                 text = ""
