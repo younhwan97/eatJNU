@@ -13,10 +13,12 @@ import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -50,14 +52,16 @@ fun AddReview(
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
         keyboardActions = KeyboardActions(
             onDone = {
-                onClickEnterBtn(text)
-                keyboardController?.hide()
-                text = ""
-                focusManager.clearFocus()
+                if (text.isNotBlank()) {
+                    onClickEnterBtn(text)
+                    keyboardController?.hide()
+                    text = ""
+                    focusManager.clearFocus()
+                }
             }
         ),
         decorationBox = { innerTextField ->
-            Row(
+            Box(
                 Modifier
                     .background(
                         color = colorResource(id = R.color.BackgroundGray),
@@ -73,16 +77,14 @@ fun AddReview(
                         style = MaterialTheme.typography.body1
                     )
                 }
-                Box(modifier = Modifier.weight(6f)) {
-                    innerTextField()
-                }
+                innerTextField()
 
                 if (alreadyWrittenReview) {
                     IconButton(
                         enabled = false,
                         onClick = { },
                         modifier = Modifier
-                            .weight(1f)
+                            .align(Alignment.CenterEnd)
                             .size(18.dp)
                     ) {
                         Icon(
@@ -94,13 +96,15 @@ fun AddReview(
                 } else {
                     IconButton(
                         onClick = {
-                            onClickEnterBtn(text)
-                            keyboardController?.hide()
-                            text = ""
-                            focusManager.clearFocus()
+                            if (text.isNotBlank()) {
+                                onClickEnterBtn(text)
+                                keyboardController?.hide()
+                                text = ""
+                                focusManager.clearFocus()
+                            }
                         },
                         modifier = Modifier
-                            .weight(1f)
+                            .align(Alignment.CenterEnd)
                             .size(18.dp)
                     ) {
                         Icon(
