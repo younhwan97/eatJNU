@@ -10,13 +10,15 @@ import androidx.compose.ui.unit.dp
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraPosition
 import com.naver.maps.map.compose.*
+import com.naver.maps.map.overlay.OverlayImage
+import kr.co.younhwan.eatjnu.R
 
 @OptIn(ExperimentalNaverMapApi::class)
 @Composable
 fun NaverMap(
     latLng: LatLng,
 ) {
-    var mapProperties by remember {
+    val mapProperties by remember {
         mutableStateOf(
             MapProperties(
                 maxZoom = 18.0,
@@ -26,7 +28,7 @@ fun NaverMap(
         )
     }
 
-    var mapUiSettings by remember {
+    val mapUiSettings by remember {
         mutableStateOf(
             MapUiSettings(
                 isCompassEnabled = false, // 나침반
@@ -45,13 +47,23 @@ fun NaverMap(
         position = CameraPosition(latLng, 15.0)
     }
     Box(
-        Modifier.fillMaxWidth().height(160.dp)
+        Modifier
+            .fillMaxWidth()
+            .height(160.dp)
     ) {
-        com.naver.maps.map.compose.NaverMap(
+        NaverMap(
             cameraPositionState = cameraPositionState,
             uiSettings = mapUiSettings,
             properties = mapProperties,
-        )
+        ) {
+            Marker(
+                state = MarkerState(position = latLng),
+                captionText = "",
+                width = 24.dp,
+                height = 32.dp,
+                //icon = OverlayImage.fromResource(R.drawable.main3)
+            )
+        }
     }
 
     Spacer(modifier = Modifier.height(8.dp))
