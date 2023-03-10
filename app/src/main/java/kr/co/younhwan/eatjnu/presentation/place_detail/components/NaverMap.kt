@@ -37,7 +37,7 @@ fun NaverMap(
                 isScrollGesturesEnabled = false, // 스크롤
                 isRotateGesturesEnabled = false, // 회전
                 isTiltGesturesEnabled = false, // 각도
-
+                isLogoClickEnabled = false, // 네이버 로고 클릭 가능 여부
             )
         )
     }
