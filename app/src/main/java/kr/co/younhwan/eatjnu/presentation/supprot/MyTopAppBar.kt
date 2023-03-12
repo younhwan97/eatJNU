@@ -32,8 +32,7 @@ fun MyTopAppBar(
         title = {
             Text(
                 text = title,
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.h5,
             )
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(

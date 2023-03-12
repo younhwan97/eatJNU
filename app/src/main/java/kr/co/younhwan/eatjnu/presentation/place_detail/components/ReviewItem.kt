@@ -2,8 +2,11 @@ package kr.co.younhwan.eatjnu.presentation.place_detail.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -50,14 +53,26 @@ fun ReviewItem(
 
             Column() {
                 // 댓글 작성자
-                Text(
-                    text = "익명",
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    style = MaterialTheme.typography.body1
-                )
+                Row() {
+                    Text(
+                        text = "익명",
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        style = MaterialTheme.typography.body1,
+                        modifier = Modifier.weight(6f)
+                    )
+
+                    Icon(
+                        imageVector = Icons.Default.MoreVert,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .weight(1f)
+                            .size(18.dp),
+                        tint = colorResource(id = R.color.Gray)
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(8.dp))
 
