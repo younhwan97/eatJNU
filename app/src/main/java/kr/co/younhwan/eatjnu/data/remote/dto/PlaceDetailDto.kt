@@ -38,7 +38,7 @@ data class PlaceDetailDto(
     val images: List<FoodImageDto>?,
     val lat: Double?,
     val lon: Double?,
-    val reviews: List<ReviewDto>?
+    val reviews: List<PlaceReviewDto>?
 )
 
 fun PlaceDetailDto.toPlaceDetail(): PlaceDetail {
@@ -56,6 +56,6 @@ fun PlaceDetailDto.toPlaceDetail(): PlaceDetail {
         lat = lat ?: 0.0,
         lon = lon ?: 0.0,
         images = images?.map { it.toFoodImage() } ?: emptyList(),
-        reviews = reviews?.map { it.toReview() } ?: emptyList()
+        placeReviews = reviews?.map { it.toReview() } ?: emptyList()
     )
 }

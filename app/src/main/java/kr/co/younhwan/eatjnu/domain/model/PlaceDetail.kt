@@ -14,5 +14,5 @@ data class PlaceDetail(
     val number: String,
     val openingInfo: String,
     val images: List<FoodImage>,
-    val reviews: List<Review>
+    val placeReviews: List<PlaceReview>
 )

@@ -17,14 +17,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kr.co.younhwan.eatjnu.R
-import kr.co.younhwan.eatjnu.domain.model.Review
+import kr.co.younhwan.eatjnu.domain.model.PlaceReview
 
 @Composable
 fun ReviewItem(
-    review: Review,
+    placeReview: PlaceReview,
     onClickReportBtn: (Int) -> Unit
 ) {
-    if (review.comment != "") { // 댓글 내용이 있는 경우
+    if (placeReview.comment != "") { // 댓글 내용이 있는 경우
         val reviewImages = arrayListOf(
             painterResource(id = R.drawable.fox),
             painterResource(id = R.drawable.lion),
@@ -44,7 +44,7 @@ fun ReviewItem(
                 Spacer(modifier = Modifier.height(4.dp))
                 // 댓글 이미지
                 Image(
-                    painter = reviewImages[(review.comment.length % reviewImages.size)],
+                    painter = reviewImages[(placeReview.comment.length % reviewImages.size)],
                     contentDescription = null,
                     modifier = Modifier.size(32.dp)
                 )
@@ -91,7 +91,7 @@ fun ReviewItem(
                         ) {
                             DropdownMenuItem(
                                 onClick = {
-                                    onClickReportBtn(review.reviewId)
+                                    onClickReportBtn(placeReview.reviewId)
                                     showMenu = false
                                 }
                             ) {
@@ -121,7 +121,7 @@ fun ReviewItem(
 
                 // 댓글 내용
                 Text(
-                    text = review.comment,
+                    text = placeReview.comment,
                     fontSize = 12.sp,
                     style = MaterialTheme.typography.body1
                 )
@@ -130,7 +130,7 @@ fun ReviewItem(
 
                 // 작성일
                 Text(
-                    text = review.writingTime,
+                    text = placeReview.writingTime,
                     fontSize = 10.sp,
                     color = colorResource(id = R.color.LightGray),
                     style = MaterialTheme.typography.body1

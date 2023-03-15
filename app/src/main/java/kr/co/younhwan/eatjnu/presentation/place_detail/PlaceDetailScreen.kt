@@ -71,7 +71,7 @@ fun PlaceDetailScreen(
                 // 리뷰 타이틀
                 item {
                     Text(
-                        text = "리뷰${nbsp}(" + detail.reviews.size + ")",
+                        text = "리뷰${nbsp}(" + detail.placeReviews.size + ")",
                         fontWeight = FontWeight.Bold,
                         fontSize = 16.sp,
                         style = androidx.compose.material.MaterialTheme.typography.body1,
@@ -83,7 +83,7 @@ fun PlaceDetailScreen(
                 item {
                     var alreadyWrittenReview = false
 
-                    for (review in detail.reviews) {
+                    for (review in detail.placeReviews) {
                         if (review.userId == userId) {
                             alreadyWrittenReview = true
                             break
@@ -105,9 +105,9 @@ fun PlaceDetailScreen(
                 }
 
                 // 리뷰
-                items(detail.reviews.size) { index ->
+                items(detail.placeReviews.size) { index ->
                     ReviewItem(
-                        review = detail.reviews[index],
+                        placeReview = detail.placeReviews[index],
                         onClickReportBtn = {
                             viewModel.addPlaceReviewReport(userId = userId, reviewId = it)
                         }

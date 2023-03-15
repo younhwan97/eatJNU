@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import kr.co.younhwan.eatjnu.common.Constants
 import kr.co.younhwan.eatjnu.common.Resource
 import kr.co.younhwan.eatjnu.domain.model.PlaceDetail
-import kr.co.younhwan.eatjnu.domain.model.Review
+import kr.co.younhwan.eatjnu.domain.model.PlaceReview
 import kr.co.younhwan.eatjnu.domain.use_case.add_like_place.AddLikePlaceUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.create_review.CreateReviewUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_like_place_list.GetLikePlaceListUseCase
@@ -116,8 +116,8 @@ class PlaceDetailViewModel @Inject constructor(
                     if (result.data == true) { // 리뷰가 추가 됐을 때
                         // (제일 앞에) 가짜 데이터 추가
                         placeDetail.value = placeDetail.value.copy(
-                            reviews = listOf(
-                                Review(
+                            placeReviews = listOf(
+                                PlaceReview(
                                     reviewId = -1,
                                     placeId = placeId,
                                     comment = comment,
@@ -125,7 +125,7 @@ class PlaceDetailViewModel @Inject constructor(
                                     likeCount = 0,
                                     userId = userId
                                 )
-                            ) + placeDetail.value.reviews
+                            ) + placeDetail.value.placeReviews
                         )
                     }
                 }
@@ -140,16 +140,16 @@ class PlaceDetailViewModel @Inject constructor(
                 is Resource.Error -> Unit
                 is Resource.Success -> {
                     if (result.data == true) {
-                        val newReviews = mutableListOf<Review>()
+                        val newPlaceReviews = mutableListOf<PlaceReview>()
 
-                        for (review in placeDetail.value.reviews){
+                        for (review in placeDetail.value.placeReviews){
                             if (review.reviewId != reviewId){
-                                newReviews.add(review)
+                                newPlaceReviews.add(review)
                             }
                         }
 
                         placeDetail.value = placeDetail.value.copy(
-                            reviews = newReviews
+                            placeReviews = newPlaceReviews
                         )
                     }
                 }

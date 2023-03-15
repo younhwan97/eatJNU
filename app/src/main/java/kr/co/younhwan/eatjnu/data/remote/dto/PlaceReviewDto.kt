@@ -1,8 +1,8 @@
 package kr.co.younhwan.eatjnu.data.remote.dto
 
-import kr.co.younhwan.eatjnu.domain.model.Review
+import kr.co.younhwan.eatjnu.domain.model.PlaceReview
 
-data class ReviewDto(
+data class PlaceReviewDto(
     val reviewId: Int?,
     val comment: String?,
     val writingTime: String?,
@@ -11,8 +11,8 @@ data class ReviewDto(
     val placeId: String?
 )
 
-fun ReviewDto.toReview(): Review {
-    return Review(
+fun PlaceReviewDto.toReview(): PlaceReview {
+    return PlaceReview(
         reviewId = reviewId ?: -1,
         comment = comment ?: "",
         writingTime = writingTime ?: "",
