@@ -1,5 +1,6 @@
 package kr.co.younhwan.eatjnu.presentation.place_detail
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
@@ -33,6 +34,7 @@ fun PlaceDetailScreen(
         val userId by remember { viewModel.userId } // 유저 식별값
         val detail by remember { viewModel.placeDetail } // 세부 정보
         val isLikePlace by remember { viewModel.isLikePlace } // 유저가 '좋아요'를 누른 장소인지
+        val reportReviews = remember { viewModel.reportReviews }
 
         Column(
             modifier = Modifier.fillMaxSize()
@@ -106,12 +108,24 @@ fun PlaceDetailScreen(
 
                 // 리뷰
                 items(detail.placeReviews.size) { index ->
-                    ReviewItem(
-                        placeReview = detail.placeReviews[index],
-                        onClickReportBtn = {
-                            viewModel.addPlaceReviewReport(userId = userId, reviewId = it)
+                    var isReported = false
+
+
+                    for (report in reportReviews) {
+                        if (detail.placeReviews[index].reviewId == report.reviewId) {
+                            isReported = true
+                            break
                         }
-                    )
+                    }
+
+                    if (!isReported) {
+                        ReviewItem(
+                            placeReview = detail.placeReviews[index],
+                            onClickReportBtn = {
+                                viewModel.addPlaceReviewReport(userId = userId, reviewId = it)
+                            }
+                        )
+                    }
                 }
 
                 item {
@@ -122,4 +136,4 @@ fun PlaceDetailScreen(
             }
         }
     }
-} 
+}

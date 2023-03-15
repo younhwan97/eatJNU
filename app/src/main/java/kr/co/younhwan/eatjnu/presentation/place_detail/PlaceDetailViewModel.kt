@@ -1,5 +1,6 @@
 package kr.co.younhwan.eatjnu.presentation.place_detail
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -12,12 +13,14 @@ import kr.co.younhwan.eatjnu.common.Constants
 import kr.co.younhwan.eatjnu.common.Resource
 import kr.co.younhwan.eatjnu.domain.model.PlaceDetail
 import kr.co.younhwan.eatjnu.domain.model.PlaceReview
+import kr.co.younhwan.eatjnu.domain.model.PlaceReviewReport
 import kr.co.younhwan.eatjnu.domain.use_case.add_like_place.AddLikePlaceUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.create_review.CreateReviewUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_like_place_list.GetLikePlaceListUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_place_detail.GetPlaceDetailUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.remove_like_place.RemoveLikePlaceUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.add_place_review_report.AddPlaceReviewReport
+import kr.co.younhwan.eatjnu.domain.use_case.get_place_review_report.GetPlaceReviewReportUseCase
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,6 +31,7 @@ class PlaceDetailViewModel @Inject constructor(
     private val removeLikePlaceUseCase: RemoveLikePlaceUseCase,
     private val createReviewUseCase: CreateReviewUseCase,
     private val addPlaceReviewReport: AddPlaceReviewReport,
+    private val getPlaceReviewReportUseCase: GetPlaceReviewReportUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -41,6 +45,7 @@ class PlaceDetailViewModel @Inject constructor(
             -1, "", 0, 0, "", "", "", "", 0.0, 0.0, "", "", emptyList(), emptyList()
         )
     )
+    var reportReviews = mutableListOf<PlaceReviewReport>()
 
     init {
         viewModelScope.launch {
@@ -48,9 +53,11 @@ class PlaceDetailViewModel @Inject constructor(
             userId.value = savedStateHandle.get<String>(Constants.PARAM_USER_ID) ?: ""
             // 2. 장소 아이디 값 초기화
             val placeId = savedStateHandle.get<String>(Constants.PARAM_PLACE_ID) ?: "1"
-            // 3. 장소 세부 정보 초기화
+            // 3. 유저가 신고한 장보정보 초기화
+            getPlaceReviewReport(userId = userId.value)
+            // 4. 장소 세부 정보 초기화
             getPlaceDetail(placeId = placeId)
-            // 4. like place 체크
+            // 5. like place 체크
             checkLikePlace(userId = userId.value, placeId = placeId)
         }
     }
@@ -142,8 +149,8 @@ class PlaceDetailViewModel @Inject constructor(
                     if (result.data == true) {
                         val newPlaceReviews = mutableListOf<PlaceReview>()
 
-                        for (review in placeDetail.value.placeReviews){
-                            if (review.reviewId != reviewId){
+                        for (review in placeDetail.value.placeReviews) {
+                            if (review.reviewId != reviewId) {
                                 newPlaceReviews.add(review)
                             }
                         }
@@ -152,6 +159,18 @@ class PlaceDetailViewModel @Inject constructor(
                             placeReviews = newPlaceReviews
                         )
                     }
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    fun getPlaceReviewReport(userId: String) {
+        getPlaceReviewReportUseCase(userId = userId).onEach { result ->
+            when (result) {
+                is Resource.Loading -> Unit
+                is Resource.Error -> Unit
+                is Resource.Success -> {
+                    reportReviews.addAll(result.data ?: emptyList())
                 }
             }
         }.launchIn(viewModelScope)
