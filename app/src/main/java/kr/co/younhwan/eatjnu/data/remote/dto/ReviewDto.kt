@@ -3,6 +3,7 @@ package kr.co.younhwan.eatjnu.data.remote.dto
 import kr.co.younhwan.eatjnu.domain.model.Review
 
 data class ReviewDto(
+    val reviewId: Int?,
     val comment: String?,
     val writingTime: String?,
     val userId: String?,
@@ -12,6 +13,7 @@ data class ReviewDto(
 
 fun ReviewDto.toReview(): Review {
     return Review(
+        reviewId = reviewId ?: -1,
         comment = comment ?: "",
         writingTime = writingTime ?: "",
         userId = userId ?: "",

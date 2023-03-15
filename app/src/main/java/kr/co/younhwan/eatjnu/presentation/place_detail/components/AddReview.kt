@@ -79,7 +79,7 @@ fun AddReview(
                 }
                 innerTextField()
 
-                if (alreadyWrittenReview) {
+                if (alreadyWrittenReview || text.length < 5) {
                     IconButton(
                         enabled = false,
                         onClick = { },

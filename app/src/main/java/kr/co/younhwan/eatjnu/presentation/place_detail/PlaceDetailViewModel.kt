@@ -1,5 +1,6 @@
 package kr.co.younhwan.eatjnu.presentation.place_detail
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -17,6 +18,7 @@ import kr.co.younhwan.eatjnu.domain.use_case.create_review.CreateReviewUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_like_place_list.GetLikePlaceListUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_place_detail.GetPlaceDetailUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.remove_like_place.RemoveLikePlaceUseCase
+import kr.co.younhwan.eatjnu.domain.use_case.report_review.ReportReviewUseCase
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,6 +28,7 @@ class PlaceDetailViewModel @Inject constructor(
     private val getLikePlaceListUseCase: GetLikePlaceListUseCase,
     private val removeLikePlaceUseCase: RemoveLikePlaceUseCase,
     private val createReviewUseCase: CreateReviewUseCase,
+    private val reportReviewUseCase: ReportReviewUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -34,7 +37,7 @@ class PlaceDetailViewModel @Inject constructor(
 
     val userId = mutableStateOf("")
     val isLikePlace = mutableStateOf(false)
-    val placeDetail = mutableStateOf(
+    var placeDetail = mutableStateOf(
         PlaceDetail(
             -1, "", 0, 0, "", "", "", "", 0.0, 0.0, "", "", emptyList(), emptyList()
         )
@@ -116,6 +119,7 @@ class PlaceDetailViewModel @Inject constructor(
                         placeDetail.value = placeDetail.value.copy(
                             reviews = listOf(
                                 Review(
+                                    reviewId = -1,
                                     placeId = placeId,
                                     comment = comment,
                                     writingTime = "지금",
@@ -123,6 +127,30 @@ class PlaceDetailViewModel @Inject constructor(
                                     userId = userId
                                 )
                             ) + placeDetail.value.reviews
+                        )
+                    }
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    fun reportPlaceReview(userId: String, reviewId: Int) {
+        reportReviewUseCase(userId = userId, reviewId = reviewId.toString()).onEach { result ->
+            when (result) {
+                is Resource.Loading -> Unit
+                is Resource.Error -> Unit
+                is Resource.Success -> {
+                    if (result.data == true) {
+                        val newReviews = mutableListOf<Review>()
+
+                        for (review in placeDetail.value.reviews){
+                            if (review.reviewId != reviewId){
+                                newReviews.add(review)
+                            }
+                        }
+
+                        placeDetail.value = placeDetail.value.copy(
+                            reviews = newReviews
                         )
                     }
                 }

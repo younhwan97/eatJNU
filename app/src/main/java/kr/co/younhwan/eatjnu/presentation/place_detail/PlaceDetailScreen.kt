@@ -1,5 +1,6 @@
 package kr.co.younhwan.eatjnu.presentation.place_detail
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
@@ -107,15 +108,12 @@ fun PlaceDetailScreen(
 
                 // 리뷰
                 items(detail.reviews.size) { index ->
-                    ReviewItem(review = detail.reviews[index])
-
-                    if (index + 1 != detail.reviews.size) {
-                        Divider(
-                            thickness = 1.dp,
-                            color = Color(0XFFD5D5D5),
-                            modifier = Modifier.padding(horizontal = 16.dp)
-                        )
-                    }
+                    ReviewItem(
+                        review = detail.reviews[index],
+                        onClickReportBtn = {
+                            viewModel.reportPlaceReview(userId = userId, reviewId = it)
+                        }
+                    )
                 }
 
                 item {

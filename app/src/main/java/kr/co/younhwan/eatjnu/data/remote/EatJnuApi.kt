@@ -24,4 +24,7 @@ interface EatJnuApi {
     @Headers("Content-Type: application/json")
     @POST("PlaceReview/")
     suspend fun createPlaceReview(@Body review: Review): ResponseDto
+
+    @PUT("PlaceReview/report/{userId}/{reviewId}")
+    suspend fun reportPlaceReview(@Path("userId") userId: String, @Path("reviewId") reviewId: String): ResponseDto
 }
