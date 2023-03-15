@@ -18,5 +18,5 @@ interface EatJnuRepository {
 
     suspend fun createPlaceReview(userId: String, placeId: String, comment: String): Boolean
 
-    suspend fun reportPlaceReview(userId: String, reviewId: String): Boolean
+    suspend fun addPlaceReviewReport(userId: String, reviewId: String): Boolean
 }

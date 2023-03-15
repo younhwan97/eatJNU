@@ -25,6 +25,9 @@ interface EatJnuApi {
     @POST("PlaceReview/")
     suspend fun createPlaceReview(@Body review: Review): ResponseDto
 
+    // @GET("PlaceReview/report/{userId}")
+
+
     @PUT("PlaceReview/report/{userId}/{reviewId}")
-    suspend fun reportPlaceReview(@Path("userId") userId: String, @Path("reviewId") reviewId: String): ResponseDto
+    suspend fun addPlaceReviewReport(@Path("userId") userId: String, @Path("reviewId") reviewId: String): ResponseDto
 }

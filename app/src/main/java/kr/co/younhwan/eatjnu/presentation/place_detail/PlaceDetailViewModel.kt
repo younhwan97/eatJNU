@@ -1,6 +1,5 @@
 package kr.co.younhwan.eatjnu.presentation.place_detail
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -18,7 +17,7 @@ import kr.co.younhwan.eatjnu.domain.use_case.create_review.CreateReviewUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_like_place_list.GetLikePlaceListUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_place_detail.GetPlaceDetailUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.remove_like_place.RemoveLikePlaceUseCase
-import kr.co.younhwan.eatjnu.domain.use_case.report_review.ReportReviewUseCase
+import kr.co.younhwan.eatjnu.domain.use_case.add_place_review_report.AddPlaceReviewReport
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,7 +27,7 @@ class PlaceDetailViewModel @Inject constructor(
     private val getLikePlaceListUseCase: GetLikePlaceListUseCase,
     private val removeLikePlaceUseCase: RemoveLikePlaceUseCase,
     private val createReviewUseCase: CreateReviewUseCase,
-    private val reportReviewUseCase: ReportReviewUseCase,
+    private val addPlaceReviewReport: AddPlaceReviewReport,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -134,8 +133,8 @@ class PlaceDetailViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun reportPlaceReview(userId: String, reviewId: Int) {
-        reportReviewUseCase(userId = userId, reviewId = reviewId.toString()).onEach { result ->
+    fun addPlaceReviewReport(userId: String, reviewId: Int) {
+        addPlaceReviewReport(userId = userId, reviewId = reviewId.toString()).onEach { result ->
             when (result) {
                 is Resource.Loading -> Unit
                 is Resource.Error -> Unit

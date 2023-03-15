@@ -45,8 +45,8 @@ class EatJnuRepositoryImpl @Inject constructor(
         ).isSuccess
     }
 
-    override suspend fun reportPlaceReview(userId: String, reviewId:String): Boolean {
-        return api.reportPlaceReview(
+    override suspend fun addPlaceReviewReport(userId: String, reviewId:String): Boolean {
+        return api.addPlaceReviewReport(
             userId = userId,
             reviewId = reviewId
         ).isSuccess
