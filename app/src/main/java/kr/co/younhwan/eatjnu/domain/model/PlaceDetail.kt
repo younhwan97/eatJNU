@@ -13,6 +13,6 @@ data class PlaceDetail(
     val lon: Double,
     val number: String,
     val openingInfo: String,
-    val images: List<FoodImage>,
+    val placeImages: List<PlaceImage>,
     val placeReviews: List<PlaceReview>
 )

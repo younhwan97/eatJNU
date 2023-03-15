@@ -11,7 +11,7 @@ data class PlaceReviewDto(
     val placeId: String?
 )
 
-fun PlaceReviewDto.toReview(): PlaceReview {
+fun PlaceReviewDto.toPlaceReview(): PlaceReview {
     return PlaceReview(
         reviewId = reviewId ?: -1,
         comment = comment ?: "",

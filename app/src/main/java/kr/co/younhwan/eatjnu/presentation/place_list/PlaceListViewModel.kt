@@ -1,8 +1,6 @@
 package kr.co.younhwan.eatjnu.presentation.place_list
 
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,7 +10,7 @@ import kotlinx.coroutines.flow.onEach
 import kr.co.younhwan.eatjnu.common.Constants
 import kr.co.younhwan.eatjnu.common.Resource
 import kr.co.younhwan.eatjnu.domain.model.FilterInfo
-import kr.co.younhwan.eatjnu.domain.model.PlaceInfo
+import kr.co.younhwan.eatjnu.domain.model.PlaceSummary
 import kr.co.younhwan.eatjnu.domain.use_case.get_filter.GetFilterUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_place_list.GetPlaceListUseCase
 import javax.inject.Inject
@@ -31,7 +29,7 @@ class PlaceListViewModel @Inject constructor(
     var areaType = mutableStateOf("")
     var selectedFilter = mutableStateOf("맛집")
     val filters = mutableStateOf<List<FilterInfo>>(listOf())
-    var places = mutableStateOf<List<PlaceInfo>>(listOf())
+    var places = mutableStateOf<List<PlaceSummary>>(listOf())
 
     val isVisiblePlaceScreen = mutableStateOf(true)
 

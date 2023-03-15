@@ -58,7 +58,7 @@ fun PlaceDetailScreen(
                 item {
                     ImageSlider(
                         image = detail.image,
-                        images = detail.images
+                        images = detail.placeImages
                     )
                 }
 

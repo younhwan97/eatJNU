@@ -3,7 +3,7 @@ package kr.co.younhwan.eatjnu.data.repository
 import kr.co.younhwan.eatjnu.data.remote.EatJnuApi
 import kr.co.younhwan.eatjnu.data.remote.dto.LikePlaceDto
 import kr.co.younhwan.eatjnu.data.remote.dto.PlaceDetailDto
-import kr.co.younhwan.eatjnu.data.remote.dto.PlaceDto
+import kr.co.younhwan.eatjnu.data.remote.dto.PlaceSummaryDto
 import kr.co.younhwan.eatjnu.data.remote.dto.PlaceReviewReportDto
 import kr.co.younhwan.eatjnu.domain.model.PlaceReview
 import kr.co.younhwan.eatjnu.domain.repository.EatJnuRepository
@@ -13,7 +13,7 @@ class EatJnuRepositoryImpl @Inject constructor(
     private val api: EatJnuApi
 ) : EatJnuRepository {
 
-    override suspend fun getPlaceList(areaType: String): List<PlaceDto> {
+    override suspend fun getPlaceList(areaType: String): List<PlaceSummaryDto> {
         return api.getPlaceList(areaType = areaType).items
     }
 

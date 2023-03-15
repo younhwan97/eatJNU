@@ -1,6 +1,6 @@
 package kr.co.younhwan.eatjnu.data.remote.dto
 
-data class PlaceListDto(
+data class PlaceSummaryListDto(
     val count: Int,
-    val items: List<PlaceDto>
+    val items: List<PlaceSummaryDto>
 )

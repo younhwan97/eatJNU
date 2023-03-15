@@ -7,7 +7,7 @@ import retrofit2.http.*
 interface EatJnuApi {
 
     @GET("PlaceList/{areaType}")
-    suspend fun getPlaceList(@Path("areaType") areaType: String): PlaceListDto
+    suspend fun getPlaceList(@Path("areaType") areaType: String): PlaceSummaryListDto
 
     @GET("PlaceDetail/{placeId}")
     suspend fun getPlaceDetail(@Path("placeId") placeId: String): PlaceDetailDto
@@ -23,11 +23,11 @@ interface EatJnuApi {
 
     @Headers("Content-Type: application/json")
     @POST("PlaceReview/")
-    suspend fun createPlaceReview(@Body placeReview: PlaceReview): ResponseDto
+    suspend fun createPlaceReview(@Body placeReview: PlaceReview): CommonResponseDto
 
     @GET("PlaceReview/report/{userId}")
     suspend fun getPlaceReviewReport(@Path("userId") userId: String) : PlaceReviewReportListDto
 
     @PUT("PlaceReview/report/{userId}/{reviewId}")
-    suspend fun addPlaceReviewReport(@Path("userId") userId: String, @Path("reviewId") reviewId: String): ResponseDto
+    suspend fun addPlaceReviewReport(@Path("userId") userId: String, @Path("reviewId") reviewId: String): CommonResponseDto
 }

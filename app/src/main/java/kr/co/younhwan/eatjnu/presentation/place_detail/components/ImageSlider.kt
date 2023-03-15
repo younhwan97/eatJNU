@@ -15,14 +15,14 @@ import com.google.accompanist.pager.*
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 import kr.co.younhwan.eatjnu.R
-import kr.co.younhwan.eatjnu.domain.model.FoodImage
+import kr.co.younhwan.eatjnu.domain.model.PlaceImage
 
 @SuppressLint("ModifierParameter")
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ImageSlider(
     image: String? = null,
-    images: List<FoodImage> = emptyList(),
+    images: List<PlaceImage> = emptyList(),
     modifier: Modifier = Modifier.fillMaxWidth()
 ) {
     Box(

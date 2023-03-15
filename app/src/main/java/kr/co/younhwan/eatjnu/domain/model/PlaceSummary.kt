@@ -1,6 +1,6 @@
 package kr.co.younhwan.eatjnu.domain.model
 
-data class PlaceInfo(
+data class PlaceSummary(
     val id: Int,
     val name: String,
     val image: String,
