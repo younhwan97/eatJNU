@@ -21,7 +21,7 @@ fun AreaButton(
     onClickBtn: () -> Unit
 ) {
     OutlinedButton(
-        onClick = { onClickBtn() },
+        onClick = onClickBtn,
         shape = RoundedCornerShape(size = 12.dp),
         border = BorderStroke(width = 2.dp, color = Color.Black),
         colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primary),

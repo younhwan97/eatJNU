@@ -1,9 +1,9 @@
-package kr.co.younhwan.eatjnu.domain.use_case.get_area
+package kr.co.younhwan.eatjnu.domain.use_case.get_area_list
 
 import kr.co.younhwan.eatjnu.domain.model.Area
 import javax.inject.Inject
 
-class GetAreaUseCase @Inject constructor() {
+class GetAreaListUseCase @Inject constructor() {
     operator fun invoke() = listOf(
         Area(type = 0, title = "후문"),
         Area(type = 1, title = "상대"),

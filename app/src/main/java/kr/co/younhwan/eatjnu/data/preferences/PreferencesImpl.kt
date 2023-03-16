@@ -15,10 +15,10 @@ private val Context.dataStore by preferencesDataStore(name = PREFERENCES_NAME)
 class PreferencesImpl @Inject constructor(
     private val context: Context
 ) : Preferences {
+    private val preferencesKey = stringPreferencesKey("user_id")
 
     override suspend fun getUserId(): String? {
         return try {
-            val preferencesKey = stringPreferencesKey("user_id")
             val preferences = context.dataStore.data.first()
             preferences[preferencesKey]
         } catch (e: Exception) {
@@ -28,7 +28,6 @@ class PreferencesImpl @Inject constructor(
     }
 
     override suspend fun createUserId(id: String) {
-        val preferencesKey = stringPreferencesKey("user_id")
         context.dataStore.edit { preferences ->
             preferences[preferencesKey] = id
         }

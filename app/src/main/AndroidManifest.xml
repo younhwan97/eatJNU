@@ -3,9 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
@@ -37,7 +35,7 @@
                 android:value="" />
         </activity>
 
-        <!-- 네이티브 앱 키 추가 -->
+        <!-- 네이버 지도 네이티브 앱 키 추가 -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="${naverApiKey}" />
