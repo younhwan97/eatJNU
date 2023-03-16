@@ -104,10 +104,10 @@ fun ReviewItem(
                                         modifier = Modifier.size(18.dp),
                                     )
 
-                                    Spacer(modifier = Modifier.width(16.dp))
+                                    Spacer(modifier = Modifier.width(8.dp))
 
                                     Text(
-                                        text = "신고",
+                                        text = "신고/차단",
                                         fontSize = 14.sp,
                                         style = MaterialTheme.typography.h6
                                     )
