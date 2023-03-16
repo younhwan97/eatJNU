@@ -1,6 +1,5 @@
 package kr.co.younhwan.eatjnu.presentation.place_list.components
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import kr.co.younhwan.eatjnu.R
 import androidx.compose.foundation.border
@@ -30,23 +29,19 @@ import com.skydoves.landscapist.animation.crossfade.CrossfadePlugin
 import com.skydoves.landscapist.components.rememberImageComponent
 import com.skydoves.landscapist.placeholder.placeholder.PlaceholderPlugin
 
-@SuppressLint("ModifierParameter")
 @Composable
 fun Place(
-    info: PlaceSummary,
-    onClickPlace: () -> Unit,
-    modifier: Modifier = Modifier.fillMaxWidth()
+    placeSummary: PlaceSummary,
+    onClickPlace: () -> Unit
 ) {
     Row(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
-            .clickable(
-                onClick = onClickPlace
-            )
+            .clickable(onClick = onClickPlace)
     ) {
         // 장소 이미지
         ImageBox(
-            imageUrl = info.image
+            imageUrl = placeSummary.image
         )
 
         Spacer(Modifier.width(16.dp))
@@ -55,7 +50,7 @@ fun Place(
         Column() {
             // 이름
             Text(
-                text = info.name,
+                text = placeSummary.name,
                 style = MaterialTheme.typography.h5
             )
 
@@ -66,7 +61,7 @@ fun Place(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    painter = painterResource(id = kr.co.younhwan.eatjnu.R.drawable.heart),
+                    painter = painterResource(id = R.drawable.heart),
                     contentDescription = null,
                     modifier = Modifier.size(18.dp)
                 )
@@ -74,7 +69,7 @@ fun Place(
                 Spacer(modifier = Modifier.width(2.dp))
 
                 Text(
-                    text = info.likeCount.toString(),
+                    text = placeSummary.likeCount.toString(),
                     style = MaterialTheme.typography.h6
                 )
 
@@ -89,7 +84,7 @@ fun Place(
                 Spacer(modifier = Modifier.width(2.dp))
 
                 Text(
-                    text = info.reviewCount.toString(),
+                    text = placeSummary.reviewCount.toString(),
                     color = colorResource(id = R.color.DarkGray),
                     style = MaterialTheme.typography.body1
                 )
@@ -99,7 +94,7 @@ fun Place(
 
             // 태그
             Text(
-                text = info.tags,
+                text = placeSummary.tags,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth(0.96f),
@@ -126,7 +121,7 @@ fun ImageBox(
             )
     ) {
         GlideImage(
-            imageModel = { imageUrl }, // loading a network image using an URL.
+            imageModel = { imageUrl },
             imageOptions = ImageOptions(
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.Center,
@@ -135,13 +130,6 @@ fun ImageBox(
                 alpha = 1f,
                 requestSize = IntSize(256, 256)
             ),
-//            loading = {
-//                Box(modifier = Modifier.fillMaxSize()) {
-//                    CircularProgressIndicator(
-//                        modifier = Modifier.align(Alignment.Center)
-//                    )
-//                }
-//            },
             component = rememberImageComponent {
                 +PlaceholderPlugin.Loading(painterResource(id = R.drawable.main3))
                 +PlaceholderPlugin.Failure(painterResource(id = R.drawable.main3))

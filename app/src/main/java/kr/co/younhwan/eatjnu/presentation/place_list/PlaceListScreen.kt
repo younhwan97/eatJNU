@@ -62,8 +62,7 @@ fun PlaceListScreen(
                 userId = userId,
                 selectedFilter = selectedFilter,
                 places = places,
-                navController = navController,
-                modifier = Modifier.fillMaxSize()
+                navController = navController
             )
         }
     }
