@@ -110,7 +110,6 @@ fun PlaceDetailScreen(
                 items(detail.placeReviews.size) { index ->
                     var isReported = false
 
-
                     for (report in reportReviews) {
                         if (detail.placeReviews[index].reviewId == report.reviewId) {
                             isReported = true

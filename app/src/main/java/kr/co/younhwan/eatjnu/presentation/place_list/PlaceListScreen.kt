@@ -21,13 +21,7 @@ import kr.co.younhwan.eatjnu.presentation.place_list.components.PlaceScreen
 import kr.co.younhwan.eatjnu.presentation.supprot.ErrorScreen
 import kr.co.younhwan.eatjnu.presentation.supprot.LoadingScreen
 import kr.co.younhwan.eatjnu.presentation.supprot.MyTopAppBar
-import soup.compose.material.motion.MaterialMotion
-import soup.compose.material.motion.animation.materialFadeThrough
-import soup.compose.material.motion.animation.materialSharedAxisX
-import soup.compose.material.motion.animation.materialSharedAxisZ
-import soup.compose.material.motion.animation.rememberSlideDistance
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun PlaceListScreen(
     navController: NavController,
@@ -66,12 +60,6 @@ fun PlaceListScreen(
             )
 
             Spacer(modifier = Modifier.height(4.dp))
-
-            // 장소 리스트
-//            val slideDistance = rememberSlideDistance(slideDistance = 40.dp)
-//            MaterialMotion(targetState = isVisiblePlaceScreen, transitionSpec = { materialSharedAxisX(forward = false, slideDistance = slideDistance) }, pop = true) {
-//
-//            }
 
             PlaceScreen(
                 userId = userId,

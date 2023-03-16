@@ -39,12 +39,12 @@ class PlaceDetailViewModel @Inject constructor(
 
     val userId = mutableStateOf("")
     val isLikePlace = mutableStateOf(false)
+    val reportReviews = mutableListOf<PlaceReviewReport>()
     var placeDetail = mutableStateOf(
         PlaceDetail(
             -1, "", 0, 0, "", "", "", "", 0.0, 0.0, "", "", emptyList(), emptyList()
         )
     )
-    var reportReviews = mutableListOf<PlaceReviewReport>()
 
     init {
         viewModelScope.launch {
