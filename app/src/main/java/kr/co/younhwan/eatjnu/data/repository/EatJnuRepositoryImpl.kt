@@ -14,7 +14,7 @@ class EatJnuRepositoryImpl @Inject constructor(
 ) : EatJnuRepository {
 
     override suspend fun getPlaceList(areaType: String): List<PlaceSummaryDto> {
-        return api.getPlaceList(areaType = areaType).items
+        return api.getPlaceList(areaType = areaType).items ?: emptyList()
     }
 
     override suspend fun getPlaceDetail(placeId: String): PlaceDetailDto {
