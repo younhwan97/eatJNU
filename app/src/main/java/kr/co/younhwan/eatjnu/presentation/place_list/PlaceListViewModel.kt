@@ -27,9 +27,9 @@ class PlaceListViewModel @Inject constructor(
 
     val userId = mutableStateOf("")
     val areaTypeName = mutableStateOf("")
-    var selectedFilter = mutableStateOf("맛집")
+    val selectedFilter = mutableStateOf("맛집")
     val filters = mutableStateOf<List<Filter>>(listOf())
-    var places = mutableStateOf<List<PlaceSummary>>(listOf())
+    val places = mutableStateOf<List<PlaceSummary>>(listOf())
 
     init {
         // 1. 유저 아이디 값 초기화
@@ -47,14 +47,17 @@ class PlaceListViewModel @Inject constructor(
         getPlaceList(areaType)
     }
 
+    // 필터 목록을 가져오는 함수
     private fun getFilterList() {
         filters.value = getFilterListUseCase()
     }
 
+    // 선택된 필터를 변경하는 함수
     fun changeFilter(newFilter: String) {
         selectedFilter.value = newFilter
     }
 
+    // 장소 목록을 가져오는 함수
     private fun getPlaceList(areaType: String) {
         getPlaceListUseCase(areaType).onEach { result ->
             when (result) {
