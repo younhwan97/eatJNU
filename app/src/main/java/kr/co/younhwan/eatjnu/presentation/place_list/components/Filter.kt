@@ -13,31 +13,29 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import kr.co.younhwan.eatjnu.R
-import kr.co.younhwan.eatjnu.domain.model.FilterInfo
+import kr.co.younhwan.eatjnu.domain.model.Filter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Filter(
-    info: FilterInfo,
-    selected: Boolean = false,
+    filter: Filter,
+    isSelected: Boolean = false,
     onClickFilter: () -> Unit
 ) {
     AssistChip(
         onClick = onClickFilter,
         label = {
             Text(
-                text = info.text,
+                text = filter.text,
                 style = MaterialTheme.typography.h6,
-                color = if (selected) Color.White else Color.Black,
-                modifier = Modifier.padding(vertical = 12.dp)
+                color = if (isSelected) Color.White else Color.Black,
+                modifier = Modifier.padding(vertical = 8.dp)
             )
         },
         colors = AssistChipDefaults.assistChipColors(
-            containerColor = if (selected) MaterialTheme.colors.primary else colorResource(id = R.color.BackgroundGray),
+            containerColor = if (isSelected) MaterialTheme.colors.primary else colorResource(id = R.color.BackgroundGray),
             labelColor = Color.Black
         ),
         border = AssistChipDefaults.assistChipBorder(
@@ -48,13 +46,13 @@ fun Filter(
         ),
         leadingIcon = {
             Icon(
-                painter = painterResource(id = info.resource),
+                painter = painterResource(id = filter.resource),
                 contentDescription = null,
                 tint = Color.Black,
                 modifier = Modifier
                     .size(AssistChipDefaults.IconSize)
                     .clip(CircleShape)
-                    .background(if (selected) Color.White else colorResource(id = R.color.BackgroundGray))
+                    .background(if (isSelected) Color.White else colorResource(id = R.color.BackgroundGray))
                     .padding(1.dp)
             )
         },

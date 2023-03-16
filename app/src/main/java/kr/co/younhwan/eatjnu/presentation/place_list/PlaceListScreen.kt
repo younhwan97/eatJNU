@@ -35,32 +35,29 @@ fun PlaceListScreen(
     } else if (error.isNotEmpty()) {
         ErrorScreen()
     } else {
-        val userId by remember { viewModel.userId } // 유저 식별값
-        val areaType by remember { viewModel.areaType } // 정문, 후문, 상대 등의 지역타입
-        val selectedFilter by remember { viewModel.selectedFilter } // 선택된 필터 이름(전체, 맛집, 술집, 카페)
-        val filters by remember { viewModel.filters } // 필터 리스트
-        val places by remember { viewModel.places } // 장소 리스트
-
-        val isVisiblePlaceScreen by remember { viewModel.isVisiblePlaceScreen }
+        val userId by remember { viewModel.userId } // 유저 ID
+        val filters by remember { viewModel.filters } // 필터 목록
+        val selectedFilter by remember { viewModel.selectedFilter } // (전체, 맛집, 술집, 카페) 선택된 필터
+        val areaTypeName by remember { viewModel.areaTypeName } // (정문, 후문, 상대) 지역 타입
+        val places by remember { viewModel.places } // 장소 목록
 
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
             // 앱바
             MyTopAppBar(
-                title = areaType,
+                title = areaTypeName,
                 navController = navController
             )
 
-            // 필터 리스트
+            // 필터 목록
             FilterScreen(
-                selectedFilter = selectedFilter,
                 filters = filters,
+                selectedFilter = selectedFilter,
                 viewModel = viewModel
             )
 
-            Spacer(modifier = Modifier.height(4.dp))
-
+            // 장소 목록
             PlaceScreen(
                 userId = userId,
                 selectedFilter = selectedFilter,

@@ -9,15 +9,15 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kr.co.younhwan.eatjnu.common.Constants
 import kr.co.younhwan.eatjnu.common.Resource
-import kr.co.younhwan.eatjnu.domain.model.FilterInfo
+import kr.co.younhwan.eatjnu.domain.model.Filter
 import kr.co.younhwan.eatjnu.domain.model.PlaceSummary
-import kr.co.younhwan.eatjnu.domain.use_case.get_filter.GetFilterUseCase
+import kr.co.younhwan.eatjnu.domain.use_case.get_filter_list.GetFilterListUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_place_list.GetPlaceListUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class PlaceListViewModel @Inject constructor(
-    private val getFilterUseCase: GetFilterUseCase,
+    private val getFilterListUseCase: GetFilterListUseCase,
     private val getPlaceListUseCase: GetPlaceListUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
@@ -26,37 +26,33 @@ class PlaceListViewModel @Inject constructor(
     var isLoading = mutableStateOf(false)
 
     val userId = mutableStateOf("")
-    var areaType = mutableStateOf("")
+    val areaTypeName = mutableStateOf("")
     var selectedFilter = mutableStateOf("맛집")
-    val filters = mutableStateOf<List<FilterInfo>>(listOf())
+    val filters = mutableStateOf<List<Filter>>(listOf())
     var places = mutableStateOf<List<PlaceSummary>>(listOf())
 
-    val isVisiblePlaceScreen = mutableStateOf(true)
-
     init {
-        // 1. 필터 리스트 초기화
-        filters.value = getFilterList()
-        savedStateHandle.get<String>(Constants.PARAM_AREA_TYPE)?.let { areaType ->
-            // 2. 장소 리스트 초기화
-            getPlaceList(areaType)
-            // 3. 지역 타입 초기화
-            when (areaType) {
-                "0" -> this.areaType.value = "후문"
-                "1" -> this.areaType.value = "상대"
-                "2" -> this.areaType.value = "정문"
-            }
+        // 1. 유저 아이디 값 초기화
+        userId.value = savedStateHandle.get<String>(Constants.PARAM_USER_ID) ?: ""
+        // 2. 지역 정보 초기화
+        val areaType = savedStateHandle.get<String>(Constants.PARAM_AREA_TYPE) ?: "1"
+        when (areaType) {
+            "0" -> areaTypeName.value = "후문"
+            "1" -> areaTypeName.value = "상대"
+            "2" -> areaTypeName.value = "정문"
         }
-        savedStateHandle.get<String>(Constants.PARAM_USER_ID)?.let { userId ->
-            // 4. 유저 아이디 초기화
-            this.userId.value = userId
-        }
+        // 3. 필터 목록 초기화
+        getFilterList()
+        // 4. 장소 목록 초기화
+        getPlaceList(areaType)
     }
 
-    private fun getFilterList() = getFilterUseCase()
+    private fun getFilterList() {
+        filters.value = getFilterListUseCase()
+    }
 
     fun changeFilter(newFilter: String) {
         selectedFilter.value = newFilter
-        changeVisibility()
     }
 
     private fun getPlaceList(areaType: String) {
@@ -77,9 +73,5 @@ class PlaceListViewModel @Inject constructor(
                 }
             }
         }.launchIn(viewModelScope)
-    }
-
-    fun changeVisibility() {
-        isVisiblePlaceScreen.value = !isVisiblePlaceScreen.value
     }
 }

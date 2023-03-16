@@ -1,6 +1,6 @@
 package kr.co.younhwan.eatjnu.domain.model
 
-data class FilterInfo(
+data class Filter(
     val resource: Int,
     val text: String
 )
