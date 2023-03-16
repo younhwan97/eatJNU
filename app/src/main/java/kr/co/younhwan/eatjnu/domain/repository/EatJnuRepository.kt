@@ -1,9 +1,6 @@
 package kr.co.younhwan.eatjnu.domain.repository
 
-import kr.co.younhwan.eatjnu.data.remote.dto.LikePlaceDto
-import kr.co.younhwan.eatjnu.data.remote.dto.PlaceDetailDto
-import kr.co.younhwan.eatjnu.data.remote.dto.PlaceSummaryDto
-import kr.co.younhwan.eatjnu.data.remote.dto.PlaceReviewReportDto
+import kr.co.younhwan.eatjnu.data.remote.dto.*
 
 interface EatJnuRepository {
 
@@ -13,9 +10,9 @@ interface EatJnuRepository {
 
     suspend fun getLikePlaceList(userId: String): List<LikePlaceDto>
 
-    suspend fun addLikePlace(userId: String, placeId: String): LikePlaceDto
+    suspend fun addLikePlace(userId: String, placeId: String): Boolean
 
-    suspend fun removeLikePlace(userId: String, placeId: String): LikePlaceDto
+    suspend fun removeLikePlace(userId: String, placeId: String): Boolean
 
     suspend fun createPlaceReview(userId: String, placeId: String, comment: String): Boolean
 

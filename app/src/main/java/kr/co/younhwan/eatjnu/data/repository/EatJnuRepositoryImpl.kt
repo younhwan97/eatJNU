@@ -1,10 +1,7 @@
 package kr.co.younhwan.eatjnu.data.repository
 
 import kr.co.younhwan.eatjnu.data.remote.EatJnuApi
-import kr.co.younhwan.eatjnu.data.remote.dto.LikePlaceDto
-import kr.co.younhwan.eatjnu.data.remote.dto.PlaceDetailDto
-import kr.co.younhwan.eatjnu.data.remote.dto.PlaceSummaryDto
-import kr.co.younhwan.eatjnu.data.remote.dto.PlaceReviewReportDto
+import kr.co.younhwan.eatjnu.data.remote.dto.*
 import kr.co.younhwan.eatjnu.domain.model.PlaceReview
 import kr.co.younhwan.eatjnu.domain.repository.EatJnuRepository
 import javax.inject.Inject
@@ -25,12 +22,12 @@ class EatJnuRepositoryImpl @Inject constructor(
         return api.getLikePlaceList(userId = userId).items ?: emptyList()
     }
 
-    override suspend fun addLikePlace(userId: String, placeId: String): LikePlaceDto {
-        return api.addLikePlace(userId = userId, placeId = placeId)
+    override suspend fun addLikePlace(userId: String, placeId: String): Boolean {
+        return api.addLikePlace(userId = userId, placeId = placeId).isSuccess ?: false
     }
 
-    override suspend fun removeLikePlace(userId: String, placeId: String): LikePlaceDto {
-        return api.removeLikePlace(userId = userId, placeId = placeId)
+    override suspend fun removeLikePlace(userId: String, placeId: String): Boolean {
+        return api.removeLikePlace(userId = userId, placeId = placeId).isSuccess ?: false
     }
 
     override suspend fun createPlaceReview(userId: String, placeId: String, comment: String): Boolean {
@@ -43,7 +40,7 @@ class EatJnuRepositoryImpl @Inject constructor(
                 writingTime = "",
                 likeCount = 0
             )
-        ).isSuccess
+        ).isSuccess ?: false
     }
 
     override suspend fun getPlaceReviewReport(userId: String): List<PlaceReviewReportDto> {
@@ -56,6 +53,6 @@ class EatJnuRepositoryImpl @Inject constructor(
         return api.addPlaceReviewReport(
             userId = userId,
             reviewId = reviewId
-        ).isSuccess
+        ).isSuccess ?: false
     }
 }

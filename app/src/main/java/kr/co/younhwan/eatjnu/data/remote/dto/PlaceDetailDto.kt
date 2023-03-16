@@ -35,9 +35,9 @@ data class PlaceDetailDto(
     val location: String?,
     val number: String?,
     val openingInfo: String?,
-    val images: List<PlaceImageDto>?,
     val lat: Double?,
     val lon: Double?,
+    val images: List<PlaceImageDto>?,
     val reviews: List<PlaceReviewDto>?
 )
 

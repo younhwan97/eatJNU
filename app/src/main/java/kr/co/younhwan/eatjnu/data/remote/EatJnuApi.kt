@@ -16,10 +16,10 @@ interface EatJnuApi {
     suspend fun getLikePlaceList(@Path("userId") userId: String): LikePlaceListDto
 
     @PUT("LikePlace/{userId}/{placeId}")
-    suspend fun addLikePlace(@Path("userId") userId: String, @Path("placeId") placeId: String): LikePlaceDto
+    suspend fun addLikePlace(@Path("userId") userId: String, @Path("placeId") placeId: String): CommonResponseDto
 
     @DELETE("LikePlace/{userId}/{placeId}")
-    suspend fun removeLikePlace(@Path("userId") userId: String, @Path("placeId") placeId: String): LikePlaceDto
+    suspend fun removeLikePlace(@Path("userId") userId: String, @Path("placeId") placeId: String): CommonResponseDto
 
     @Headers("Content-Type: application/json")
     @POST("PlaceReview/")

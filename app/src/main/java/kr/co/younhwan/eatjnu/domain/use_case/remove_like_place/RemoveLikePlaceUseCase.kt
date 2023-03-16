@@ -13,11 +13,11 @@ class RemoveLikePlaceUseCase @Inject constructor(
     private val repository: EatJnuRepository
 ) {
 
-    operator fun invoke(userId: String, placeId: String): Flow<Resource<LikePlaceDto>> = flow {
+    operator fun invoke(userId: String, placeId: String): Flow<Resource<Boolean>> = flow {
         try {
             emit(Resource.Loading())
-            val likePlace = repository.removeLikePlace(userId = userId, placeId = placeId)
-            emit(Resource.Success(data = likePlace))
+            val isSuccess = repository.removeLikePlace(userId = userId, placeId = placeId)
+            emit(Resource.Success(data = isSuccess))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "An expected error!"))
         } catch (e: IOException) {
