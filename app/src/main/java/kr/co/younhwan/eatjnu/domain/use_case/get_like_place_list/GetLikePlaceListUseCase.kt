@@ -11,7 +11,6 @@ import javax.inject.Inject
 class GetLikePlaceListUseCase @Inject constructor(
     private val repository: EatJnuRepository
 ) {
-
     operator fun invoke(userId: String): Flow<Resource<List<Int>>> = flow {
         try {
             emit(Resource.Loading())

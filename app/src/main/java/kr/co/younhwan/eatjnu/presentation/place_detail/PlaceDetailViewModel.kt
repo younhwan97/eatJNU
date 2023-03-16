@@ -1,6 +1,5 @@
 package kr.co.younhwan.eatjnu.presentation.place_detail
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -15,12 +14,12 @@ import kr.co.younhwan.eatjnu.domain.model.PlaceDetail
 import kr.co.younhwan.eatjnu.domain.model.PlaceReview
 import kr.co.younhwan.eatjnu.domain.model.PlaceReviewReport
 import kr.co.younhwan.eatjnu.domain.use_case.add_like_place.AddLikePlaceUseCase
-import kr.co.younhwan.eatjnu.domain.use_case.create_review.CreateReviewUseCase
+import kr.co.younhwan.eatjnu.domain.use_case.create_place_review.CreatePlaceReviewUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_like_place_list.GetLikePlaceListUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_place_detail.GetPlaceDetailUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.remove_like_place.RemoveLikePlaceUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.add_place_review_report.AddPlaceReviewReport
-import kr.co.younhwan.eatjnu.domain.use_case.get_place_review_report.GetPlaceReviewReportUseCase
+import kr.co.younhwan.eatjnu.domain.use_case.get_place_review_report_list.GetPlaceReviewReportListUseCase
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,9 +28,9 @@ class PlaceDetailViewModel @Inject constructor(
     private val addLikePlaceUseCase: AddLikePlaceUseCase,
     private val getLikePlaceListUseCase: GetLikePlaceListUseCase,
     private val removeLikePlaceUseCase: RemoveLikePlaceUseCase,
-    private val createReviewUseCase: CreateReviewUseCase,
+    private val createPlaceReviewUseCase: CreatePlaceReviewUseCase,
     private val addPlaceReviewReport: AddPlaceReviewReport,
-    private val getPlaceReviewReportUseCase: GetPlaceReviewReportUseCase,
+    private val getPlaceReviewReportListUseCase: GetPlaceReviewReportListUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -53,15 +52,38 @@ class PlaceDetailViewModel @Inject constructor(
             userId.value = savedStateHandle.get<String>(Constants.PARAM_USER_ID) ?: ""
             // 2. 장소 아이디 값 초기화
             val placeId = savedStateHandle.get<String>(Constants.PARAM_PLACE_ID) ?: "1"
-            // 3. 유저가 신고한 장보정보 초기화
-            getPlaceReviewReport(userId = userId.value)
-            // 4. 장소 세부 정보 초기화
-            getPlaceDetail(placeId = placeId)
-            // 5. like place 체크
+            // 3. 유저가 신고한 리뷰 목록 초기화
+            getPlaceReviewReportList(userId = userId.value)
+            // 4. like place 체크
             checkLikePlace(userId = userId.value, placeId = placeId)
+            // 5. 장소 세부 정보 초기화
+            getPlaceDetail(placeId = placeId)
         }
     }
 
+    // (유저 ID를 이용해) 유저가 신고한 리뷰 목록을 가져오는 함수
+    private fun getPlaceReviewReportList(userId: String) {
+        getPlaceReviewReportListUseCase(userId = userId).onEach { result ->
+            when (result) {
+                is Resource.Loading -> Unit
+                is Resource.Error -> Unit
+                is Resource.Success -> reportReviews.addAll(result.data ?: emptyList())
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    // (유저 ID, 장소 ID를 이용해) 해당 유저가 해당 장소에 '좋아요'를 눌렀는지 확인하는 함수
+    private fun checkLikePlace(userId: String, placeId: String) {
+        getLikePlaceListUseCase(userId = userId).onEach { result ->
+            when (result) {
+                is Resource.Loading -> Unit
+                is Resource.Error -> Unit
+                is Resource.Success -> isLikePlace.value = result.data?.contains(placeId.toInt()) ?: false
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    // 장소 세부 정보를 초기화하는 함수
     private fun getPlaceDetail(placeId: String) {
         getPlaceDetailUseCase(placeId = placeId).onEach { result ->
             when (result) {
@@ -78,23 +100,14 @@ class PlaceDetailViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    private fun checkLikePlace(userId: String, placeId: String) {
-        getLikePlaceListUseCase(userId = userId).onEach { result ->
-            when (result) {
-                is Resource.Loading -> Unit
-                is Resource.Error -> Unit
-                is Resource.Success -> isLikePlace.value = result.data?.contains(placeId.toInt()) ?: false
-            }
-        }.launchIn(viewModelScope)
-    }
-
+    // 장소를 유저의 '좋아요' 목록에 추가하는 함수
     fun addLikePlace(placeId: Int) {
         addLikePlaceUseCase(userId = userId.value, placeId = placeId.toString()).onEach { result ->
             when (result) {
                 is Resource.Loading -> Unit
                 is Resource.Error -> Unit
                 is Resource.Success -> {
-                    if (result.data == true){
+                    if (result.data == true) {
                         isLikePlace.value = true
                         placeDetail.value = placeDetail.value.copy(likeCount = placeDetail.value.likeCount.plus(1))
                     }
@@ -103,13 +116,14 @@ class PlaceDetailViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
+    // 장소를 유저의 '좋아요' 목록에서 제거하는 함수
     fun removeLikePlace(placeId: Int) {
         removeLikePlaceUseCase(userId = userId.value, placeId = placeId.toString()).onEach { result ->
             when (result) {
                 is Resource.Loading -> Unit
                 is Resource.Error -> Unit
                 is Resource.Success -> {
-                    if (result.data == true){
+                    if (result.data == true) {
                         isLikePlace.value = false
                         placeDetail.value = placeDetail.value.copy(likeCount = placeDetail.value.likeCount.minus(1))
                     }
@@ -118,8 +132,9 @@ class PlaceDetailViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
+    // 장소에 리뷰를 추가하는 함수
     fun createPlaceReview(userId: String, placeId: String, comment: String) {
-        createReviewUseCase(userId = userId, placeId = placeId, comment = comment).onEach { result ->
+        createPlaceReviewUseCase(userId = userId, placeId = placeId, comment = comment).onEach { result ->
             when (result) {
                 is Resource.Loading -> Unit
                 is Resource.Error -> Unit
@@ -163,18 +178,6 @@ class PlaceDetailViewModel @Inject constructor(
                             placeReviews = newPlaceReviews
                         )
                     }
-                }
-            }
-        }.launchIn(viewModelScope)
-    }
-
-    fun getPlaceReviewReport(userId: String) {
-        getPlaceReviewReportUseCase(userId = userId).onEach { result ->
-            when (result) {
-                is Resource.Loading -> Unit
-                is Resource.Error -> Unit
-                is Resource.Success -> {
-                    reportReviews.addAll(result.data ?: emptyList())
                 }
             }
         }.launchIn(viewModelScope)

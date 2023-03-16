@@ -47,8 +47,8 @@ class EatJnuRepositoryImpl @Inject constructor(
         ).isSuccess ?: false
     }
 
-    override suspend fun getPlaceReviewReport(userId: String): List<PlaceReviewReportDto> {
-        return api.getPlaceReviewReport(
+    override suspend fun getPlaceReviewReportList(userId: String): List<PlaceReviewReportDto> {
+        return api.getPlaceReviewReportList(
             userId = userId
         ).items ?: emptyList()
     }

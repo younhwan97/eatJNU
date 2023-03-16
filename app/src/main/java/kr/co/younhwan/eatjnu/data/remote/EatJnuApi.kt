@@ -30,7 +30,7 @@ interface EatJnuApi {
     suspend fun createPlaceReview(@Body placeReview: PlaceReview): CommonResponseDto
 
     @GET("PlaceReview/report/{userId}")
-    suspend fun getPlaceReviewReport(@Path("userId") userId: String): PlaceReviewReportListDto
+    suspend fun getPlaceReviewReportList(@Path("userId") userId: String): PlaceReviewReportListDto
 
     @PUT("PlaceReview/report/{userId}/{reviewId}")
     suspend fun addPlaceReviewReport(@Path("userId") userId: String, @Path("reviewId") reviewId: String): CommonResponseDto

@@ -12,7 +12,6 @@ import javax.inject.Inject
 class RemoveLikePlaceUseCase @Inject constructor(
     private val repository: EatJnuRepository
 ) {
-
     operator fun invoke(userId: String, placeId: String): Flow<Resource<Boolean>> = flow {
         try {
             emit(Resource.Loading())

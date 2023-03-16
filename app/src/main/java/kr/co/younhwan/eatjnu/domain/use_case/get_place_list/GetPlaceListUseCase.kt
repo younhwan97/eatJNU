@@ -13,7 +13,6 @@ import javax.inject.Inject
 class GetPlaceListUseCase @Inject constructor(
     private val repository: EatJnuRepository
 ) {
-
     operator fun invoke(areaType: String): Flow<Resource<List<PlaceSummary>>> = flow {
         try {
             emit(Resource.Loading())

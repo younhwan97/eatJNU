@@ -13,7 +13,6 @@ import javax.inject.Inject
 class GetPlaceDetailUseCase @Inject constructor(
     private val repository: EatJnuRepository
 ) {
-
     operator fun invoke(placeId: String): Flow<Resource<PlaceDetail>> = flow {
         try {
             emit(Resource.Loading())
