@@ -10,14 +10,17 @@ class EatJnuRepositoryImpl @Inject constructor(
     private val api: EatJnuApi
 ) : EatJnuRepository {
 
+    // 1. 장소 목록을 가져오는 API
     override suspend fun getPlaceList(areaType: String): List<PlaceSummaryDto> {
         return api.getPlaceList(areaType = areaType).items ?: emptyList()
     }
 
+    // 2. 장소 세부 정보를 가져오는 API
     override suspend fun getPlaceDetail(placeId: String): PlaceDetailDto {
         return api.getPlaceDetail(placeId = placeId)
     }
 
+    // 3. 장소의 '좋아요' 기능과 관련된 API
     override suspend fun getLikePlaceList(userId: String): List<LikePlaceDto> {
         return api.getLikePlaceList(userId = userId).items ?: emptyList()
     }
@@ -30,6 +33,7 @@ class EatJnuRepositoryImpl @Inject constructor(
         return api.removeLikePlace(userId = userId, placeId = placeId).isSuccess ?: false
     }
 
+    // 4. 장소의 '리뷰' 기능과 관련된 API
     override suspend fun createPlaceReview(userId: String, placeId: String, comment: String): Boolean {
         return api.createPlaceReview(
             placeReview = PlaceReview(
