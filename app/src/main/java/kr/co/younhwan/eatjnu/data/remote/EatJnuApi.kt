@@ -34,4 +34,11 @@ interface EatJnuApi {
 
     @PUT("PlaceReview/report/{userId}/{reviewId}")
     suspend fun addPlaceReviewReport(@Path("userId") userId: String, @Path("reviewId") reviewId: String): CommonResponseDto
+
+    // 5. 유저의 'UGC' 값과 관련된 API
+    @GET("Ugc/{userId}")
+    suspend fun getUgcValue(@Path("userId") userId: String): CommonResponseDto
+
+    @PUT("Ugc/{userId}")
+    suspend fun addUgcValue(@Path("userId") userId: String): CommonResponseDto
 }

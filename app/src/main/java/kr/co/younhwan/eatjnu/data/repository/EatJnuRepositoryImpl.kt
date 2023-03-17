@@ -59,4 +59,12 @@ class EatJnuRepositoryImpl @Inject constructor(
             reviewId = reviewId
         ).isSuccess ?: false
     }
+
+    override suspend fun getUgcValue(userId: String): Boolean {
+        return api.getUgcValue(userId).isSuccess ?: false
+    }
+
+    override suspend fun addUgcValue(userId: String): Boolean {
+        return api.addUgcValue(userId).isSuccess ?: false
+    }
 }

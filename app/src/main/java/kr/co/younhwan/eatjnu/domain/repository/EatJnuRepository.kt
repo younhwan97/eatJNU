@@ -19,4 +19,8 @@ interface EatJnuRepository {
     suspend fun getPlaceReviewReportList(userId: String): List<PlaceReviewReportDto>
 
     suspend fun addPlaceReviewReport(userId: String, reviewId: String): Boolean
+
+    suspend fun getUgcValue(userId: String): Boolean
+
+    suspend fun addUgcValue(userId: String): Boolean
 }

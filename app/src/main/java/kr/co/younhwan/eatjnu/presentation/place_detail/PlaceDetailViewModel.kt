@@ -19,7 +19,9 @@ import kr.co.younhwan.eatjnu.domain.use_case.get_like_place_list.GetLikePlaceLis
 import kr.co.younhwan.eatjnu.domain.use_case.get_place_detail.GetPlaceDetailUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.remove_like_place.RemoveLikePlaceUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.add_place_review_report.AddPlaceReviewReport
+import kr.co.younhwan.eatjnu.domain.use_case.add_ugc_value.AddUgcValueUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_place_review_report_list.GetPlaceReviewReportListUseCase
+import kr.co.younhwan.eatjnu.domain.use_case.get_ugc_value.GetUgcValueUseCase
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,6 +33,8 @@ class PlaceDetailViewModel @Inject constructor(
     private val createPlaceReviewUseCase: CreatePlaceReviewUseCase,
     private val addPlaceReviewReport: AddPlaceReviewReport,
     private val getPlaceReviewReportListUseCase: GetPlaceReviewReportListUseCase,
+    private val getUgcValueUseCase: GetUgcValueUseCase,
+    private val addUgcValueUseCase: AddUgcValueUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -39,6 +43,7 @@ class PlaceDetailViewModel @Inject constructor(
 
     val userId = mutableStateOf("")
     val isLikePlace = mutableStateOf(false)
+    val isUgcAgree = mutableStateOf(false)
     val reportReviews = mutableListOf<PlaceReviewReport>()
     var placeDetail = mutableStateOf(
         PlaceDetail(
@@ -56,7 +61,9 @@ class PlaceDetailViewModel @Inject constructor(
             getPlaceReviewReportList(userId = userId.value)
             // 4. like place 체크
             checkLikePlace(userId = userId.value, placeId = placeId)
-            // 5. 장소 세부 정보 초기화
+            // 5. Ugc 동의 여부 확인
+            checkUgcAgree(userId = userId.value)
+            // 6. 장소 세부 정보 초기화
             getPlaceDetail(placeId = placeId)
         }
     }
@@ -79,6 +86,17 @@ class PlaceDetailViewModel @Inject constructor(
                 is Resource.Loading -> Unit
                 is Resource.Error -> Unit
                 is Resource.Success -> isLikePlace.value = result.data?.contains(placeId.toInt()) ?: false
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    // (유저 ID를 이용해) 해당 유저가 UGC 약관에 동의를 했는지 확인하는 함수
+    private fun checkUgcAgree(userId: String) {
+        getUgcValueUseCase(userId = userId).onEach { result ->
+            when (result) {
+                is Resource.Loading -> Unit
+                is Resource.Error -> Unit
+                is Resource.Success -> isUgcAgree.value = result.data ?: false
             }
         }.launchIn(viewModelScope)
     }
@@ -177,6 +195,20 @@ class PlaceDetailViewModel @Inject constructor(
                         placeDetail.value = placeDetail.value.copy(
                             placeReviews = newPlaceReviews
                         )
+                    }
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    fun addUgcValue() {
+        addUgcValueUseCase(userId = userId.value).onEach { result ->
+            when (result) {
+                is Resource.Loading -> Unit
+                is Resource.Error -> Unit
+                is Resource.Success -> {
+                    if (result.data == true) {
+                        isUgcAgree.value = true
                     }
                 }
             }
