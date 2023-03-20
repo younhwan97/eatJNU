@@ -1,7 +1,8 @@
 # **전대밥토끼**
 
 ![앱 그래픽 이미지](preview/graphic_image.png)
-💛 [플레이스토어](https://play.google.com/store/apps/details?id=kr.co.younhwan.eatjnu)
+
+<a herf="https://play.google.com/store/apps/details?id=kr.co.younhwan.eatjnu" taregt="_blank">💛 플레이스토어</a>
 
 <br/>
 
@@ -48,11 +49,12 @@
 
 <table>
   <tr>
+    <td><img width="226px" height="452px" src="preview/image5.gif"/></td>
+    <td><img width="226px" height="452px" src="preview/image6.gif"/></td>
     <td><img width="226px" height="452px" src="preview/image1.jpeg"/></td>
-    <td><img width="226px" height="452px" src="preview/image1.jpeg"/></td>
-    <td><img width="226px" height="452px" src="preview/image2.jpeg"/></td>
   </tr>
   <tr>
+    <td><img width="226px" height="452px" src="preview/image2.jpeg"/></td>
     <td><img width="226px" height="452px" src="preview/image3.jpeg"/></td>
     <td><img width="226px" height="452px" src="preview/image4.jpeg"/></td>
   </tr>    
