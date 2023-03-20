@@ -14,6 +14,31 @@
 
 <br>
 
+## 💁🏻‍♂️ 팀원 및 역할
+
+<table>
+    <th width="20%" style="text-align:center"><a href="https://github.com/nang518" target="_blank">정나영</a></th>
+    <th width="20%" style="text-align:center"><a href="https://github.com/younhwan97" target="_blank">조윤환</a></th>
+    <tr>
+        <td width="20%">
+            <img src="https://avatars.githubusercontent.com/u/106538455?v=4"/>
+        </td>
+        <td width="20%">
+            <img src="https://avatars.githubusercontent.com/u/78298663?v=4"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>iOS <br> Developer</strong>
+        </td>
+        <td>
+            <strong>Android <br> Developer</strong>
+        </td>
+    </tr>
+</table>
+
+<br/>
+
 ## 📸 핵심 기능 사진
 
 <table>
@@ -32,19 +57,32 @@
 
 ## 🚀 기술 스택 및 성과
 
+**Android**
+
 - Minimum SDK level 21
 - 100% Kotlin + Coroutines + Flow + Retrofit를 이용한 비동기 처리.
-- Hilt를 이용한 의존성 주입
+- Hilt 의존성 주입
 - Jetpack
-    + Compos
-    + ViewModel
-    + DataStore - 유저 ID 저장
-- Architecture
-    + Data layer
-    + Domain layer - **유스케이스**를 이용해 재사용 가능한 로직 구현 및 God Object 방지
-        * 장소 리스트 조회, 장소 세부 조회, 유저 아이디 조회 및 생성 등 **10개** 이상의 유스케이스
-    + Presentation layer
-- ..
-- ..
+  + Compose + ViewModel 기반 선언형 프로그래밍
+  + DataStore 기반 **로그인 기능** 구현
+- 맛집 리스트 조회, 리뷰 작성 및 조회 등 세부 로직에 대한 Use Case 구현
+  + God Object 방지, 로직 재사용성 증가
+  + 앱 출시 시점 **14개의 Use Case로 세분화**
+- **맛집 찜 기능** 구현
+- **사용자 리뷰 기능** 구현
+- 메인, 맛집 리스트, 맛집 정보 등 모든 UI 구현
+- Naver Map API을 이용해 가게 위치 정보 제공
+- 기타 사용 라이브러리
+  + Landscapist(Glide): 장소 이미지
+  + Pager: 장소 이미지 슬라이드
+  + Lottie: 로딩 화면
 
-<!-- 좋아요, 리뷰, 이미지 스크롤, 필터링?, 네이버 map -->
+<br/>
+
+**Back-end**
+
+- [https://github.com/younhwan97/eatJNU-server](https://github.com/younhwan97/eatJNU-server)
+- Node.js 기반 REST API 서버 개발 및 EC2 배포
+  + 맛집 리스트, 맛집 정보, 리뷰, 좋아요 기능과 관련한 API 제공
+- MySQL 기반 RDBMS 설계 및 RDS 배포
+
