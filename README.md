@@ -49,14 +49,14 @@
 
 <table>
   <tr>
-    <td><img width="226px" height="452px" src="preview/image5.gif"/></td>
-    <td><img width="226px" height="452px" src="preview/image6.gif"/></td>
+    <td><img width="226px" height="462px" src="preview/image5.gif"/></td>
+    <td><img width="226px" height="462px" src="preview/image6.gif"/></td>
     <td><img width="226px" height="452px" src="preview/image1.jpeg"/></td>
   </tr>
   <tr>
-    <td><img width="226px" height="452px" src="preview/image2.jpeg"/></td>
-    <td><img width="226px" height="452px" src="preview/image3.jpeg"/></td>
-    <td><img width="226px" height="452px" src="preview/image4.jpeg"/></td>
+    <td><img width="226px" height="462px" src="preview/image2.jpeg"/></td>
+    <td><img width="226px" height="462px" src="preview/image3.jpeg"/></td>
+    <td><img width="226px" height="462px" src="preview/image4.jpeg"/></td>
   </tr>    
  </table>
 
