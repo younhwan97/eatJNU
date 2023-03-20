@@ -1,6 +1,7 @@
 # **전대밥토끼**
 
 ![앱 그래픽 이미지](preview/graphic_image.png)
+💛 [플레이스토어](https://play.google.com/store/apps/details?id=kr.co.younhwan.eatjnu)
 
 <br/>
 
