@@ -16,14 +16,18 @@
 
 ## 💁🏻‍♂️ 팀원 및 역할
 
-<table width="60%">
-    <th width="50%" style="text-align:center"><a href="https://github.com/nang518" target="_blank">정나영</a></th>
-    <th width="50%" style="text-align:center"><a href="https://github.com/younhwan97" target="_blank">조윤환</a></th>
+<table style="width='60%'">
+    <th style="text-align:center">
+      <a href="https://github.com/nang518" target="_blank">정나영</a>
+    </th>
+    <th style="text-align:center">
+      <a href="https://github.com/younhwan97" target="_blank">조윤환</a>
+    </th>
     <tr>
-        <td width="20%">
+        <td>
             <img src="https://avatars.githubusercontent.com/u/106538455?v=4"/>
         </td>
-        <td width="20%">
+        <td>
             <img src="https://avatars.githubusercontent.com/u/78298663?v=4"/>
         </td>
     </tr>
