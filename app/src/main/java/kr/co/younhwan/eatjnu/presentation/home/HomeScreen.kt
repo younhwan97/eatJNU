@@ -1,5 +1,7 @@
 package kr.co.younhwan.eatjnu.presentation.home
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
@@ -14,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,6 +37,24 @@ fun HomeScreen(
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
+        // 피드백 버튼
+        val ctx = LocalContext.current
+        IconButton(
+            onClick = {
+                val i = Intent(Intent.ACTION_VIEW, Uri.parse("https://open.kakao.com/o/gLzIj9af"))
+                ctx.startActivity(i)
+            },
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .padding(top = 8.dp, start = 4.dp)
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.outline_chat_bubble_outline_24),
+                contentDescription = null
+            )
+        }
+
+        // 좋아요 버튼
         IconButton(
             onClick = { navController.navigate(Screen.PlaceLikeListScreen.route + "/${userId}") },
             modifier = Modifier
