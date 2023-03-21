@@ -15,7 +15,7 @@ import kr.co.younhwan.eatjnu.domain.model.PlaceReview
 import kr.co.younhwan.eatjnu.domain.model.PlaceReviewReport
 import kr.co.younhwan.eatjnu.domain.use_case.add_like_place.AddLikePlaceUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.create_place_review.CreatePlaceReviewUseCase
-import kr.co.younhwan.eatjnu.domain.use_case.get_like_place_list.GetLikePlaceListUseCase
+import kr.co.younhwan.eatjnu.domain.use_case.get_like_place_id_list.GetLikePlaceIdListUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_place_detail.GetPlaceDetailUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.remove_like_place.RemoveLikePlaceUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.add_place_review_report.AddPlaceReviewReport
@@ -28,7 +28,7 @@ import javax.inject.Inject
 class PlaceDetailViewModel @Inject constructor(
     private val getPlaceDetailUseCase: GetPlaceDetailUseCase,
     private val addLikePlaceUseCase: AddLikePlaceUseCase,
-    private val getLikePlaceListUseCase: GetLikePlaceListUseCase,
+    private val getLikePlaceIdListUseCase: GetLikePlaceIdListUseCase,
     private val removeLikePlaceUseCase: RemoveLikePlaceUseCase,
     private val createPlaceReviewUseCase: CreatePlaceReviewUseCase,
     private val addPlaceReviewReport: AddPlaceReviewReport,
@@ -81,7 +81,7 @@ class PlaceDetailViewModel @Inject constructor(
 
     // (유저 ID, 장소 ID를 이용해) 해당 유저가 해당 장소에 '좋아요'를 눌렀는지 확인하는 함수
     private fun checkLikePlace(userId: String, placeId: String) {
-        getLikePlaceListUseCase(userId = userId).onEach { result ->
+        getLikePlaceIdListUseCase(userId = userId).onEach { result ->
             when (result) {
                 is Resource.Loading -> Unit
                 is Resource.Error -> Unit

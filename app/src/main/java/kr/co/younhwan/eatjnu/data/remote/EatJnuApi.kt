@@ -16,7 +16,10 @@ interface EatJnuApi {
 
     // 3. 장소의 '좋아요' 기능과 관련된 API
     @GET("LikePlace/{userId}")
-    suspend fun getLikePlaceList(@Path("userId") userId: String): LikePlaceListDto
+    suspend fun getLikePlaceIdList(@Path("userId") userId: String): LikePlaceIdListDto
+
+    @GET("LikePlace/detail/{userId}")
+    suspend fun getLikePlaceList(@Path("userId") userId: String): PlaceSummaryListDto
 
     @PUT("LikePlace/{userId}/{placeId}")
     suspend fun addLikePlace(@Path("userId") userId: String, @Path("placeId") placeId: String): CommonResponseDto

@@ -3,7 +3,6 @@ package kr.co.younhwan.eatjnu.domain.use_case.remove_like_place
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kr.co.younhwan.eatjnu.common.Resource
-import kr.co.younhwan.eatjnu.data.remote.dto.LikePlaceDto
 import kr.co.younhwan.eatjnu.domain.repository.EatJnuRepository
 import retrofit2.HttpException
 import java.io.IOException

@@ -8,7 +8,9 @@ interface EatJnuRepository {
 
     suspend fun getPlaceDetail(placeId: String): PlaceDetailDto
 
-    suspend fun getLikePlaceList(userId: String): List<LikePlaceDto>
+    suspend fun getLikePlaceIdList(userId: String): List<LikePlaceIdDto>
+
+    suspend fun getLikePlaceList(userId: String): List<PlaceSummaryDto>
 
     suspend fun addLikePlace(userId: String, placeId: String): Boolean
 

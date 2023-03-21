@@ -21,7 +21,11 @@ class EatJnuRepositoryImpl @Inject constructor(
     }
 
     // 3. 장소의 '좋아요' 기능과 관련된 API
-    override suspend fun getLikePlaceList(userId: String): List<LikePlaceDto> {
+    override suspend fun getLikePlaceIdList(userId: String): List<LikePlaceIdDto> {
+        return api.getLikePlaceIdList(userId = userId).items ?: emptyList()
+    }
+
+    override suspend fun getLikePlaceList(userId: String): List<PlaceSummaryDto> {
         return api.getLikePlaceList(userId = userId).items ?: emptyList()
     }
 

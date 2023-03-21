@@ -36,7 +36,9 @@ fun HomeScreen(
     ) {
         IconButton(
             onClick = { navController.navigate(Screen.PlaceLikeListScreen.route + "/${userId}") },
-            modifier = Modifier.align(Alignment.TopEnd)
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(top = 8.dp, end = 4.dp)
         ) {
             Icon(
                 imageVector = Icons.Outlined.FavoriteBorder,
