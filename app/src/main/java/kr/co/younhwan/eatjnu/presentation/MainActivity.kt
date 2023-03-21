@@ -23,7 +23,6 @@ import kr.co.younhwan.eatjnu.presentation.ui.theme.EatJNUTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
             EatJNUTheme {
                 // Status bar
@@ -45,24 +44,28 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         startDestination = Screen.HomeScreen.route
                     ) {
+                        // 메인 화면
                         composable(
                             route = Screen.HomeScreen.route,
                         ) {
                             HomeScreen(navController)
                         }
 
+                        // '좋아요'를 누른 장소 목록 화면
                         composable(
                             route = Screen.LikePlaceListScreen.route + "/{userId}"
                         ) {
                             LikePlaceListScreen(navController)
                         }
 
+                        // (후문, 정문, 상대) 지역에 포함된 장소 목록 화면
                         composable(
                             route = Screen.PlaceListScreen.route + "/{areaType}" + "/{userId}"
                         ) {
                             PlaceListScreen(navController)
                         }
 
+                        // 장소 세부 정보 화면
                         composable(
                             route = Screen.PlaceDetailScreen.route + "/{placeId}" + "/{userId}"
                         ) {
