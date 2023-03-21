@@ -56,7 +56,7 @@ fun HomeScreen(
 
         // 좋아요 버튼
         IconButton(
-            onClick = { navController.navigate(Screen.PlaceLikeListScreen.route + "/${userId}") },
+            onClick = { navController.navigate(Screen.LikePlaceListScreen.route + "/${userId}") },
             modifier = Modifier
                 .align(Alignment.TopEnd)
                 .padding(top = 8.dp, end = 4.dp)

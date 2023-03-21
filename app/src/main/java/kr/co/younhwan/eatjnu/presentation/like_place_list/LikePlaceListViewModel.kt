@@ -1,4 +1,4 @@
-package kr.co.younhwan.eatjnu.presentation.place_like_list
+package kr.co.younhwan.eatjnu.presentation.like_place_list
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
@@ -14,7 +14,7 @@ import kr.co.younhwan.eatjnu.domain.use_case.get_like_place_list.GetLikePlaceLis
 import javax.inject.Inject
 
 @HiltViewModel
-class PlaceLikeListViewModel @Inject constructor(
+class LikePlaceListViewModel @Inject constructor(
     private val getLikePlaceListUseCase: GetLikePlaceListUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {

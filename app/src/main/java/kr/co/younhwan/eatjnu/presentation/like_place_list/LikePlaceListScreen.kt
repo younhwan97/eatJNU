@@ -1,4 +1,4 @@
-package kr.co.younhwan.eatjnu.presentation.place_like_list
+package kr.co.younhwan.eatjnu.presentation.like_place_list
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,9 +14,9 @@ import kr.co.younhwan.eatjnu.presentation.supprot.LoadingScreen
 import kr.co.younhwan.eatjnu.presentation.supprot.MyTopAppBar
 
 @Composable
-fun PlaceLikeListScreen(
+fun LikePlaceListScreen(
     navController: NavController,
-    viewModel: PlaceLikeListViewModel = hiltViewModel()
+    viewModel: LikePlaceListViewModel = hiltViewModel()
 ) {
     val isLoading by remember { viewModel.isLoading }
     val error by remember { viewModel.error }
