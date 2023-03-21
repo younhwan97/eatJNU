@@ -2,7 +2,7 @@
 
 ![앱 그래픽 이미지](preview/graphic_image.png)
 
-<a herf="https://play.google.com/store/apps/details?id=kr.co.younhwan.eatjnu" taregt="_blank">💛 플레이스토어</a>
+<a href="https://play.google.com/store/apps/details?id=kr.co.younhwan.eatjnu" taregt="_blank">💛 플레이스토어</a>
 
 <br/>
 
