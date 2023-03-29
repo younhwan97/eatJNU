@@ -117,7 +117,8 @@ fun ImageBox(
             .clip(RoundedCornerShape(roundedDp))
             .border(
                 width = 1.dp,
-                color = Color.Black, RoundedCornerShape(roundedDp)
+                color = Color.Black,
+                shape = RoundedCornerShape(roundedDp)
             )
     ) {
         GlideImage(
@@ -134,7 +135,7 @@ fun ImageBox(
                 +PlaceholderPlugin.Loading(painterResource(id = R.drawable.main3))
                 +PlaceholderPlugin.Failure(painterResource(id = R.drawable.main3))
                 +CrossfadePlugin(
-                    duration = 1500
+                    duration = 550
                 )
             },
             requestOptions = {
