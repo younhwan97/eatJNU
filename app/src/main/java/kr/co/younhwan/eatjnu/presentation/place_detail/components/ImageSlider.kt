@@ -3,6 +3,7 @@ package kr.co.younhwan.eatjnu.presentation.place_detail.components
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,7 +39,6 @@ fun ImageSlider(
                 state = pagerState,
                 contentPadding = PaddingValues(start = 0.dp, end = 0.dp)
             ) { index ->
-
                 GlideImage(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -46,11 +46,18 @@ fun ImageSlider(
                     imageModel = { images[index].url },
                     imageOptions = ImageOptions(
                         contentScale = ContentScale.Crop,
-                        alignment = Alignment.Center
+                        alignment = Alignment.Center,
+                        contentDescription = null
                     ),
+                    loading = {
+                        Box(modifier = Modifier.matchParentSize()) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.align(Alignment.Center)
+                            )
+                        }
+                    },
                     requestOptions = {
-                        RequestOptions()
-                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL)
                     },
                 )
             }
@@ -75,8 +82,16 @@ fun ImageSlider(
                 imageModel = { image },
                 imageOptions = ImageOptions(
                     contentScale = ContentScale.Crop,
-                    alignment = Alignment.Center
+                    alignment = Alignment.Center,
+                    contentDescription = null
                 ),
+                loading = {
+                    Box(modifier = Modifier.matchParentSize()) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.align(Alignment.Center)
+                        )
+                    }
+                },
                 requestOptions = {
                     RequestOptions()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
