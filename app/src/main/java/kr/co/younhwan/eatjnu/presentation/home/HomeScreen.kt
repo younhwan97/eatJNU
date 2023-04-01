@@ -41,7 +41,7 @@ fun HomeScreen(
         val ctx = LocalContext.current
         IconButton(
             onClick = {
-                val i = Intent(Intent.ACTION_VIEW, Uri.parse("https://open.kakao.com/o/gLzIj9af"))
+                val i = Intent(Intent.ACTION_VIEW, Uri.parse("https://open.kakao.com/o/syHpz4cf"))
                 ctx.startActivity(i)
             },
             modifier = Modifier
