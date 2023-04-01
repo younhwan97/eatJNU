@@ -8,6 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -29,6 +30,9 @@ fun ImageSlider(
     Box(
         modifier = Modifier.fillMaxWidth()
     ) {
+        val configuration = LocalConfiguration.current
+        val screenHeight = configuration.screenHeightDp.dp
+
         if (images.isNotEmpty()) { // 이미지가 여러장 있는 경우
             // State
             val pagerState = rememberPagerState(initialPage = 0)
@@ -42,7 +46,7 @@ fun ImageSlider(
                 GlideImage(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(368.dp),
+                        .height(screenHeight / 2),
                     imageModel = { images[index].url },
                     imageOptions = ImageOptions(
                         contentScale = ContentScale.Crop,
@@ -78,7 +82,7 @@ fun ImageSlider(
             GlideImage(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(368.dp),
+                    .height(screenHeight / 2),
                 imageModel = { image },
                 imageOptions = ImageOptions(
                     contentScale = ContentScale.Crop,
