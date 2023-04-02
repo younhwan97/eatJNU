@@ -90,33 +90,35 @@ fun ReviewItem(
                                 showMenu = false
                             },
                         ) {
-                            // 신고/차단
-                            DropdownMenuItem(
-                                onClick = {
-                                    onClickReportBtn(placeReview.reviewId)
-                                    showMenu = false
-                                }
-                            ) {
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically
+                            // 신고/차단 (자신이 작성한 리뷰가 아닐 경우)
+                            if (placeReview.userId != userId) {
+                                DropdownMenuItem(
+                                    onClick = {
+                                        onClickReportBtn(placeReview.reviewId)
+                                        showMenu = false
+                                    }
                                 ) {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.outline_flag_24),
-                                        contentDescription = null,
-                                        modifier = Modifier.size(18.dp),
-                                    )
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.outline_flag_24),
+                                            contentDescription = null,
+                                            modifier = Modifier.size(18.dp),
+                                        )
 
-                                    Spacer(modifier = Modifier.width(8.dp))
+                                        Spacer(modifier = Modifier.width(8.dp))
 
-                                    Text(
-                                        text = "신고/차단",
-                                        fontSize = 14.sp,
-                                        style = MaterialTheme.typography.h6
-                                    )
+                                        Text(
+                                            text = "신고/차단",
+                                            fontSize = 14.sp,
+                                            style = MaterialTheme.typography.h6
+                                        )
+                                    }
                                 }
                             }
 
-                            // 삭제
+                            // 삭제 (자신이 작성한 리뷰일 경우)
                             if (placeReview.userId == userId) {
                                 DropdownMenuItem(
                                     onClick = {
