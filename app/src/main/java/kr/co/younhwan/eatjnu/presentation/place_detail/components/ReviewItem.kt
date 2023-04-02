@@ -22,6 +22,7 @@ import kr.co.younhwan.eatjnu.domain.model.PlaceReview
 @Composable
 fun ReviewItem(
     placeReview: PlaceReview,
+    onCLickDeleteBtn: (Int) -> Unit,
     onClickReportBtn: (Int) -> Unit
 ) {
     if (placeReview.comment != "") { // 댓글 내용이 있는 경우
@@ -89,6 +90,7 @@ fun ReviewItem(
                                 showMenu = false
                             },
                         ) {
+                            // 신고/차단
                             DropdownMenuItem(
                                 onClick = {
                                     onClickReportBtn(placeReview.reviewId)
@@ -108,6 +110,32 @@ fun ReviewItem(
 
                                     Text(
                                         text = "신고/차단",
+                                        fontSize = 14.sp,
+                                        style = MaterialTheme.typography.h6
+                                    )
+                                }
+                            }
+
+                            // 삭제
+                            DropdownMenuItem(
+                                onClick = {
+                                    onCLickDeleteBtn(placeReview.reviewId)
+                                    showMenu = false
+                                }
+                            ) {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.baseline_delete_outline_24),
+                                        contentDescription = null,
+                                        modifier = Modifier.size(18.dp),
+                                    )
+
+                                    Spacer(modifier = Modifier.width(8.dp))
+
+                                    Text(
+                                        text = "삭제",
                                         fontSize = 14.sp,
                                         style = MaterialTheme.typography.h6
                                     )

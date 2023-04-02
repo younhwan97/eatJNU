@@ -18,6 +18,8 @@ interface EatJnuRepository {
 
     suspend fun createPlaceReview(userId: String, placeId: String, comment: String): Boolean
 
+    suspend fun removePlaceReview(reviewId: String): Boolean
+
     suspend fun getPlaceReviewReportList(userId: String): List<PlaceReviewReportDto>
 
     suspend fun addPlaceReviewReport(userId: String, reviewId: String): Boolean

@@ -123,6 +123,9 @@ fun PlaceDetailScreen(
                     if (!isReported) {
                         ReviewItem(
                             placeReview = detail.placeReviews[index],
+                            onCLickDeleteBtn = {
+                                viewModel.removePlaceReview(it.toString())
+                            },
                             onClickReportBtn = {
                                 viewModel.addPlaceReviewReport(userId = userId, reviewId = it)
                             }

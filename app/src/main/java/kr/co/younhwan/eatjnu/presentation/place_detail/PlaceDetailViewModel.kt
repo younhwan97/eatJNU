@@ -22,6 +22,7 @@ import kr.co.younhwan.eatjnu.domain.use_case.add_place_review_report.AddPlaceRev
 import kr.co.younhwan.eatjnu.domain.use_case.add_ugc_value.AddUgcValueUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_place_review_report_list.GetPlaceReviewReportListUseCase
 import kr.co.younhwan.eatjnu.domain.use_case.get_ugc_value.GetUgcValueUseCase
+import kr.co.younhwan.eatjnu.domain.use_case.remove_place_review.RemovePlaceReviewUseCase
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,6 +32,7 @@ class PlaceDetailViewModel @Inject constructor(
     private val getLikePlaceIdListUseCase: GetLikePlaceIdListUseCase,
     private val removeLikePlaceUseCase: RemoveLikePlaceUseCase,
     private val createPlaceReviewUseCase: CreatePlaceReviewUseCase,
+    private val removePlaceReviewUseCase: RemovePlaceReviewUseCase,
     private val addPlaceReviewReport: AddPlaceReviewReport,
     private val getPlaceReviewReportListUseCase: GetPlaceReviewReportListUseCase,
     private val getUgcValueUseCase: GetUgcValueUseCase,
@@ -171,6 +173,21 @@ class PlaceDetailViewModel @Inject constructor(
                                 )
                             ) + placeDetail.value.placeReviews
                         )
+                    }
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    // 장소에 리뷰를 삭제하는 함수
+    fun removePlaceReview(reviewId: String) {
+        removePlaceReviewUseCase(reviewId = reviewId).onEach { result ->
+            when (result) {
+                is Resource.Loading -> Unit
+                is Resource.Error -> Unit
+                is Resource.Success -> {
+                    if (result.data == true) {
+                        
                     }
                 }
             }
