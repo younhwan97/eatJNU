@@ -99,7 +99,7 @@ fun PlaceDetailScreen(
                         onClickEnterBtn = {
                             viewModel.createPlaceReview(
                                 userId = userId,
-                                placeId = detail.id.toString(),
+                                placeId = detail.id,
                                 comment = it
                             )
                         },
@@ -122,9 +122,12 @@ fun PlaceDetailScreen(
 
                     if (!isReported) {
                         ReviewItem(
+                            userId = userId,
                             placeReview = detail.placeReviews[index],
-                            onCLickDeleteBtn = {
-                                viewModel.removePlaceReview(it.toString())
+                            onCLickDeleteBtn = { reviewId, userId, placeId ->
+                                if (userId == detail.placeReviews[index].userId) {
+                                    viewModel.removePlaceReview(reviewId = reviewId.toString(), userId = userId, placeId = placeId.toString())
+                                }
                             },
                             onClickReportBtn = {
                                 viewModel.addPlaceReviewReport(userId = userId, reviewId = it)

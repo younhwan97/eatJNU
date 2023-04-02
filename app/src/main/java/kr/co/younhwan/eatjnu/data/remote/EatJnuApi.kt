@@ -32,8 +32,8 @@ interface EatJnuApi {
     @POST("PlaceReview/")
     suspend fun createPlaceReview(@Body placeReview: PlaceReview): CommonResponseDto
 
-    @DELETE("PlaceReview/{reviewId}")
-    suspend fun removePlaceReview(@Path("reviewId") reviewId: String): CommonResponseDto
+    @DELETE("PlaceReview/{reviewId}/{userId}/{placeId}")
+    suspend fun removePlaceReview(@Path("reviewId") reviewId: String, @Path("userId") userId: String, @Path("placeId") placeId: String): CommonResponseDto
 
     @GET("PlaceReview/report/{userId}")
     suspend fun getPlaceReviewReportList(@Path("userId") userId: String): PlaceReviewReportListDto

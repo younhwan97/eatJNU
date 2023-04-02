@@ -38,7 +38,7 @@ class EatJnuRepositoryImpl @Inject constructor(
     }
 
     // 4. 장소의 '리뷰' 기능과 관련된 API
-    override suspend fun createPlaceReview(userId: String, placeId: String, comment: String): Boolean {
+    override suspend fun createPlaceReview(userId: String, placeId: Int, comment: String): Boolean {
         return api.createPlaceReview(
             placeReview = PlaceReview(
                 reviewId = -1,
@@ -51,9 +51,11 @@ class EatJnuRepositoryImpl @Inject constructor(
         ).isSuccess ?: false
     }
 
-    override suspend fun removePlaceReview(reviewId: String): Boolean {
+    override suspend fun removePlaceReview(reviewId: String, userId: String, placeId: String): Boolean {
         return api.removePlaceReview(
-            reviewId = reviewId
+            reviewId = reviewId,
+            userId = userId,
+            placeId = placeId
         ).isSuccess ?: false
     }
 

@@ -8,7 +8,7 @@ data class PlaceReviewDto(
     val writingTime: String?,
     val userId: String?,
     val likeCount: Int?,
-    val placeId: String?
+    val placeId: Int?
 )
 
 fun PlaceReviewDto.toPlaceReview(): PlaceReview {
@@ -18,6 +18,6 @@ fun PlaceReviewDto.toPlaceReview(): PlaceReview {
         writingTime = writingTime ?: "",
         userId = userId ?: "",
         likeCount = likeCount ?: 0,
-        placeId = placeId ?: ""
+        placeId = placeId ?: -1
     )
 }

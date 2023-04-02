@@ -11,7 +11,7 @@ import javax.inject.Inject
 class CreatePlaceReviewUseCase @Inject constructor(
     private val repository: EatJnuRepository
 ) {
-    operator fun invoke(userId: String, placeId: String, comment: String): Flow<Resource<Boolean>> = flow {
+    operator fun invoke(userId: String, placeId: Int, comment: String): Flow<Resource<Boolean>> = flow {
         try {
             emit(Resource.Loading())
             val isSuccess = repository.createPlaceReview(userId = userId, placeId = placeId, comment = comment)

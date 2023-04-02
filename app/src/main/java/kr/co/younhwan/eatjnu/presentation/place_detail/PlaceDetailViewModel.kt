@@ -153,7 +153,7 @@ class PlaceDetailViewModel @Inject constructor(
     }
 
     // 장소에 리뷰를 추가하는 함수
-    fun createPlaceReview(userId: String, placeId: String, comment: String) {
+    fun createPlaceReview(userId: String, placeId: Int, comment: String) {
         createPlaceReviewUseCase(userId = userId, placeId = placeId, comment = comment).onEach { result ->
             when (result) {
                 is Resource.Loading -> Unit
@@ -180,14 +180,25 @@ class PlaceDetailViewModel @Inject constructor(
     }
 
     // 장소에 리뷰를 삭제하는 함수
-    fun removePlaceReview(reviewId: String) {
-        removePlaceReviewUseCase(reviewId = reviewId).onEach { result ->
+    fun removePlaceReview(reviewId: String, userId: String, placeId: String) {
+        removePlaceReviewUseCase(reviewId = reviewId, userId = userId, placeId = placeId).onEach { result ->
             when (result) {
                 is Resource.Loading -> Unit
                 is Resource.Error -> Unit
                 is Resource.Success -> {
                     if (result.data == true) {
-                        
+                        // 리뷰 삭제
+                        val newPlaceReviews = mutableListOf<PlaceReview>()
+
+                        for (review in placeDetail.value.placeReviews) {
+                            if (review.reviewId.toString() != reviewId) {
+                                newPlaceReviews.add(review)
+                            }
+                        }
+
+                        placeDetail.value = placeDetail.value.copy(
+                            placeReviews = newPlaceReviews
+                        )
                     }
                 }
             }

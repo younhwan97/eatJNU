@@ -11,10 +11,10 @@ import javax.inject.Inject
 class RemovePlaceReviewUseCase @Inject constructor(
     private val repository: EatJnuRepository
 ) {
-    operator fun invoke(reviewId: String): Flow<Resource<Boolean>> = flow {
+    operator fun invoke(reviewId: String, userId: String, placeId: String): Flow<Resource<Boolean>> = flow {
         try {
             emit(Resource.Loading())
-            val isSuccess = repository.removePlaceReview(reviewId = reviewId)
+            val isSuccess = repository.removePlaceReview(reviewId = reviewId, userId = userId, placeId = placeId)
             emit(Resource.Success(data = isSuccess))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "An expected error!"))

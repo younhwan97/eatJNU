@@ -21,8 +21,9 @@ import kr.co.younhwan.eatjnu.domain.model.PlaceReview
 
 @Composable
 fun ReviewItem(
+    userId: String,
     placeReview: PlaceReview,
-    onCLickDeleteBtn: (Int) -> Unit,
+    onCLickDeleteBtn: (Int, String, Int) -> Unit,
     onClickReportBtn: (Int) -> Unit
 ) {
     if (placeReview.comment != "") { // 댓글 내용이 있는 경우
@@ -79,8 +80,7 @@ fun ReviewItem(
                                 .clickable {
                                     showMenu = !showMenu
                                 }
-                                .align(Alignment.CenterEnd)
-                            ,
+                                .align(Alignment.CenterEnd),
                             tint = colorResource(id = R.color.Gray),
                         )
 
@@ -117,28 +117,30 @@ fun ReviewItem(
                             }
 
                             // 삭제
-                            DropdownMenuItem(
-                                onClick = {
-                                    onCLickDeleteBtn(placeReview.reviewId)
-                                    showMenu = false
-                                }
-                            ) {
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically
+                            if (placeReview.userId == userId) {
+                                DropdownMenuItem(
+                                    onClick = {
+                                        onCLickDeleteBtn(placeReview.reviewId, userId, placeReview.placeId)
+                                        showMenu = false
+                                    }
                                 ) {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.baseline_delete_outline_24),
-                                        contentDescription = null,
-                                        modifier = Modifier.size(18.dp),
-                                    )
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.baseline_delete_outline_24),
+                                            contentDescription = null,
+                                            modifier = Modifier.size(18.dp),
+                                        )
 
-                                    Spacer(modifier = Modifier.width(8.dp))
+                                        Spacer(modifier = Modifier.width(8.dp))
 
-                                    Text(
-                                        text = "삭제",
-                                        fontSize = 14.sp,
-                                        style = MaterialTheme.typography.h6
-                                    )
+                                        Text(
+                                            text = "삭제",
+                                            fontSize = 14.sp,
+                                            style = MaterialTheme.typography.h6
+                                        )
+                                    }
                                 }
                             }
                         }
