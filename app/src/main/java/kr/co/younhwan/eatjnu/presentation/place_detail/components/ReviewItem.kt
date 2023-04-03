@@ -13,11 +13,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kr.co.younhwan.eatjnu.R
 import kr.co.younhwan.eatjnu.domain.model.PlaceReview
+import java.util.*
 
 @Composable
 fun ReviewItem(
@@ -26,7 +26,7 @@ fun ReviewItem(
     onCLickDeleteBtn: (Int, String, Int) -> Unit,
     onClickReportBtn: (Int) -> Unit
 ) {
-    if (placeReview.comment != "") { // 댓글 내용이 있는 경우
+    if (placeReview.comment.isNotBlank()) { // 댓글 내용이 있는 경우
         val reviewImages = arrayListOf(
             painterResource(id = R.drawable.fox),
             painterResource(id = R.drawable.lion),
@@ -34,8 +34,13 @@ fun ReviewItem(
             painterResource(id = R.drawable.panda),
             painterResource(id = R.drawable.penguin),
             painterResource(id = R.drawable.rabbit),
-            painterResource(id = R.drawable.whale)
-        )
+            painterResource(id = R.drawable.whale),
+            painterResource(id = R.drawable.squid),
+            painterResource(id = R.drawable.walrus),
+            painterResource(id = R.drawable.chicken),
+            painterResource(id = R.drawable.pig)
+        ) // 리뷰 아이콘
+        var isVisibleMenu by remember { mutableStateOf(false) } // 드랍다운 메뉴가 보이는지
 
         Row(
             modifier = Modifier
@@ -54,55 +59,72 @@ fun ReviewItem(
 
             Spacer(modifier = Modifier.width(16.dp))
 
-            Column() {
-                // 댓글 작성자
-                Row() {
+            Column {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    // 작성자
                     Text(
                         text = "익명",
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
+                        color = if (userId == placeReview.userId) MaterialTheme.colors.primary else Color.Black,
                         style = MaterialTheme.typography.body1,
-                        modifier = Modifier.weight(6f)
+                        modifier = Modifier.weight(5f)
                     )
 
-                    var showMenu by remember { mutableStateOf(false) }
-
-                    Box(
-                        modifier = Modifier.weight(1f)
+                    Row(
+                        horizontalArrangement = Arrangement.End,
                     ) {
-                        Icon(
-                            imageVector = Icons.Default.MoreVert,
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(18.dp)
-                                .clickable {
-                                    showMenu = !showMenu
-                                }
-                                .align(Alignment.CenterEnd),
-                            tint = colorResource(id = R.color.Gray),
-                        )
+                        // 댓글 좋아요
+//                        Icon(
+//                            imageVector = Icons.Outlined.FavoriteBorder,
+//                            contentDescription = null,
+//                            modifier = Modifier.size(18.dp),
+//                            tint = colorResource(id = R.color.Gray)
+//                        )
+//
+//                        Spacer(modifier = Modifier.width(12.dp))
 
-                        DropdownMenu(
-                            expanded = showMenu,
-                            onDismissRequest = {
-                                showMenu = false
-                            },
-                        ) {
-                            // 신고/차단 (자신이 작성한 리뷰가 아닐 경우)
-                            if (placeReview.userId != userId) {
+                        // 댓글 신고/차단 및 삭제 드랍다운 메뉴
+                        Box {
+                            Icon(
+                                imageVector = Icons.Default.MoreVert,
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .size(18.dp)
+                                    .clickable {
+                                        isVisibleMenu = !isVisibleMenu
+                                    }
+                                    .align(Alignment.CenterEnd),
+                                tint = colorResource(id = R.color.Gray),
+                            )
+
+                            DropdownMenu(
+                                expanded = isVisibleMenu,
+                                onDismissRequest = {
+                                    isVisibleMenu = false
+                                }
+                            ) {
                                 DropdownMenuItem(
                                     onClick = {
-                                        onClickReportBtn(placeReview.reviewId)
-                                        showMenu = false
+                                        if (placeReview.userId == userId) {
+                                            // 자신이 작성한 리뷰일 때
+                                            onCLickDeleteBtn(placeReview.reviewId, userId, placeReview.placeId)
+                                        } else {
+                                            // 자신이 작성한 리뷰가 아닐 때
+                                            onClickReportBtn(placeReview.reviewId)
+                                        }
+                                        isVisibleMenu = false
                                     }
                                 ) {
                                     Row(
                                         verticalAlignment = Alignment.CenterVertically
                                     ) {
                                         Icon(
-                                            painter = painterResource(id = R.drawable.outline_flag_24),
+                                            painter =
+                                            if (placeReview.userId == userId) painterResource(id = R.drawable.baseline_delete_outline_24)
+                                            else painterResource(id = R.drawable.outline_flag_24),
                                             contentDescription = null,
                                             modifier = Modifier.size(18.dp),
                                         )
@@ -110,35 +132,7 @@ fun ReviewItem(
                                         Spacer(modifier = Modifier.width(8.dp))
 
                                         Text(
-                                            text = "신고/차단",
-                                            fontSize = 14.sp,
-                                            style = MaterialTheme.typography.h6
-                                        )
-                                    }
-                                }
-                            }
-
-                            // 삭제 (자신이 작성한 리뷰일 경우)
-                            if (placeReview.userId == userId) {
-                                DropdownMenuItem(
-                                    onClick = {
-                                        onCLickDeleteBtn(placeReview.reviewId, userId, placeReview.placeId)
-                                        showMenu = false
-                                    }
-                                ) {
-                                    Row(
-                                        verticalAlignment = Alignment.CenterVertically
-                                    ) {
-                                        Icon(
-                                            painter = painterResource(id = R.drawable.baseline_delete_outline_24),
-                                            contentDescription = null,
-                                            modifier = Modifier.size(18.dp),
-                                        )
-
-                                        Spacer(modifier = Modifier.width(8.dp))
-
-                                        Text(
-                                            text = "삭제",
+                                            text = if (placeReview.userId == userId) "삭제" else "신고/차단",
                                             fontSize = 14.sp,
                                             style = MaterialTheme.typography.h6
                                         )
@@ -162,11 +156,29 @@ fun ReviewItem(
 
                 // 작성일
                 Text(
-                    text = placeReview.writingTime,
+                    text =
+                    if (placeReview.writingTime.length >= 8) {
+                        val reviewWrittenYear = placeReview.writingTime.substring(0, 4)
+                        val currentYear = Calendar.getInstance().get(Calendar.YEAR).toString()
+
+                        if (reviewWrittenYear == currentYear) {
+                            // 올 해 작성된 리뷰일 때
+                            placeReview.writingTime.substring(5, placeReview.writingTime.length - 3)
+                        } else {
+                            // 올 해 작성된 리뷰가 아닐 때
+                            placeReview.writingTime.substring(2, placeReview.writingTime.length - 3)
+                        }
+                    } else if (placeReview.writingTime == "지금") {
+                        placeReview.writingTime
+                    } else {
+                        ""
+                    },
                     fontSize = 10.sp,
                     color = colorResource(id = R.color.LightGray),
                     style = MaterialTheme.typography.body1
                 )
+
+                Spacer(modifier = Modifier.height(4.dp))
             }
         }
 

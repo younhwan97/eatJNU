@@ -1,6 +1,5 @@
 package kr.co.younhwan.eatjnu.presentation.place_detail
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
@@ -125,18 +124,17 @@ fun PlaceDetailScreen(
                             userId = userId,
                             placeReview = detail.placeReviews[index],
                             onCLickDeleteBtn = { reviewId, userId, placeId ->
-                                if (userId == detail.placeReviews[index].userId) {
-                                    viewModel.removePlaceReview(
-                                        reviewId = reviewId.toString(),
-                                        userId = userId,
-                                        placeId = placeId.toString()
-                                    )
-                                }
+                                viewModel.removePlaceReview(
+                                    reviewId = reviewId,
+                                    userId = userId,
+                                    placeId = placeId
+                                )
                             },
                             onClickReportBtn = { reviewId ->
-                                if (userId != detail.placeReviews[index].userId) {
-                                    viewModel.addPlaceReviewReport(userId = userId, reviewId = reviewId)
-                                }
+                                viewModel.addPlaceReviewReport(
+                                    userId = userId,
+                                    reviewId = reviewId
+                                )
                             }
                         )
                     }

@@ -180,8 +180,8 @@ class PlaceDetailViewModel @Inject constructor(
     }
 
     // 장소에 리뷰를 삭제하는 함수
-    fun removePlaceReview(reviewId: String, userId: String, placeId: String) {
-        removePlaceReviewUseCase(reviewId = reviewId, userId = userId, placeId = placeId).onEach { result ->
+    fun removePlaceReview(reviewId: Int, userId: String, placeId: Int) {
+        removePlaceReviewUseCase(reviewId = reviewId.toString(), userId = userId, placeId = placeId.toString()).onEach { result ->
             when (result) {
                 is Resource.Loading -> Unit
                 is Resource.Error -> Unit
@@ -191,7 +191,7 @@ class PlaceDetailViewModel @Inject constructor(
                         val newPlaceReviews = mutableListOf<PlaceReview>()
 
                         for (review in placeDetail.value.placeReviews) {
-                            if (review.reviewId.toString() != reviewId) {
+                            if (review.reviewId != reviewId) {
                                 newPlaceReviews.add(review)
                             }
                         }
